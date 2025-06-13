@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Folding</string>
+	<key>scope</key>
+	<string>source.boxlang.template</string>
+	<key>settings</key>
+	<dict>
+		<key>foldingStartMarker</key>
+		<string>(?x)
+	&lt;!---.*?---&gt;                          # CFML comments
+	|                                       # OR
+	&lt;(bx:[a-zA-Z]+)(?:\s[^&gt;]*)?&gt;        # Opening bx: tags
+	|                                       # OR
+	&lt;([a-zA-Z][a-zA-Z0-9]*)(?:\s[^&gt;]*)?&gt;(?!.*&lt;/\2&gt;) # HTML tags without immediate closing
+	|                                       # OR
+	/\*\*(?!\*)                             # Documentation comments
+	|                                       # OR
+	\{                                      # Opening braces for script blocks
+    </string>
+		<key>foldingStopMarker</key>
+		<string>(?x)
+	&lt;/(bx:[a-zA-Z]+)&gt;                    # Closing bx: tags
+	|                                       # OR
+	&lt;/([a-zA-Z][a-zA-Z0-9]*)&gt;           # Closing HTML tags
+	|                                       # OR
+	(?&lt;!\*)\*\*/                          # End of documentation comments
+	|                                       # OR
+	\}                                      # Closing braces
+    </string>
+	</dict>
+	<key>uuid</key>
+	<string>BL07FOLD-TEMP-LATE-1234-567890123456</string>
+</dict>
+</plist>

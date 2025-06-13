@@ -3,19 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Symbol List: Methods</string>
+	<string>Symbol List: Properties</string>
 	<key>scope</key>
-	<string>source.boxlang meta.function.boxlang entity.name.function.boxlang</string>
+	<string>source.boxlang</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
 		<integer>1</integer>
 		<key>symbolTransformation</key>
-		<string>
-		s/\s*.*\s+(\w+)\s*(\(.*\)).*/    $1$2/g
-	</string>
+		<string>s/.*\bproperty\s+(?:[^=;]*\s+)?name\s*=\s*["']?([a-zA-Z_][a-zA-Z0-9_]*)["']?.*/    $1/g</string>
 	</dict>
 	<key>uuid</key>
-	<string>BL01B177-1700-478F-808B-78D85403FC19</string>
+	<string>BL09PROP-SYMB-OL12-3456-789012345678</string>
 </dict>
 </plist>

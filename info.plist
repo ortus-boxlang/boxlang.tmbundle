@@ -7,11 +7,7 @@
 	<key>contactName</key>
 	<string>Ortus Solutions</string>
 	<key>description</key>
-	<string>A modern, dynamic programming language for the JVM that combines the best of CFML and Java.</string>
-	<key>isDelta</key>
-	<false/>
-	<key>isDisabled</key>
-	<false/>
+	<string>Welcome to BoxLang: A Modern Dynamic JVM Language</string>
 	<key>mainMenu</key>
 	<dict>
 		<key>excludedItems</key>
@@ -29,17 +25,6 @@
 			<string>A1B2C3D4-E5F6-7890-ABCD-123456789012</string>
 		</array>
 	</dict>
-	<key>ordering</key>
-	<array>
-		<string>B1A2C3D4-E5F6-7890-ABCD-EF9876543210</string>
-		<string>C2B3A4D5-F6E7-8901-BCDE-F23456789013</string>
-		<string>D3C4B5A6-F7E8-9012-CDEF-345678901234</string>
-		<string>B0C1D2E3-F4A5-6B78-9C0D-E1F234567890</string>
-		<string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
-		<string>A1B2C3D4-E5F6-7890-ABCD-123456789012</string>
-	</array>
-	<key>name</key>
-	<string>BoxLang</string>
 	<key>uuid</key>
 	<string>BOXLANG-BUNDLE-UUID-1234-567890ABCDEF</string>
 </dict>

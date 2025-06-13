@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Symbol List: Functions</string>
+	<key>scope</key>
+	<string>source.boxlang meta.function.boxlang entity.name.function.boxlang</string>
+	<key>settings</key>
+	<dict>
+		<key>showInSymbolList</key>
+		<integer>1</integer>
+		<key>symbolTransformation</key>
+		<string>s/.*\bfunction\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(\([^)]*\)).*/  $1$2/g</string>
+	</dict>
+	<key>uuid</key>
+	<string>BL08FUNC-SYMB-OL12-3456-789012345678</string>
+</dict>
+</plist>
