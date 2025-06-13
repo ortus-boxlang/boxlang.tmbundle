@@ -8,7 +8,7 @@
 	<string>#!/bin/bash
 
 # Check if boxlang command is available
-if ! command -v boxlang &> /dev/null; then
+if ! command -v boxlang &amp;> /dev/null; then
     echo "&lt;h2&gt;BoxLang Error&lt;/h2&gt;"
     echo "&lt;p&gt;BoxLang command not found. Please ensure BoxLang is installed and in your PATH.&lt;/p&gt;"
     exit 1
