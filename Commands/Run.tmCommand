@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>saveActiveFile</string>
+	<key>command</key>
+	<string>#!/bin/bash
+
+# Check if boxlang command is available
+if ! command -v boxlang &> /dev/null; then
+    echo "&lt;h2&gt;BoxLang Error&lt;/h2&gt;"
+    echo "&lt;p&gt;BoxLang command not found. Please ensure BoxLang is installed and in your PATH.&lt;/p&gt;"
+    exit 1
+fi
+
+# Save current file path
+FILE_PATH="$TM_FILEPATH"
+
+if [ -z "$FILE_PATH" ]; then
+    echo "&lt;h2&gt;BoxLang Error&lt;/h2&gt;"
+    echo "&lt;p&gt;No file to run. Please save your BoxLang file first.&lt;/p&gt;"
+    exit 1
+fi
+
+# Create HTML wrapper for output
+echo "&lt;html&gt;"
+echo "&lt;head&gt;"
+echo "  &lt;title&gt;BoxLang Output&lt;/title&gt;"
+echo "  &lt;style&gt;"
+echo "    body { font-family: 'Monaco', 'Menlo', 'Courier New', monospace; margin: 20px; background: #f5f5f5; }"
+echo "    .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }"
+echo "    .header { color: #2c3e50; margin-bottom: 15px; border-bottom: 1px solid #ecf0f1; padding-bottom: 10px; }"
+echo "    .output { background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 4px; white-space: pre-wrap; }"
+echo "    .error { background: #e74c3c; color: white; padding: 15px; border-radius: 4px; white-space: pre-wrap; }"
+echo "    .success { background: #27ae60; color: white; padding: 10px; border-radius: 4px; margin-bottom: 15px; }"
+echo "  &lt;/style&gt;"
+echo "&lt;/head&gt;"
+echo "&lt;body&gt;"
+echo "  &lt;div class='container'&gt;"
+echo "    &lt;div class='header'&gt;"
+echo "      &lt;h2&gt;BoxLang Output&lt;/h2&gt;"
+echo "      &lt;p&gt;File: $(basename "$FILE_PATH")&lt;/p&gt;"
+echo "    &lt;/div&gt;"
+
+# Execute BoxLang file and capture output
+START_TIME=$(date +%s.%N)
+OUTPUT=$(boxlang "$FILE_PATH" 2>&1)
+EXIT_CODE=$?
+END_TIME=$(date +%s.%N)
+
+# Calculate execution time
+EXECUTION_TIME=$(echo "$END_TIME - $START_TIME" | bc -l)
+
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "    &lt;div class='success'&gt;✓ Execution completed successfully in ${EXECUTION_TIME}s&lt;/div&gt;"
+    echo "    &lt;div class='output'&gt;$OUTPUT&lt;/div&gt;"
+else
+    echo "    &lt;div class='error'&gt;"
+    echo "✗ Execution failed (exit code: $EXIT_CODE)"
+    echo ""
+    echo "$OUTPUT"
+    echo "    &lt;/div&gt;"
+fi
+
+echo "  &lt;/div&gt;"
+echo "&lt;/body&gt;"
+echo "&lt;/html&gt;"</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@r</string>
+	<key name</key>
+	<string>Run BoxLang File</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>uuid</key>
+	<string>B1A2C3D4-E5F6-7890-ABCD-EF9876543210</string>
+</dict>
+</plist>

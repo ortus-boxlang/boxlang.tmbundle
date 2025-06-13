@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>cat &lt;&lt; 'EOF'
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="utf-8"&gt;
+	&lt;title&gt;BoxLang Documentation Search&lt;/title&gt;
+	&lt;style&gt;
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			margin: 20px;
+			background: #f5f5f5;
+		}
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			background: white;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		}
+		h1 {
+			color: #2c3e50;
+			margin-bottom: 20px;
+			font-size: 24px;
+		}
+		.search-box {
+			width: 100%;
+			padding: 12px;
+			font-size: 16px;
+			border: 2px solid #3498db;
+			border-radius: 6px;
+			margin-bottom: 15px;
+			box-sizing: border-box;
+		}
+		.search-box:focus {
+			outline: none;
+			border-color: #2980b9;
+		}
+		.buttons {
+			display: flex;
+			gap: 10px;
+			margin-bottom: 20px;
+		}
+		.btn {
+			padding: 10px 20px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+			font-size: 14px;
+			text-decoration: none;
+			display: inline-block;
+			text-align: center;
+		}
+		.btn-primary {
+			background: #3498db;
+			color: white;
+		}
+		.btn-primary:hover {
+			background: #2980b9;
+		}
+		.btn-secondary {
+			background: #95a5a6;
+			color: white;
+		}
+		.btn-secondary:hover {
+			background: #7f8c8d;
+		}
+		.quick-links {
+			margin-top: 20px;
+		}
+		.quick-links h3 {
+			color: #2c3e50;
+			margin-bottom: 10px;
+		}
+		.quick-links a {
+			display: block;
+			color: #3498db;
+			text-decoration: none;
+			padding: 5px 0;
+			border-bottom: 1px solid #ecf0f1;
+		}
+		.quick-links a:hover {
+			color: #2980b9;
+			background: #f8f9fa;
+			padding-left: 10px;
+		}
+		.info {
+			margin-top: 20px;
+			padding: 10px;
+			background: #e3f2fd;
+			border-radius: 4px;
+			font-size: 14px;
+			color: #1565c0;
+		}
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div class="container"&gt;
+		&lt;h1&gt;BoxLang Documentation Search&lt;/h1&gt;
+
+		&lt;input type="text" id="searchInput" class="search-box" placeholder="Search BoxLang documentation..."&gt;
+
+		&lt;div class="buttons"&gt;
+			&lt;button class="btn btn-primary" onclick="searchDocs()"&gt;Search Docs&lt;/button&gt;
+			&lt;a href="https://boxlang.ortusbooks.com/" target="_blank" class="btn btn-secondary"&gt;Browse All Docs&lt;/a&gt;
+		&lt;/div&gt;
+
+		&lt;div class="quick-links"&gt;
+			&lt;h3&gt;Quick Links&lt;/h3&gt;
+			&lt;a href="https://boxlang.ortusbooks.com/getting-started/installation" target="_blank"&gt;Installation Guide&lt;/a&gt;
+			&lt;a href="https://boxlang.ortusbooks.com/language-syntax" target="_blank"&gt;Language Syntax&lt;/a&gt;
+			&lt;a href="https://boxlang.ortusbooks.com/built-in-functions" target="_blank"&gt;Built-in Functions&lt;/a&gt;
+			&lt;a href="https://boxlang.ortusbooks.com/boxlang-components" target="_blank"&gt;Components&lt;/a&gt;
+			&lt;a href="https://boxlang.ortusbooks.com/modules" target="_blank"&gt;Modules&lt;/a&gt;
+			&lt;a href="https://boxlang.ortusbooks.com/examples" target="_blank"&gt;Code Examples&lt;/a&gt;
+		&lt;/div&gt;
+
+		&lt;div class="info"&gt;
+			&lt;strong&gt;Tip:&lt;/strong&gt; Use Ctrl+Option+H (Mac) or Ctrl+Alt+H (Windows/Linux) to quickly access this search while editing BoxLang code.
+		&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;script&gt;
+		// Auto-focus and pre-fill search if word is selected
+		document.addEventListener('DOMContentLoaded', function() {
+			const searchInput = document.getElementById('searchInput');
+			searchInput.focus();
+
+			// Handle Enter key
+			searchInput.addEventListener('keypress', function(e) {
+				if (e.key === 'Enter') {
+					searchDocs();
+				}
+			});
+		});
+
+		function searchDocs() {
+			const query = document.getElementById('searchInput').value.trim();
+			if (query) {
+				// Open search in the documentation site
+				// Note: This uses Google site search since the docs don't have a built-in search API
+				const searchUrl = `https://www.google.com/search?q=site:boxlang.ortusbooks.com ${encodeURIComponent(query)}`;
+				window.open(searchUrl, '_blank');
+			} else {
+				// If no search term, just open the main docs
+				window.open('https://boxlang.ortusbooks.com/', '_blank');
+			}
+		}
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF
+
+# If there's a selected word, pre-fill the search
+if [ "$TM_CURRENT_WORD" ]; then
+	echo "&lt;script&gt;"
+	echo "document.addEventListener('DOMContentLoaded', function() {"
+	echo "  document.getElementById('searchInput').value = '$TM_CURRENT_WORD';"
+	echo "});"
+	echo "&lt;/script&gt;"
+fi</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^~h</string>
+	<key>name</key>
+	<string>Search BoxLang Documentation</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>uuid</key>
+	<string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
+</dict>
+</plist>
