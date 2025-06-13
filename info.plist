@@ -6,10 +6,20 @@
 	<string>obkynata@beghffbyhgvbaf.pbz</string>
 	<key>contactName</key>
 	<string>Ortus Solutions</string>
+	<key>deleted</key>
+	<array>
+	</array>
 	<key>description</key>
 	<string>A modern, dynamic programming language for the JVM that combines the best of CFML and Java.</string>
+	<key>isDelta</key>
+	<false/>
+	<key>isDisabled</key>
+	<false/>
 	<key>mainMenu</key>
 	<dict>
+		<key>excludedItems</key>
+		<array>
+		</array>
 		<key>items</key>
 		<array>
 			<string>B1A2C3D4-E5F6-7890-ABCD-EF9876543210</string>
@@ -20,147 +30,17 @@
 			<string>------------------------------------</string>
 			<string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
 			<string>A1B2C3D4-E5F6-7890-ABCD-123456789012</string>
-			<string>------------------------------------</string>
-			<string>BOXLANG-DECL-ARAT-IONS-SUBMENU12345</string>
-			<string>BOXLANG-FLOW-CONT-ROL-SUBMENU67890</string>
-			<string>BOXLANG-COMP-ONEN-TS-SUBMENU12345</string>
-			<string>BOXLANG-FUNC-TION-S-SUBMENU67890</string>
-			<string>BOXLANG-COLL-ECTI-ONS-SUBMENU1234</string>
-			<string>BOXLANG-UTIL-ITY-SUBMENU567890AB</string>
-			<string>BOXLANG-TEMP-LATE-SUBMENU12345678</string>
 		</array>
-		<key>submenus</key>
-		<dict>
-			<key>BOXLANG-DECL-ARAT-IONS-SUBMENU12345</key>
-			<dict>
-				<key>items</key>
-				<array>
-					<string>BOXLANG-VAR-DECL-1234-567890ABCDEF</string>
-					<string>BOXLANG-LET-DECL-1234-567890ABCDEF</string>
-					<string>BOXLANG-FUNC-DECL-1234-567890ABCDE</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-CLASS-DECL-1234-567890ABC</string>
-					<string>BOXLANG-INTER-FACE-1234-567890ABC</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-PROP-ERTY-1234-567890ABCD</string>
-					<string>BOXLANG-ANNOT-ATION-1234-567890AB</string>
-				</array>
-				<key>name</key>
-				<string>Declarations</string>
-			</dict>
-			<key>BOXLANG-FLOW-CONT-ROL-SUBMENU67890</key>
-			<dict>
-				<key>items</key>
-				<array>
-					<string>BOXLANG-IF-STMT-1234-567890ABCDEF</string>
-					<string>BOXLANG-SWITCH-STMT-1234-567890AB</string>
-					<string>BOXLANG-TRY-CATCH-1234-567890ABCD</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-FOR-LOOP-1234-567890ABCDE</string>
-					<string>BOXLANG-WHILE-LOOP-1234-567890ABC</string>
-					<string>BOXLANG-FOR-IN-LOOP-1234-567890AB</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-BREAK-STMT-1234-567890ABC</string>
-					<string>BOXLANG-CONTINUE-STMT-1234-56789</string>
-					<string>BOXLANG-RETURN-STMT-1234-567890AB</string>
-				</array>
-				<key>name</key>
-				<string>Flow Control</string>
-			</dict>
-			<key>BOXLANG-COMP-ONEN-TS-SUBMENU12345</key>
-			<dict>
-				<key>items</key>
-				<array>
-					<string>BOXLANG-BX-OUTPUT-1234-567890ABCD</string>
-					<string>BOXLANG-BX-IF-1234-567890ABCDEFG</string>
-					<string>BOXLANG-BX-SWITCH-1234-567890ABCD</string>
-					<string>BOXLANG-BX-TRY-1234-567890ABCDEF</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-BX-SCRIPT-1234-567890ABCD</string>
-					<string>BOXLANG-BX-FUNCTION-1234-567890AB</string>
-					<string>BOXLANG-BX-ARGUMENT-1234-567890AB</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-BX-SET-1234-567890ABCDEF</string>
-					<string>BOXLANG-BX-INCLUDE-1234-567890ABC</string>
-					<string>BOXLANG-BX-IMPORT-1234-567890ABCD</string>
-				</array>
-				<key>name</key>
-				<string>Components</string>
-			</dict>
-			<key>BOXLANG-FUNC-TION-S-SUBMENU67890</key>
-			<dict>
-				<key>items</key>
-				<array>
-					<string>BOXLANG-ARROW-FUNC-1234-567890ABC</string>
-					<string>BOXLANG-ANON-FUNC-1234-567890ABCD</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-ARRAY-EACH-1234-567890ABC</string>
-					<string>BOXLANG-ARRAY-MAP-1234-567890ABCD</string>
-					<string>BOXLANG-ARRAY-FILTER-1234-567890A</string>
-					<string>BOXLANG-ARRAY-REDUCE-1234-567890A</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-STRUCT-EACH-1234-567890AB</string>
-					<string>BOXLANG-STRUCT-MAP-1234-567890ABC</string>
-				</array>
-				<key>name</key>
-				<string>Functions</string>
-			</dict>
-			<key>BOXLANG-COLL-ECTI-ONS-SUBMENU1234</key>
-			<dict>
-				<key>items</key>
-				<array>
-					<string>BOXLANG-ARRAY-INIT-1234-567890ABC</string>
-					<string>BOXLANG-ARRAY-APPEND-1234-567890A</string>
-					<string>BOXLANG-ARRAY-PREPEND-1234-56789</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-STRUCT-INIT-1234-567890AB</string>
-					<string>BOXLANG-STRUCT-INSERT-1234-56789</string>
-					<string>BOXLANG-STRUCT-DELETE-1234-56789</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-QUERY-NEW-1234-567890ABCD</string>
-					<string>BOXLANG-QUERY-ADD-ROW-1234-56789</string>
-					<string>BOXLANG-QUERY-SET-CELL-1234-5678</string>
-				</array>
-				<key>name</key>
-				<string>Collections</string>
-			</dict>
-			<key>BOXLANG-UTIL-ITY-SUBMENU567890AB</key>
-			<dict>
-				<key>items</key>
-				<array>
-					<string>BOXLANG-PRINT-LN-1234-567890ABCDE</string>
-					<string>BOXLANG-WRITE-OUTPUT-1234-567890</string>
-					<string>BOXLANG-DUMP-1234-567890ABCDEFGH</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-IS-DEFINED-1234-567890AB</string>
-					<string>BOXLANG-GET-TYPE-1234-567890ABCDE</string>
-					<string>BOXLANG-IS-ARRAY-1234-567890ABCDE</string>
-					<string>BOXLANG-IS-STRUCT-1234-567890ABCD</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-TRIM-1234-567890ABCDEFGH</string>
-					<string>BOXLANG-LEN-1234-567890ABCDEFGHI</string>
-					<string>BOXLANG-REPLACE-1234-567890ABCDEF</string>
-				</array>
-				<key>name</key>
-				<string>Utility Functions</string>
-			</dict>
-			<key>BOXLANG-TEMP-LATE-SUBMENU12345678</key>
-			<dict>
-				<key>items</key>
-				<array>
-					<string>BOXLANG-TEMPLATE-BASIC-1234-5678</string>
-					<string>BOXLANG-TEMPLATE-WITH-SCRIPT-123</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-INTERPOLATION-1234-56789</string>
-					<string>BOXLANG-EXPRESSION-1234-567890ABC</string>
-					<string>------------------------------------</string>
-					<string>BOXLANG-COMPONENT-ISLAND-1234-567</string>
-				</array>
-				<key>name</key>
-				<string>Templates</string>
-			</dict>
-		</dict>
 	</dict>
+	<key>ordering</key>
+	<array>
+		<string>B1A2C3D4-E5F6-7890-ABCD-EF9876543210</string>
+		<string>C2B3A4D5-F6E7-8901-BCDE-F23456789013</string>
+		<string>D3C4B5A6-F7E8-9012-CDEF-345678901234</string>
+		<string>B0C1D2E3-F4A5-6B78-9C0D-E1F234567890</string>
+		<string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
+		<string>A1B2C3D4-E5F6-7890-ABCD-123456789012</string>
+	</array>
 	<key>name</key>
 	<string>BoxLang</string>
 	<key>uuid</key>

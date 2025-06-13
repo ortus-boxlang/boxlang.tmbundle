@@ -70,7 +70,7 @@ echo "&lt;/html&gt;"</string>
 	<string>none</string>
 	<key>keyEquivalent</key>
 	<string>@r</string>
-	<key name</key>
+	<key>name</key>
 	<string>Run BoxLang File</string>
 	<key>output</key>
 	<string>showAsHTML</string>
