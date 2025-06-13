@@ -1,0 +1,18 @@
+/**
+ * ${TM_NEW_FILE_BASENAME}
+ *
+ * @author ${TM_FULLNAME:$USER}
+ * @date ${TM_DATE}
+ */
+class {
+
+    /**
+     * Constructor
+     */
+    public function init() {
+        return this;
+    }
+
+    $0
+
+}

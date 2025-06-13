@@ -1,0 +1,28 @@
+/**
+ * ${TM_NEW_FILE_BASENAME} Service
+ *
+ * @author ${TM_FULLNAME:$USER}
+ * @date ${TM_DATE}
+ */
+@singleton
+class {
+
+    property name="datasource" type="string" default="myDB";
+
+    /**
+     * Constructor
+     */
+    public function init() {
+        return this;
+    }
+
+    /**
+     * Sample service method
+     */
+    public function sampleMethod() {
+        // Add your service logic here
+        $0
+        return {};
+    }
+
+}

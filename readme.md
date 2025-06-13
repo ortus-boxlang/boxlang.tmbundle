@@ -78,6 +78,24 @@ git clone https://github.com/ortus-boxlang/boxlang.tmbundle.git
 - `⌃H` - Show documentation for current word
 - `⌃⌥⌘H` - Open BoxLang API documentation
 
+### File Templates
+
+The bundle includes several file templates to help you quickly create new BoxLang files. Access them via `File → New From Template → BoxLang`:
+
+- **BoxLang Class** (`.bx`) - Basic class template with constructor
+- **BoxLang Component** (`.bx`) - Component template with initialization
+- **BoxLang Service** (`.bx`) - Service layer template with singleton annotation
+- **BoxLang Interface** (`.bx`) - Interface template with sample method signature
+- **BoxLang Test** (`.bx`) - TestBox-compatible test template
+- **BoxLang Script** (`.bxs`) - Executable script template with shebang
+- **BoxLang Template** (`.bxm`) - HTML template with embedded BoxLang script
+
+All templates include:
+
+- Proper file headers with author and date placeholders
+- Basic structure and common patterns
+- Cursor positioning for immediate coding (`$0` placeholder)
+
 ### Code Examples
 
 The bundle includes sample files in the `Samples/` directory:

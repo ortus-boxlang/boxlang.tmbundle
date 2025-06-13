@@ -1,0 +1,14 @@
+/**
+ * ${TM_NEW_FILE_BASENAME} Interface
+ *
+ * @author ${TM_FULLNAME:$USER}
+ * @date ${TM_DATE}
+ */
+interface {
+
+    /**
+     * Sample interface method
+     */
+    public function sampleMethod();
+
+}
