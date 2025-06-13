@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Symbol List: Class Methods</string>
+	<key>scope</key>
+	<string>source.boxlang meta.class.boxlang meta.function.boxlang entity.name.function.boxlang</string>
+	<key>settings</key>
+	<dict>
+		<key>showInSymbolList</key>
+		<integer>1</integer>
+		<key>symbolTransformation</key>
+		<string>
+		s/.+/  $0/g
+	</string>
+	</dict>
+	<key>uuid</key>
+	<string>BL02BE5E-3DB3-4F86-AB3D-5800E4307C29</string>
+</dict>
+</plist>
