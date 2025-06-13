@@ -6,9 +6,6 @@
 	<string>obkynata@beghffbyhgvbaf.pbz</string>
 	<key>contactName</key>
 	<string>Ortus Solutions</string>
-	<key>deleted</key>
-	<array>
-	</array>
 	<key>description</key>
 	<string>A modern, dynamic programming language for the JVM that combines the best of CFML and Java.</string>
 	<key>isDelta</key>
