@@ -2,6 +2,7 @@
   "name": "BoxLang Template",
   "scopeName": "source.boxlang.template",
   "fileTypes": ["bxm"],
+  "uuid": "A3269333-0C18-4534-9738-9C05ADF257AD",
   "patterns": [
     {"include": "#comments"},
     {"include": "#bx-script"},

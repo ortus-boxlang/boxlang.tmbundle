@@ -2,6 +2,7 @@
   "name": "BoxLang Script",
   "scopeName": "source.boxlang",
   "fileTypes": ["bx", "bxs"],
+  "uuid": "E1DE0070-3200-48D2-A8E5-F136FCB9CCD3",
   "patterns": [
     {"include": "#comments"},
     {"include": "#strings"},

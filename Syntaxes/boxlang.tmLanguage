@@ -11,6 +11,8 @@
 		<string>bx</string>
 		<string>bxs</string>
 	</array>
+	<key>uuid</key>
+	<string>78CA4076-12A0-4022-8CF7-2D345CA64DBC</string>
 	<key>patterns</key>
 	<array>
 		<dict>
