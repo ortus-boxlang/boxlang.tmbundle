@@ -3,16 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>contactEmailRot13</key>
-	<string>obkynata@beghffbyhgvbaf.pbz</string>
+	<string>obkynta@beghffbyhgvbaf.pbz</string>
 	<key>contactName</key>
 	<string>Ortus Solutions</string>
 	<key>description</key>
-	<string>Welcome to BoxLang: A Modern Dynamic JVM Language</string>
+	<string>Welcome to BoxLang: A Modern Dynamic JVM Language. Provides syntax highlighting, code execution, documentation lookup, and intelligent code navigation for BoxLang development.</string>
+	<key>isDelta</key>
+	<false/>
+	<key>isDisabled</key>
+	<false/>
 	<key>mainMenu</key>
 	<dict>
-		<key>excludedItems</key>
-		<array>
-		</array>
 		<key>items</key>
 		<array>
 			<string>B1A2C3D4-E5F6-7890-ABCD-EF9876543210</string>
@@ -24,8 +25,27 @@
 			<string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
 			<string>A1B2C3D4-E5F6-7890-ABCD-123456789012</string>
 		</array>
+		<key>submenus</key>
+		<dict/>
 	</dict>
+	<key>name</key>
+	<string>BoxLang</string>
+	<key>ordering</key>
+	<array>
+		<string>B1A2C3D4-E5F6-7890-ABCD-EF9876543210</string>
+		<string>C2B3A4D5-F6E7-8901-BCDE-F23456789013</string>
+		<string>D3C4B5A6-F7E8-9012-CDEF-345678901234</string>
+		<string>B0C1D2E3-F4A5-6B78-9C0D-E1F234567890</string>
+		<string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
+		<string>A1B2C3D4-E5F6-7890-ABCD-123456789012</string>
+		<string>BL05TEMP-COMM-1234-5678-90ABCDEF1234</string>
+		<string>BL06FOLD-SCRI-PT12-3456-789012345678</string>
+		<string>BL01F313-C9FB-4D7E-9D01-FB85287BE21C</string>
+		<string>BL08FUNC-SYMB-OL12-3456-789012345678</string>
+	</array>
+	<key>repository</key>
+	<string>https://github.com/ortus-boxlang/boxlang.tmbundle</string>
 	<key>uuid</key>
-	<string>BOXLANG-BUNDLE-UUID-1234-567890ABCDEF</string>
+	<string>A1B2C3D4-E5F6-7890-1234-567890ABCDEF</string>
 </dict>
 </plist>
