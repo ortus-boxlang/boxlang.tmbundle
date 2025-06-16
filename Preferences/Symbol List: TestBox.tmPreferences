@@ -14,6 +14,6 @@
 		<string>s/^\s*([xf]?)(describe|it|feature|scenario|story|given|when|then)\s*\(\s*["']([^"']+)["'].*/    [$1$2] $3/g</string>
 	</dict>
 	<key>uuid</key>
-	<string>BL10TEST-SPEC-S123-4567-890123456789</string>
+	<string>31166969-2920-4580-8DB6-F1C5CB51A1F2</string>
 </dict>
 </plist>
