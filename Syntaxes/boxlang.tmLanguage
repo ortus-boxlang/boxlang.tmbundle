@@ -4,6 +4,8 @@
 <dict>
 	<key>name</key>
 	<string>BoxLang Script</string>
+	<key>keyEquivalent</key>
+	<string>^~B</string>
 	<key>scopeName</key>
 	<string>source.boxlang</string>
 	<key>fileTypes</key>
