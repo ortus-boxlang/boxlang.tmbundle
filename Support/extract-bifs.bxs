@@ -32,12 +32,12 @@ function extractBifsFromApiDocs(baseUrl = "https://s3.amazonaws.com/apidocs.ortu
         "ortus/boxlang/runtime/bifs/global/zip/"
     ];
 
-    WriteOutput("Extracting BIFs from API documentation..." & Chr(10));
+    WriteOutput("Extracting BIFs from API documentation..." & Char(10));
 
     for (var package in packages) {
         try {
             var url = baseUrl & package & "package-summary.html";
-            WriteOutput("Checking: " & url & Chr(10));
+            WriteOutput("Checking: " & url & Char(10));
 
             // Use BoxLang's HTTP functionality to fetch the page
             var httpResult = "";
@@ -66,7 +66,7 @@ function extractBifsFromApiDocs(baseUrl = "https://s3.amazonaws.com/apidocs.ortu
             }
 
         } catch (any e) {
-            WriteOutput("Error processing " & package & ": " & e.message & Chr(10));
+            WriteOutput("Error processing " & package & ": " & e.message & Char(10));
             continue;
         }
     }
@@ -101,38 +101,38 @@ function formatForSyntaxFile(bifs) {
  * Main function to extract and display BIFs.
  */
 function main() {
-    WriteOutput("BoxLang BIF Extractor" & Chr(10));
-    WriteOutput(RepeatString("=", 40) & Chr(10));
+    WriteOutput("BoxLang BIF Extractor" & Char(10));
+    WriteOutput(RepeatString("=", 40) & Char(10));
 
     // Extract BIFs from API docs
     var extractedBifs = extractBifsFromApiDocs();
 
     if (ArrayLen(extractedBifs) > 0) {
-        WriteOutput(Chr(10) & "Found " & ArrayLen(extractedBifs) & " potential BIFs:" & Chr(10));
-        WriteOutput(RepeatString("-", 40) & Chr(10));
+        WriteOutput(Char(10) & "Found " & ArrayLen(extractedBifs) & " potential BIFs:" & Char(10));
+        WriteOutput(RepeatString("-", 40) & Char(10));
 
         for (var bif in extractedBifs) {
-            WriteOutput("  " & bif & Chr(10));
+            WriteOutput("  " & bif & Char(10));
         }
 
-        WriteOutput(Chr(10) & "Formatted for syntax file:" & Chr(10));
-        WriteOutput(RepeatString("-", 40) & Chr(10));
-        WriteOutput(formatForSyntaxFile(extractedBifs) & Chr(10));
+        WriteOutput(Char(10) & "Formatted for syntax file:" & Char(10));
+        WriteOutput(RepeatString("-", 40) & Char(10));
+        WriteOutput(formatForSyntaxFile(extractedBifs) & Char(10));
 
         // Save to file
-        var fileContent = "## Extracted BIFs from BoxLang API Documentation" & Chr(10);
-        fileContent = fileContent & "## Total: " & ArrayLen(extractedBifs) & " BIFs" & Chr(10) & Chr(10);
+        var fileContent = "## Extracted BIFs from BoxLang API Documentation" & Char(10);
+        fileContent = fileContent & "## Total: " & ArrayLen(extractedBifs) & " BIFs" & Char(10) & Char(10);
 
         for (var bif in extractedBifs) {
-            fileContent = fileContent & bif & Chr(10);
+            fileContent = fileContent & bif & Char(10);
         }
 
         bx:file action="write" file="extracted-bifs.txt" output="#fileContent#";
 
-        WriteOutput(Chr(10) & "Results saved to 'extracted-bifs.txt'" & Chr(10));
+        WriteOutput(Char(10) & "Results saved to 'extracted-bifs.txt'" & Char(10));
 
     } else {
-        WriteOutput("No BIFs found. The API documentation structure may have changed." & Chr(10));
+        WriteOutput("No BIFs found. The API documentation structure may have changed." & Char(10));
     }
 }
 
@@ -179,11 +179,11 @@ function generateKnownBifs() {
         ]
     };
 
-    WriteOutput(Chr(10) & "Using known BIF categories as fallback:" & Chr(10));
+    WriteOutput(Char(10) & "Using known BIF categories as fallback:" & Char(10));
 
     for (var category in knownBifs) {
-        WriteOutput(Chr(10) & UCase(category) & " Functions:" & Chr(10));
-        WriteOutput(formatForSyntaxFile(knownBifs[category]) & Chr(10));
+        WriteOutput(Char(10) & UCase(category) & " Functions:" & Char(10));
+        WriteOutput(formatForSyntaxFile(knownBifs[category]) & Char(10));
     }
 }
 
@@ -191,7 +191,7 @@ function generateKnownBifs() {
 try {
     main();
 } catch (any e) {
-    WriteOutput("Error occurred: " & e.message & Chr(10));
-    WriteOutput("Falling back to known BIF patterns..." & Chr(10));
+    WriteOutput("Error occurred: " & e.message & Char(10));
+    WriteOutput("Falling back to known BIF patterns..." & Char(10));
     generateKnownBifs();
 }

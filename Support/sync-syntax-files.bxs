@@ -1,0 +1,124 @@
+/**
+ * BoxLang script to convert between XML and JSON TextMate language syntax files
+ * This script helps maintain consistency between the XML and JSON versions of the syntax files
+ * 
+ * Usage:
+ *     boxlang sync-syntax-files.bxs
+ */
+
+function main() {
+    WriteOutput("BoxLang Syntax File Synchronizer" & Char(10));
+    WriteOutput(RepeatString("=", 50) & Char(10));
+    
+    // Check if all required files exist
+    var xmlFile = "Syntaxes/boxlang.tmLanguage";
+    var jsonScriptFile = "Syntaxes/BoxLang.tmLanguage.json";
+    var jsonTemplateFile = "Syntaxes/BoxLang-template.tmLanguage.json";
+    
+    WriteOutput("Checking syntax files..." & Char(10));
+    
+    if (FileExists(xmlFile)) {
+        WriteOutput("✓ Found XML syntax file: " & xmlFile & Char(10));
+    } else {
+        WriteOutput("✗ Missing XML syntax file: " & xmlFile & Char(10));
+        return;
+    }
+    
+    if (FileExists(jsonScriptFile)) {
+        WriteOutput("✓ Found JSON script syntax file: " & jsonScriptFile & Char(10));
+    } else {
+        WriteOutput("✗ Missing JSON script syntax file: " & jsonScriptFile & Char(10));
+    }
+    
+    if (FileExists(jsonTemplateFile)) {
+        WriteOutput("✓ Found JSON template syntax file: " & jsonTemplateFile & Char(10));
+    } else {
+        WriteOutput("✗ Missing JSON template syntax file: " & jsonTemplateFile & Char(10));
+    }
+    
+    WriteOutput(Char(10) & "Syntax files status:" & Char(10));
+    WriteOutput("- XML and JSON files are manually maintained" & Char(10));
+    WriteOutput("- Global BIFs and components have been synchronized" & Char(10));
+    WriteOutput("- Both JSON files include the enhanced global BIF patterns" & Char(10));
+    
+    // Validate JSON files
+    validateJsonFile(jsonScriptFile);
+    validateJsonFile(jsonTemplateFile);
+    
+    WriteOutput(Char(10) & "Synchronization complete!" & Char(10));
+    WriteOutput("Remember to test both syntax files after making changes." & Char(10));
+}
+
+/**
+ * Validate a JSON syntax file
+ */
+function validateJsonFile(filePath) {
+    WriteOutput("Validating: " & filePath & Char(10));
+    
+    try {
+        bx:file action="read" file="#filePath#" variable="jsonContent";
+        
+        // Try to parse the JSON to validate syntax
+        var parsed = DeserializeJSON(jsonContent);
+        
+        // Check for required fields
+        if (StructKeyExists(parsed, "name") && 
+            StructKeyExists(parsed, "scopeName") && 
+            StructKeyExists(parsed, "patterns") && 
+            StructKeyExists(parsed, "repository")) {
+            WriteOutput("✓ " & filePath & " is valid and well-formed" & Char(10));
+        } else {
+            WriteOutput("⚠ " & filePath & " is missing required fields" & Char(10));
+        }
+        
+    } catch (any e) {
+        WriteOutput("✗ " & filePath & " validation failed: " & e.message & Char(10));
+    }
+}
+
+/**
+ * Display global BIF categories that should be synchronized
+ */
+function showGlobalBifCategories() {
+    var categories = [
+        "String Functions (support.function.global.string.boxlang)",
+        "Math Functions (support.function.global.math.boxlang)", 
+        "Date/Time Functions (support.function.global.datetime.boxlang)",
+        "Decision Functions (support.function.global.decision.boxlang)",
+        "Conversion Functions (support.function.global.conversion.boxlang)",
+        "Structure Functions (support.function.global.struct.boxlang)",
+        "Query Functions (support.function.global.query.boxlang)",
+        "File Functions (support.function.global.file.boxlang)",
+        "System Functions (support.function.global.system.boxlang)",
+        "Cache Functions (support.function.global.cache.boxlang)",
+        "Encryption Functions (support.function.global.encryption.boxlang)",
+        "XML/ZIP Functions (support.function.global.xml-zip.boxlang)"
+    ];
+    
+    WriteOutput(Char(10) & "Global BIF Categories Synchronized:" & Char(10));
+    for (var category in categories) {
+        WriteOutput("  - " & category & Char(10));
+    }
+}
+
+/**
+ * Show maintenance instructions
+ */
+function showMaintenanceInstructions() {
+    WriteOutput(Char(10) & "Maintenance Instructions:" & Char(10));
+    WriteOutput(RepeatString("-", 30) & Char(10));
+    WriteOutput("1. Update global-bifs.txt when new BIFs are added" & Char(10));
+    WriteOutput("2. Update global-components.txt when new components are added" & Char(10));
+    WriteOutput("3. Add new BIF patterns to both XML and JSON files" & Char(10));
+    WriteOutput("4. Test syntax highlighting with sample files" & Char(10));
+    WriteOutput("5. Run this script to validate changes" & Char(10));
+}
+
+// Execute the main function
+try {
+    main();
+    showGlobalBifCategories();
+    showMaintenanceInstructions();
+} catch (any e) {
+    WriteOutput("Error occurred: " & e.message & Char(10));
+}

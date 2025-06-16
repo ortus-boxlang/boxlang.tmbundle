@@ -18,6 +18,12 @@ This directory contains support files and tools for maintaining and enhancing th
   - Written in native BoxLang for consistency
   - Usage: `boxlang extract-bifs.bxs`
 
+- **`sync-syntax-files.bxs`** - BoxLang script to validate and check syntax file synchronization
+  - Validates JSON syntax files for correctness
+  - Checks that all required syntax files exist
+  - Provides maintenance instructions and status
+  - Usage: `boxlang sync-syntax-files.bxs`
+
 ## Updating BIFs and Components
 
 When BoxLang releases new versions with additional BIFs or components:

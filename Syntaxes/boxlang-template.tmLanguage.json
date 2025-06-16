@@ -320,6 +320,37 @@
     "bx-generic": {
       "patterns": [
         {
+          "name": "meta.tag.global.boxlang",
+          "begin": "(<)(bx:(async|cache|debug|io|jdbc|net|system|xml|zip|query|http|httpparam|file|directory|image|document|pdf|chart|search|schedule|application|session|cookie|error|log|mail|mailparam|ftp|ldap|object|component|interface|function|property|import|include|transaction|lock|thread|try|catch|finally|rethrow|throw|loop|switch|case|defaultcase|setting|param|invoke|invokeargument|content|output|silent|processingdirective|location|abort|exit|dump|trace|timer|stopwatch))(\\s[^>]*)?+(>)",
+          "beginCaptures": {
+            "1": {"name": "punctuation.definition.tag.begin.boxlang"},
+            "2": {"name": "support.class.component.global.boxlang"},
+            "3": {"name": "support.class.component.global.boxlang"},
+            "4": {"patterns": [{"include": "#tag-attributes"}]},
+            "5": {"name": "punctuation.definition.tag.end.boxlang"}
+          },
+          "end": "(</)\\s*(bx:\\3)\\s*(>)",
+          "endCaptures": {
+            "1": {"name": "punctuation.definition.tag.begin.boxlang"},
+            "2": {"name": "support.class.component.global.boxlang"},
+            "3": {"name": "punctuation.definition.tag.end.boxlang"}
+          },
+          "patterns": [
+            {"include": "$base"}
+          ]
+        },
+        {
+          "name": "meta.tag.self-closing.global.boxlang",
+          "match": "(<)(bx:(async|cache|debug|io|jdbc|net|system|xml|zip|query|http|httpparam|file|directory|image|document|pdf|chart|search|schedule|application|session|cookie|error|log|mail|mailparam|ftp|ldap|object|component|interface|function|property|import|include|transaction|lock|thread|try|catch|finally|rethrow|throw|loop|switch|case|defaultcase|setting|param|invoke|invokeargument|content|output|silent|processingdirective|location|abort|exit|dump|trace|timer|stopwatch))(\\s[^>]*)?+(/>)",
+          "captures": {
+            "1": {"name": "punctuation.definition.tag.begin.boxlang"},
+            "2": {"name": "support.class.component.global.boxlang"},
+            "3": {"name": "support.class.component.global.boxlang"},
+            "4": {"patterns": [{"include": "#tag-attributes"}]},
+            "5": {"name": "punctuation.definition.tag.end.boxlang"}
+          }
+        },
+        {
           "name": "meta.tag.generic.boxlang",
           "begin": "(<)(bx:([a-zA-Z_][a-zA-Z0-9_\\-]*))(\\s[^>]*)?+(>)",
           "beginCaptures": {
