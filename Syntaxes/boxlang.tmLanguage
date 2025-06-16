@@ -17,6 +17,8 @@
 		<string>bx</string>
 		<string>bxs</string>
 	</array>
+	<key>icon</key>
+    <string>icon.png</string>
 	<key>uuid</key>
 	<string>78CA4076-12A0-4022-8CF7-2D345CA64DBC</string>
 	<key>patterns</key>
