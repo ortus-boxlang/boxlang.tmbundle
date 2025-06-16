@@ -26,6 +26,10 @@
 	</dict>
 	<key>name</key>
 	<string>BoxLang</string>
+	<key>icon</key>
+	<string>icon.png</string>
+	<key>fileHierarchyDrawerFilename</key>
+	<string>icon.png</string>
 	<key>ordering</key>
 	<array>
 		<string>B1A2C3D4-E5F6-7890-ABCD-EF9876543210</string>
@@ -41,6 +45,42 @@
 	</array>
 	<key>repository</key>
 	<string>https://github.com/ortus-boxlang/boxlang.tmbundle</string>
+	<key>fileTypes</key>
+	<array>
+		<string>bx</string>
+		<string>bxs</string>
+		<string>bxm</string>
+	</array>
+	<key>fileAssociations</key>
+	<dict>
+		<key>bx</key>
+		<dict>
+			<key>name</key>
+			<string>BoxLang Script</string>
+			<key>icon</key>
+			<string>icon.png</string>
+			<key>description</key>
+			<string>BoxLang Script File</string>
+		</dict>
+		<key>bxs</key>
+		<dict>
+			<key>name</key>
+			<string>BoxLang Script</string>
+			<key>icon</key>
+			<string>icon.png</string>
+			<key>description</key>
+			<string>BoxLang Script File</string>
+		</dict>
+		<key>bxm</key>
+		<dict>
+			<key>name</key>
+			<string>BoxLang Template</string>
+			<key>icon</key>
+			<string>icon.png</string>
+			<key>description</key>
+			<string>BoxLang Template File</string>
+		</dict>
+	</dict>
 	<key>uuid</key>
 	<string>A1B2C3D4-E5F6-7890-1234-567890ABCDEF</string>
 </dict>

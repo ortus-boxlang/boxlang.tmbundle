@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+	<string>BoxLang</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.ortussolutions.boxlang</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>BOXL</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>BoxLang Script</string>
+			<key>CFBundleTypeDescription</key>
+			<string>BoxLang Script File</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>icon.png</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>bx</string>
+				<string>bxs</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.ortussolutions.boxlang.script</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>BoxLang Template</string>
+			<key>CFBundleTypeDescription</key>
+			<string>BoxLang Template File</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>icon.png</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>bxm</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.ortussolutions.boxlang.template</string>
+			</array>
+		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.ortussolutions.boxlang.script</string>
+			<key>UTTypeDescription</key>
+			<string>BoxLang Script</string>
+			<key>UTTypeIconFile</key>
+			<string>icon.png</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.source-code</string>
+				<string>public.plain-text</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>bx</string>
+					<string>bxs</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>text/x-boxlang</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.ortussolutions.boxlang.template</string>
+			<key>UTTypeDescription</key>
+			<string>BoxLang Template</string>
+			<key>UTTypeIconFile</key>
+			<string>icon.png</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.source-code</string>
+				<string>public.plain-text</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>bxm</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>text/x-boxlang-template</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
