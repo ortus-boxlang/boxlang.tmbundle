@@ -8,6 +8,10 @@
 	<string>^~B</string>
 	<key>scopeName</key>
 	<string>source.boxlang</string>
+	<key>foldingStartMarker</key>
+	<string>(\{\s*$|^\s*// \{\{\{)</string>
+	<key>foldingStopMarker</key>
+	<string>^\s*(\}|// \}\}\}$)</string>
 	<key>fileTypes</key>
 	<array>
 		<string>bx</string>
@@ -17,6 +21,10 @@
 	<string>78CA4076-12A0-4022-8CF7-2D345CA64DBC</string>
 	<key>patterns</key>
 	<array>
+		<dict>
+			<key>include</key>
+			<string>#import</string>
+		</dict>
 		<dict>
 			<key>include</key>
 			<string>#comments</string>
@@ -60,6 +68,14 @@
 		<dict>
 			<key>include</key>
 			<string>#interpolation</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#closures</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#map-keys</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -122,7 +138,7 @@
 							<key>name</key>
 							<string>constant.character.escape.boxlang</string>
 							<key>match</key>
-							<string>##</string>
+							<string>\\.</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -143,7 +159,7 @@
 							<key>name</key>
 							<string>constant.character.escape.boxlang</string>
 							<key>match</key>
-							<string>##</string>
+							<string>\\.</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -151,21 +167,51 @@
 						</dict>
 					</array>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#regexp</string>
+				</dict>
 			</array>
 		</dict>
 		<key>string-interpolation</key>
 		<dict>
-			<key>name</key>
-			<string>meta.embedded.line.boxlang</string>
-			<key>begin</key>
-			<string>#</string>
-			<key>end</key>
-			<string>#</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>include</key>
-					<string>#expressions</string>
+					<key>name</key>
+					<string>meta.embedded.line.boxlang</string>
+					<key>begin</key>
+					<string>#</string>
+					<key>end</key>
+					<string>#</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#expressions</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>variable.other.interpolated.boxlang</string>
+					<key>begin</key>
+					<string>\$\{</string>
+					<key>end</key>
+					<string>\}</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#expressions</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>variable.other.interpolated.boxlang</string>
+					<key>match</key>
+					<string>\$\w+</string>
 				</dict>
 			</array>
 		</dict>
@@ -175,21 +221,27 @@
 			<array>
 				<dict>
 					<key>name</key>
-					<string>constant.numeric.float.boxlang</string>
+					<string>constant.numeric.hex.boxlang</string>
 					<key>match</key>
-					<string>\b\d+\.\d+([eE][+-]?\d+)?\b</string>
+					<string>\b0[xX][0-9a-fA-F]+[LlFfDd]?\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>constant.numeric.float.boxlang</string>
 					<key>match</key>
-					<string>\.\d+([eE][+-]?\d+)?\b</string>
+					<string>(\+|-)?\b\d+\.\d+([eE][+-]?\d+)?[LlFfDdGg]?\b</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.float.boxlang</string>
+					<key>match</key>
+					<string>(\+|-)?\.\d+([eE][+-]?\d+)?[LlFfDdGg]?\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>constant.numeric.integer.boxlang</string>
 					<key>match</key>
-					<string>\b\d+([_]?\d)*\b</string>
+					<string>(\+|-)?\b\d+([_]?\d)*[LlFfDdGg]?\b</string>
 				</dict>
 			</array>
 		</dict>
@@ -207,7 +259,7 @@
 					<key>name</key>
 					<string>keyword.other.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(import|include|as|in|instanceof|castas|does|not|contain|contains|than|to|when|assert|param|abort|exit|lock|thread|transaction)\b</string>
+					<string>(?i)\b(import|include|as|in|instanceof|castas|does|not|contain|contains|than|to|when|assert|param|abort|exit|lock|thread|transaction|throws|extends|implements|writedump|echo|println|writeoutput)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -225,13 +277,13 @@
 					<key>name</key>
 					<string>storage.type.primitive.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(any|array|boolean|numeric|query|string|struct)\b</string>
+					<string>(?i)\b(any|array|boolean|numeric|query|string|struct|date|binary|guid|uuid|function|closure|lambda|class)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>constant.language.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(true|false|null)\b</string>
+					<string>(?i)\b(true|false|null|yes|no)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -255,7 +307,13 @@
 					<key>name</key>
 					<string>keyword.operator.comparison.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(eq|equal|neq|gt|gte|ge|lt|lte|le|is)\b|==|!=|&lt;&gt;|&gt;=|&lt;=|&gt;|&lt;|===</string>
+					<string>(?i)\b(eq|equal|neq|gt|gte|ge|lt|lte|le|is)\b|===|==|!=|&lt;&gt;|&gt;=|&lt;=|&gt;|&lt;|&lt;=&gt;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.match.boxlang</string>
+					<key>match</key>
+					<string>==~|=~</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -277,9 +335,33 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.arrow.boxlang</string>
+					<key>match</key>
+					<string>=&gt;|-&gt;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.elvis.boxlang</string>
+					<key>match</key>
+					<string>\?:</string>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>keyword.operator.ternary.boxlang</string>
 					<key>match</key>
-					<string>\?:|\?|:</string>
+					<string>\?|:</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.range.boxlang</string>
+					<key>match</key>
+					<string>\.\.</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.spread.boxlang</string>
+					<key>match</key>
+					<string>\*:</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -289,9 +371,15 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.safe-navigation.boxlang</string>
+					<key>match</key>
+					<string>\?\.</string>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>keyword.operator.access.boxlang</string>
 					<key>match</key>
-					<string>\.|::|\\?\\.</string>
+					<string>\.</string>
 				</dict>
 			</array>
 		</dict>
@@ -402,6 +490,234 @@
 						<dict>
 							<key>name</key>
 							<string>storage.type.function.arrow.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(ArrayAppend|ArrayAvg|ArrayClear|ArrayContains|ArrayContainsNoCase|ArrayDelete|ArrayDeleteAt|ArrayDeleteNoCase|ArrayEach|ArrayEvery|ArrayFilter|ArrayFind|ArrayFindAll|ArrayFindAllNoCase|ArrayFindNoCase|ArrayFirst|ArrayInsertAt|ArrayIsDefined|ArrayIsEmpty|ArrayLast|ArrayLen|ArrayMap|ArrayMax|ArrayMerge|ArrayMin|ArrayNew|ArrayPrepend|ArrayReduce|ArrayResize|ArrayReverse|ArraySet|ArraySlice|ArraySort|ArraySum|ArraySwap|ArrayToList|ArrayUnique|Asc|Char|Compare|CompareNoCase|Find|FindNoCase|FindOneOf|GetToken|Insert|LCase|Left|Len|ListAppend|ListChangeDelims|ListContains|ListContainsNoCase|ListDeleteAt|ListFind|ListFindNoCase|ListFirst|ListGetAt|ListInsertAt|ListLast|ListLen|ListPrepend|ListQualify|ListRest|ListSetAt|ListSort|ListToArray|ListValueCount|ListValueCountNoCase|LJustify|LTrim|Mid|REFind|REFindNoCase|REMatch|REMatchNoCase|REReplace|REReplaceNoCase|RemoveChars|RepeatString|Replace|ReplaceList|ReplaceNoCase|Reverse|Right|RJustify|RTrim|SpanExcluding|SpanIncluding|StripCR|Trim|UCase|Val|Wrap)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.string.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(Abs|Acos|Asin|Atan|Atan2|Ceiling|Cos|DecrementValue|Exp|Fix|FormatBaseN|IncrementValue|InputBaseN|Int|Log|Log10|Max|Min|Pi|Pow|Rand|Randomize|RandRange|Round|Sgn|Sin|Sqr|Tan|BitAnd|BitMaskClear|BitMaskRead|BitMaskSet|BitNot|BitOr|BitSHLN|BitSHRN|BitXor|DecimalFormat|DollarFormat|NumberFormat)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.math.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(CreateDate|CreateDateTime|CreateODBCDate|CreateODBCDateTime|CreateODBCTime|CreateTime|CreateTimeSpan|DateAdd|DateCompare|DateConvert|DateDiff|DateFormat|DatePart|Day|DayOfWeek|DayOfYear|DaysInMonth|DaysInYear|FirstDayOfMonth|GetHttpTimeString|GetTickCount|GetTimezoneInfo|Hour|IsDate|IsLeapYear|LSDateFormat|LSParseDateTime|LSTimeFormat|Minute|Month|MonthAsString|Now|ParseDateTime|Quarter|Second|TimeFormat|Week|Year)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.datetime.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(IIf|IsArray|IsBinary|IsBoolean|IsCustomFunction|IsDate|IsDefined|IsEmpty|IsJSON|IsNull|IsNumeric|IsObject|IsQuery|IsSimpleValue|IsStruct|IsValid|IsXML|IsXmlAttribute|IsXmlDoc|IsXmlElem|IsXmlNode|IsXmlRoot)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.decision.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(BinaryDecode|BinaryEncode|CharsetDecode|CharsetEncode|HTMLCodeFormat|HTMLEditFormat|JSStringFormat|ParagraphFormat|URLDecode|URLEncodedFormat|XMLFormat|ToBase64|ToString|ToBinary)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.conversion.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(Duplicate|StructAppend|StructClear|StructCopy|StructCount|StructDelete|StructFind|StructFindKey|StructFindValue|StructGet|StructInsert|StructIsEmpty|StructKeyArray|StructKeyExists|StructKeyList|StructNew|StructSort|StructUpdate)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.struct.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(QueryAddColumn|QueryAddRow|QueryNew|QuerySetCell|ValueList)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.query.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(DirectoryExists|FileExists|GetDirectoryFromPath|GetFileFromPath|GetTempDirectory|GetTempFile|ExpandPath)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.file.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(CreateObject|GetBaseTemplatePath|GetCurrentTemplatePath|GetFunctionList|GetMetaData|Hash|Serialize|SetEncoding|SetLocale|SystemExecute|WriteOutput|WriteDump|Evaluate|Invoke)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.system.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(CacheClear|CacheDelete|CacheGet|CacheGetAll|CacheGetMetadata|CacheIdExists|CachePut|CacheRemove|CacheRemoveAll)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.cache.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(Decrypt|Encrypt|GenerateSecretKey)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.encryption.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.global-bif.boxlang</string>
+					<key>match</key>
+					<string>(?i)\b(XMLChildPos|XMLElemNew|XMLGetNodeType|XMLNew|XMLParse|XMLSearch|XMLTransform|XMLValidate|Zip|Unzip|IsZipFile)\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.global.xml-zip.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.boxlang</string>
 						</dict>
 					</dict>
 				</dict>
@@ -555,6 +871,34 @@
 			<array>
 				<dict>
 					<key>name</key>
+					<string>meta.component.global.boxlang</string>
+					<key>begin</key>
+					<string>(?i)\b(bx:)(async|cache|debug|io|jdbc|net|system|xml|zip|query|http|httpparam|file|directory|image|document|pdf|chart|search|schedule|application|session|cookie|error|log|mail|mailparam|ftp|ldap|object|component|interface|function|property|import|include|transaction|lock|thread|try|catch|finally|rethrow|throw|loop|switch|case|defaultcase|setting|param|invoke|invokeargument|content|output|silent|processingdirective|location|abort|exit|dump|trace|timer|stopwatch)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.tag.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.class.component.global.boxlang</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?=\s|{|;)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#component-attributes</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>meta.component.boxlang</string>
 					<key>begin</key>
 					<string>(?i)\b(bx:)([a-zA-Z_][a-zA-Z0-9_]*)</string>
@@ -639,7 +983,7 @@
 		<key>component-islands</key>
 		<dict>
 			<key>name</key>
-			<string>meta.embedded.block.boxlang</string>
+			<string>meta.template.embedded.boxlang</string>
 			<key>begin</key>
 			<string>```</string>
 			<key>end</key>
@@ -674,7 +1018,136 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#closures</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#map-keys</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#variables</string>
+				</dict>
+			</array>
+		</dict>
+		<key>import</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>meta.import.boxlang</string>
+					<key>begin</key>
+					<string>(import)\b\s*</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.import.boxlang</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\s*(?:$|(;))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.terminator.boxlang</string>
+						</dict>
+					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>\b(as)\b</string>
+							<key>name</key>
+							<string>keyword.other.import.alias.boxlang</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\.</string>
+							<key>name</key>
+							<string>punctuation.separator.boxlang</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\b[a-zA-Z_][a-zA-Z0-9_]*\b</string>
+							<key>name</key>
+							<string>storage.modifier.import.boxlang</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>regexp</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>string.regexp.boxlang</string>
+					<key>begin</key>
+					<string>/(?=[^/]+/)</string>
+					<key>end</key>
+					<string>/</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>constant.character.escape.boxlang</string>
+							<key>match</key>
+							<string>\\.</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>closures</key>
+		<dict>
+			<key>name</key>
+			<string>meta.closure.boxlang</string>
+			<key>begin</key>
+			<string>\{(?=.*?-&gt;)</string>
+			<key>end</key>
+			<string>\}</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.arrow.boxlang</string>
+					<key>match</key>
+					<string>-&gt;</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#expressions</string>
+				</dict>
+			</array>
+		</dict>
+		<key>map-keys</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>meta.map.key.boxlang</string>
+					<key>match</key>
+					<string>(\w+)\s*(:)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>constant.other.key.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.key-value.boxlang</string>
+						</dict>
+					</dict>
 				</dict>
 			</array>
 		</dict>

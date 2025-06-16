@@ -1,0 +1,169 @@
+# BoxLang Global Components
+# This file contains a comprehensive list of global components available in BoxLang
+
+# Async Components
+async
+
+# Cache Components
+cache
+
+# Debug Components
+debug
+
+# I/O Components
+io
+
+# JDBC Components
+jdbc
+
+# Network Components
+net
+
+# System Components
+system
+
+# XML Components
+xml
+
+# ZIP Components
+zip
+
+# Database Components
+query
+
+# HTTP Components
+http
+httpparam
+
+# File Components
+file
+directory
+
+# Image Components (if available)
+image
+
+# Document Components
+document
+
+# PDF Components (if available)
+pdf
+
+# Chart Components (if available)
+chart
+
+# Search Components
+search
+
+# Schedule Components
+schedule
+
+# Application Components
+application
+
+# Session Management Components
+session
+
+# Cookie Components
+cookie
+
+# Error Handling Components
+error
+
+# Logging Components
+log
+
+# Mail Components
+mail
+mailparam
+
+# FTP Components
+ftp
+
+# LDAP Components
+ldap
+
+# Object Components
+object
+
+# Component Components
+component
+interface
+
+# Function Components
+function
+
+# Property Components
+property
+
+# Import Components
+import
+
+# Include Components
+include
+
+# Transaction Components
+transaction
+
+# Lock Components
+lock
+
+# Thread Components
+thread
+
+# Try/Catch Components
+try
+catch
+finally
+rethrow
+throw
+
+# Loop Components
+loop
+
+# Switch Components
+switch
+case
+defaultcase
+
+# Setting Components
+setting
+
+# Param Components
+param
+
+# Invoke Components
+invoke
+invokeargument
+
+# Content Components
+content
+
+# Output Components
+output
+
+# Silent Components
+silent
+
+# Processing Components
+processingdirective
+
+# Location Components
+location
+
+# Abort Components
+abort
+
+# Exit Components
+exit
+
+# Dump Components
+dump
+
+# Trace Components
+trace
+
+# Timer Components
+timer
+
+# Stopwatch Components
+stopwatch

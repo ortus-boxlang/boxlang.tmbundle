@@ -1,0 +1,115 @@
+/**
+ * Sample BoxLang file demonstrating global BIFs and components syntax highlighting
+ */
+class SampleBoxLangClass {
+
+    function init() {
+        // String functions - should be highlighted as support.function.global.string.boxlang
+        var name = "BoxLang";
+        var upperName = UCase(name);
+        var lowerName = LCase(name);
+        var nameLength = Len(name);
+        var foundPos = Find("Lang", name);
+
+        // Math functions - should be highlighted as support.function.global.math.boxlang
+        var pi = Pi();
+        var randomNum = Rand();
+        var roundedNum = Round(3.14159);
+        var maxValue = Max(10, 20, 30);
+        var absValue = Abs(-42);
+
+        // Date/Time functions - should be highlighted as support.function.global.datetime.boxlang
+        var today = Now();
+        var currentYear = Year(today);
+        var currentMonth = Month(today);
+        var formattedDate = DateFormat(today, "yyyy-mm-dd");
+
+        // Decision functions - should be highlighted as support.function.global.decision.boxlang
+        if (IsArray(someVar)) {
+            WriteOutput("It's an array!");
+        }
+
+        if (IsDefined("variables.name")) {
+            WriteOutput("Name is defined");
+        }
+
+        // Structure functions - should be highlighted as support.function.global.struct.boxlang
+        var myStruct = StructNew();
+        StructInsert(myStruct, "key", "value");
+        var hasKey = StructKeyExists(myStruct, "key");
+
+        // Array functions - should be highlighted as support.function.global.string.boxlang
+        var myArray = ArrayNew(1);
+        ArrayAppend(myArray, "item1");
+        ArrayAppend(myArray, "item2");
+        var arrayLength = ArrayLen(myArray);
+
+        // Query functions - should be highlighted as support.function.global.query.boxlang
+        var myQuery = QueryNew("id,name", "integer,varchar", [
+            [1, "John"],
+            [2, "Jane"]
+        ]);
+
+        // System functions - should be highlighted as support.function.global.system.boxlang
+        WriteOutput("Hello World!");
+        WriteDump(myStruct);
+        var metadata = GetMetaData(this);
+
+        // Cache functions - should be highlighted as support.function.global.cache.boxlang
+        CachePut("myKey", "myValue");
+        var cachedValue = CacheGet("myKey");
+
+        // Conversion functions - should be highlighted as support.function.global.conversion.boxlang
+        var encodedString = HTMLEditFormat("<script>alert('test')</script>");
+        var base64String = ToBase64("Hello World");
+
+        // File functions - should be highlighted as support.function.global.file.boxlang
+        if (FileExists("/path/to/file.txt")) {
+            WriteOutput("File exists!");
+        }
+
+        // Custom function call - should be highlighted as entity.name.function.boxlang
+        myCustomFunction("parameter");
+
+        return this;
+    }
+
+    function myCustomFunction(param) {
+        return param;
+    }
+}
+
+// Component examples - global components should be highlighted as support.class.component.global.boxlang
+bx:query name="users" datasource="mydb" {
+    SELECT * FROM users WHERE active = 1
+}
+
+bx:http url="https://api.example.com/data" method="GET" result="apiResponse" {
+    bx:httpparam type="header" name="Authorization" value="Bearer token123";
+}
+
+bx:file action="read" file="/path/to/data.txt" variable="fileContent";
+
+bx:cache action="put" id="userData" value="#users#" timeout="3600";
+
+bx:async name="backgroundTask" {
+    // Some background processing
+    var result = ProcessLargeDataset();
+}
+
+// Control flow components
+bx:try {
+    var riskyOperation = DoSomethingRisky();
+    bx:catch type="any" name="e" {
+        WriteOutput("Error: " & e.message);
+    }
+}
+
+bx:loop query="users" {
+    WriteOutput("User: " & users.name);
+}
+
+// Custom component - should be highlighted as entity.name.tag.boxlang
+bx:myCustomComponent attribute1="value1" attribute2="value2" {
+    // Component body
+}

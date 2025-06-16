@@ -1,0 +1,197 @@
+/**
+ * BoxLang script to extract global BIFs and components from API documentation.
+ * This script can be used to update the syntax file with new BIFs as they are added to BoxLang.
+ *
+ * Usage:
+ *     boxlang extract-bifs.bxs
+ */
+
+/**
+ * Extract BIF names from BoxLang API documentation.
+ *
+ * @param baseUrl Base URL for the API documentation
+ * @return Array of BIF names found in the documentation
+ */
+function extractBifsFromApiDocs(baseUrl = "https://s3.amazonaws.com/apidocs.ortussolutions.com/boxlang/1.3.0/") {
+    var bifs = [];
+
+    // List of common BIF packages to check
+    var packages = [
+        "ortus/boxlang/runtime/bifs/global/array/",
+        "ortus/boxlang/runtime/bifs/global/string/",
+        "ortus/boxlang/runtime/bifs/global/math/",
+        "ortus/boxlang/runtime/bifs/global/date/",
+        "ortus/boxlang/runtime/bifs/global/decision/",
+        "ortus/boxlang/runtime/bifs/global/conversion/",
+        "ortus/boxlang/runtime/bifs/global/struct/",
+        "ortus/boxlang/runtime/bifs/global/query/",
+        "ortus/boxlang/runtime/bifs/global/system/",
+        "ortus/boxlang/runtime/bifs/global/cache/",
+        "ortus/boxlang/runtime/bifs/global/encryption/",
+        "ortus/boxlang/runtime/bifs/global/xml/",
+        "ortus/boxlang/runtime/bifs/global/zip/"
+    ];
+
+    WriteOutput("Extracting BIFs from API documentation..." & Chr(10));
+
+    for (var package in packages) {
+        try {
+            var url = baseUrl & package & "package-summary.html";
+            WriteOutput("Checking: " & url & Chr(10));
+
+            // Use BoxLang's HTTP functionality to fetch the page
+            var httpResult = "";
+
+            bx:http url="#url#" method="GET" result="httpResult" timeout="10" {
+                // HTTP request configuration
+            }
+
+            if (httpResult.statusCode == "200 OK") {
+                var content = httpResult.fileContent;
+
+                // Extract class names that likely represent BIFs
+                // BIFs typically follow naming pattern like "ArrayAppend", "StringFind", etc.
+                var classPattern = "class\s+([A-Z][a-zA-Z0-9]*)";
+                var matches = REMatch(classPattern, content);
+
+                for (var match in matches) {
+                    // Extract just the class name from the match
+                    var className = REReplace(match, "class\s+", "", "ALL");
+                    className = Trim(className);
+
+                    if (Len(className) > 2) {  // Filter out very short matches
+                        ArrayAppend(bifs, className);
+                    }
+                }
+            }
+
+        } catch (any e) {
+            WriteOutput("Error processing " & package & ": " & e.message & Chr(10));
+            continue;
+        }
+    }
+
+    // Remove duplicates and sort
+    var uniqueBifs = [];
+    var seen = {};
+
+    for (var bif in bifs) {
+        if (!StructKeyExists(seen, bif)) {
+            ArrayAppend(uniqueBifs, bif);
+            seen[bif] = true;
+        }
+    }
+
+    ArraySort(uniqueBifs, "textnocase");
+
+    return uniqueBifs;
+}
+
+/**
+ * Format BIF names for inclusion in the TextMate syntax file.
+ *
+ * @param bifs Array of BIF names
+ * @return Formatted string for regex pattern
+ */
+function formatForSyntaxFile(bifs) {
+    return ArrayToList(bifs, "|");
+}
+
+/**
+ * Main function to extract and display BIFs.
+ */
+function main() {
+    WriteOutput("BoxLang BIF Extractor" & Chr(10));
+    WriteOutput(RepeatString("=", 40) & Chr(10));
+
+    // Extract BIFs from API docs
+    var extractedBifs = extractBifsFromApiDocs();
+
+    if (ArrayLen(extractedBifs) > 0) {
+        WriteOutput(Chr(10) & "Found " & ArrayLen(extractedBifs) & " potential BIFs:" & Chr(10));
+        WriteOutput(RepeatString("-", 40) & Chr(10));
+
+        for (var bif in extractedBifs) {
+            WriteOutput("  " & bif & Chr(10));
+        }
+
+        WriteOutput(Chr(10) & "Formatted for syntax file:" & Chr(10));
+        WriteOutput(RepeatString("-", 40) & Chr(10));
+        WriteOutput(formatForSyntaxFile(extractedBifs) & Chr(10));
+
+        // Save to file
+        var fileContent = "## Extracted BIFs from BoxLang API Documentation" & Chr(10);
+        fileContent = fileContent & "## Total: " & ArrayLen(extractedBifs) & " BIFs" & Chr(10) & Chr(10);
+
+        for (var bif in extractedBifs) {
+            fileContent = fileContent & bif & Chr(10);
+        }
+
+        bx:file action="write" file="extracted-bifs.txt" output="#fileContent#";
+
+        WriteOutput(Chr(10) & "Results saved to 'extracted-bifs.txt'" & Chr(10));
+
+    } else {
+        WriteOutput("No BIFs found. The API documentation structure may have changed." & Chr(10));
+    }
+}
+
+/**
+ * Alternative approach using known BIF categories
+ * This function provides a fallback method to generate BIF lists
+ * based on common CFML/BoxLang patterns when API scraping fails.
+ */
+function generateKnownBifs() {
+    var knownBifs = {
+        "array": [
+            "ArrayAppend", "ArrayAvg", "ArrayClear", "ArrayContains", "ArrayContainsNoCase",
+            "ArrayDelete", "ArrayDeleteAt", "ArrayDeleteNoCase", "ArrayEach", "ArrayEvery",
+            "ArrayFilter", "ArrayFind", "ArrayFindAll", "ArrayFindAllNoCase", "ArrayFindNoCase",
+            "ArrayFirst", "ArrayInsertAt", "ArrayIsDefined", "ArrayIsEmpty", "ArrayLast",
+            "ArrayLen", "ArrayMap", "ArrayMax", "ArrayMerge", "ArrayMin", "ArrayNew",
+            "ArrayPrepend", "ArrayReduce", "ArrayResize", "ArrayReverse", "ArraySet",
+            "ArraySlice", "ArraySort", "ArraySum", "ArraySwap", "ArrayToList", "ArrayUnique"
+        ],
+        "string": [
+            "Asc", "Char", "Compare", "CompareNoCase", "Find", "FindNoCase", "FindOneOf",
+            "GetToken", "Insert", "LCase", "Left", "Len", "LJustify", "LTrim", "Mid",
+            "REFind", "REFindNoCase", "REMatch", "REMatchNoCase", "REReplace", "REReplaceNoCase",
+            "RemoveChars", "RepeatString", "Replace", "ReplaceList", "ReplaceNoCase",
+            "Reverse", "Right", "RJustify", "RTrim", "SpanExcluding", "SpanIncluding",
+            "StripCR", "Trim", "UCase", "Val", "Wrap"
+        ],
+        "math": [
+            "Abs", "Acos", "Asin", "Atan", "Atan2", "Ceiling", "Cos", "DecrementValue",
+            "Exp", "Fix", "FormatBaseN", "IncrementValue", "InputBaseN", "Int", "Log",
+            "Log10", "Max", "Min", "Pi", "Pow", "Rand", "Randomize", "RandRange",
+            "Round", "Sgn", "Sin", "Sqr", "Tan", "BitAnd", "BitMaskClear", "BitMaskRead",
+            "BitMaskSet", "BitNot", "BitOr", "BitSHLN", "BitSHRN", "BitXor"
+        ],
+        "date": [
+            "CreateDate", "CreateDateTime", "CreateODBCDate", "CreateODBCDateTime",
+            "CreateODBCTime", "CreateTime", "CreateTimeSpan", "DateAdd", "DateCompare",
+            "DateConvert", "DateDiff", "DateFormat", "DatePart", "Day", "DayOfWeek",
+            "DayOfYear", "DaysInMonth", "DaysInYear", "FirstDayOfMonth", "GetHttpTimeString",
+            "GetTickCount", "GetTimezoneInfo", "Hour", "IsDate", "IsLeapYear",
+            "LSDateFormat", "LSParseDateTime", "LSTimeFormat", "Minute", "Month",
+            "MonthAsString", "Now", "ParseDateTime", "Quarter", "Second", "TimeFormat",
+            "Week", "Year"
+        ]
+    };
+
+    WriteOutput(Chr(10) & "Using known BIF categories as fallback:" & Chr(10));
+
+    for (var category in knownBifs) {
+        WriteOutput(Chr(10) & UCase(category) & " Functions:" & Chr(10));
+        WriteOutput(formatForSyntaxFile(knownBifs[category]) & Chr(10));
+    }
+}
+
+// Execute the main function
+try {
+    main();
+} catch (any e) {
+    WriteOutput("Error occurred: " & e.message & Chr(10));
+    WriteOutput("Falling back to known BIF patterns..." & Chr(10));
+    generateKnownBifs();
+}
