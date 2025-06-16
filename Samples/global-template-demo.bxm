@@ -1,60 +1,60 @@
-<!--- 
+<!---
 BoxLang Template demonstrating global BIFs and components syntax highlighting
 File extension: .bxm
 --->
 
 <bx:output>
     <h1>BoxLang Template Demo</h1>
-    
+
     <!--- Global Components - should be highlighted as support.class.component.global.boxlang --->
     <bx:query name="users" datasource="mydb">
-        SELECT id, name, email, created_date 
-        FROM users 
+        SELECT id, name, email, created_date
+        FROM users
         WHERE active = 1
         ORDER BY name
     </bx:query>
-    
+
     <bx:cache action="get" id="userCount" variable="cachedCount">
         <bx:query name="countQuery" datasource="mydb">
             SELECT COUNT(*) as total FROM users WHERE active = 1
         </bx:query>
         <bx:cache action="put" id="userCount" value="#countQuery.total#" timeout="3600">
     </bx:cache>
-    
+
     <h2>User List (#cachedCount# total users)</h2>
-    
+
     <bx:loop query="users">
         <div class="user-card">
             <h3>#users.name#</h3>
             <p>Email: #users.email#</p>
-            
+
             <!--- Using global BIFs in template context --->
             <p>Member since: #DateFormat(users.created_date, "mmmm d, yyyy")#</p>
             <p>Name length: #Len(users.name)# characters</p>
             <p>Uppercase name: #UCase(users.name)#</p>
-            
+
             <bx:if condition="Find('@', users.email) GT 0">
                 <span class="verified">✓ Valid email format</span>
             </bx:if>
         </div>
     </bx:loop>
-    
+
     <!--- HTTP component for API calls --->
     <bx:http url="https://api.example.com/stats" method="GET" result="apiResponse">
         <bx:httpparam type="header" name="Authorization" value="Bearer #session.token#">
         <bx:httpparam type="header" name="Content-Type" value="application/json">
     </bx:http>
-    
+
     <bx:if condition="apiResponse.statusCode EQ '200 OK'">
         <div class="api-stats">
             <h3>API Statistics</h3>
             <pre>#HTMLCodeFormat(apiResponse.fileContent)#</pre>
         </div>
     </bx:if>
-    
+
     <!--- File operations --->
     <bx:file action="read" file="#ExpandPath('./data/config.json')#" variable="configData">
-    
+
     <bx:try>
         <bx:script>
             // Global BIFs in embedded script - should be highlighted properly
@@ -62,47 +62,47 @@ File extension: .bxm
             var timestamp = Now();
             var formattedTime = TimeFormat(timestamp, "HH:mm:ss");
             var randomNum = RandRange(1, 100);
-            
+
             WriteOutput("Config loaded at: " & formattedTime);
             WriteOutput("Random number: " & randomNum);
-            
+
             // Array operations
             var items = ArrayNew(1);
             ArrayAppend(items, "Item 1");
             ArrayAppend(items, "Item 2");
             ArrayAppend(items, "Item 3");
-            
+
             var itemCount = ArrayLen(items);
             var lastItem = ArrayLast(items);
-            
+
             // String operations
             var message = "Hello World";
             var upperMessage = UCase(message);
             var messageLength = Len(message);
             var foundPos = Find("World", message);
         </bx:script>
-        
+
         <bx:catch type="any" name="e">
             <div class="error">
                 Error loading config: #e.message#
             </div>
         </bx:catch>
     </bx:try>
-    
+
     <!--- Custom components - should be highlighted as entity.name.tag.boxlang --->
     <bx:userProfile userId="#users.id#" showDetails="true">
-    
-    <bx:customWidget 
-        title="Dynamic Widget" 
-        data="#SerializeJSON(config)#" 
+
+    <bx:customWidget
+        title="Dynamic Widget"
+        data="#SerializeJSON(config)#"
         timestamp="#GetTickCount()#">
     </bx:customWidget>
-    
+
     <!--- System components --->
     <bx:setting showdebugoutput="false">
-    
+
     <bx:param name="userId" type="numeric" default="0">
-    
+
     <bx:location url="/dashboard" addtoken="false">
-    
+
 </bx:output>
