@@ -3,15 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>contactEmailRot13</key>
-	<string>obkynta@beghffbyhgvbaf.pbz</string>
+	<string>obkynat@beghffbyhgvbaf.pbz</string>
 	<key>contactName</key>
 	<string>Ortus Solutions</string>
 	<key>description</key>
 	<string>Welcome to BoxLang: A Modern Dynamic JVM Language. Provides syntax highlighting, code execution, documentation lookup, and intelligent code navigation for BoxLang development.</string>
-	<key>isDelta</key>
-	<false/>
-	<key>isDisabled</key>
-	<false/>
 	<key>mainMenu</key>
 	<dict>
 		<key>items</key>
