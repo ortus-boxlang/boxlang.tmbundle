@@ -10,8 +10,6 @@
 	<array>
 		<string>bxm</string>
 	</array>
-	<key>icon</key>
-    <string>icon.png</string>
 	<key>uuid</key>
 	<string>1A6EB03E-FD9E-4BFC-8C85-ED8D2399DB2F</string>
 	<key>patterns</key>
