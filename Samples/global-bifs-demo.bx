@@ -1,7 +1,11 @@
 /**
  * Sample BoxLang file demonstrating global BIFs and components syntax highlighting
  */
-class SampleBoxLangClass {
+@annotation( value )
+class {
+
+	property name="name" type="string" default="BoxLang Demo";
+	property name="version" type="string" default="1.0.0";
 
     function init() {
         // String functions - should be highlighted as support.function.global.string.boxlang
@@ -77,39 +81,4 @@ class SampleBoxLangClass {
     function myCustomFunction(param) {
         return param;
     }
-}
-
-// Component examples - global components should be highlighted as support.class.component.global.boxlang
-bx:query name="users" datasource="mydb" {
-    SELECT * FROM users WHERE active = 1
-}
-
-bx:http url="https://api.example.com/data" method="GET" result="apiResponse" {
-    bx:httpparam type="header" name="Authorization" value="Bearer token123";
-}
-
-bx:file action="read" file="/path/to/data.txt" variable="fileContent";
-
-bx:cache action="put" id="userData" value="#users#" timeout="3600";
-
-bx:async name="backgroundTask" {
-    // Some background processing
-    var result = ProcessLargeDataset();
-}
-
-// Control flow components
-bx:try {
-    var riskyOperation = DoSomethingRisky();
-    bx:catch type="any" name="e" {
-        WriteOutput("Error: " & e.message);
-    }
-}
-
-bx:loop query="users" {
-    WriteOutput("User: " & users.name);
-}
-
-// Custom component - should be highlighted as entity.name.tag.boxlang
-bx:myCustomComponent attribute1="value1" attribute2="value2" {
-    // Component body
 }
