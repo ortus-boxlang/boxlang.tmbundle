@@ -1,0 +1,76 @@
+name: Publish to NPM
+
+on:
+  release:
+    types: [published]
+  push:
+    branches: [main]
+    paths:
+      - 'monaco/**'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: monaco/package-lock.json
+      
+      - name: Install dependencies
+        run: |
+          cd monaco
+          npm ci
+      
+      - name: Run tests
+        run: |
+          cd monaco
+          npm test
+      
+      - name: Build library
+        run: |
+          cd monaco
+          npm run build
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          cache-dependency-path: monaco/package-lock.json
+      
+      - name: Install dependencies
+        run: |
+          cd monaco
+          npm ci
+      
+      - name: Build library
+        run: |
+          cd monaco
+          npm run build
+      
+      - name: Publish to NPM
+        run: |
+          cd monaco
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

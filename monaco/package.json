@@ -1,0 +1,72 @@
+{
+  "name": "@boxlang/monaco-editor",
+  "version": "1.0.0",
+  "description": "Monaco Editor language support for BoxLang - syntax highlighting, IntelliSense, and themes",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "build:demo": "webpack --mode=production",
+    "dev": "webpack serve --mode=development",
+    "dev:lib": "rollup -c --watch",
+    "test": "node test-monaco.js",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.45.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "monaco-editor-webpack-plugin": "^7.1.0",
+    "html-webpack-plugin": "^5.5.4",
+    "style-loader": "^3.3.3",
+    "css-loader": "^6.8.1",
+    "rollup": "^4.6.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "typescript": "^5.3.2"
+  },
+  "peerDependencies": {
+    "monaco-editor": ">=0.40.0"
+  },
+  "keywords": [
+    "boxlang",
+    "monaco",
+    "monaco-editor",
+    "syntax-highlighting",
+    "code-editor",
+    "language-support",
+    "ide",
+    "cfml",
+    "coldfusion"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ortus-solutions/boxlang.tmbundle.git",
+    "directory": "monaco"
+  },
+  "bugs": {
+    "url": "https://github.com/ortus-solutions/boxlang.tmbundle/issues"
+  },
+  "homepage": "https://boxlang.io",
+  "author": {
+    "name": "Ortus Solutions",
+    "email": "boxlang@ortussolutions.com",
+    "url": "https://ortussolutions.com"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

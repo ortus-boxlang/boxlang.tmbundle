@@ -1,0 +1,39 @@
+# Development files
+webpack.config.js
+rollup.config.js
+test-monaco.js
+.DS_Store
+*.log
+node_modules/
+
+# Demo files (keep src for source maps)
+src/index.html
+src/index.js
+
+# Build artifacts (except dist)
+.cache/
+.temp/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+.travis.yml
+.circleci/
+
+# Development
+coverage/
+.nyc_output/
