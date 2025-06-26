@@ -79,6 +79,21 @@ class  {
 
     <h1>#title#</h1>
 
+	 <bx:script>
+        var name = "BoxLang";
+        var numbers = ArrayNew(1);
+
+        function greet(message) {
+            WriteOutput("Hello " & message);
+            return true;
+        }
+
+        // This is a comment
+        if (name == "BoxLang") {
+            greet(name);
+        }
+    </bx:script>
+
     <bx:if condition="arrayLen(users) > 0">
         <ul>
             <bx:loop array="#users#" item="user">

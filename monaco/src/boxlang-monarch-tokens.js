@@ -3,7 +3,7 @@ export const boxlangMonarchTokens = {
     script: {
         defaultToken: 'invalid',
         tokenPostfix: '.bx',
-        
+
         keywords: [
             'abstract', 'any', 'array', 'as', 'boolean', 'break', 'by', 'case', 'catch', 'class',
             'component', 'continue', 'default', 'do', 'else', 'elseif', 'false', 'finally',
@@ -14,20 +14,20 @@ export const boxlangMonarchTokens = {
             'implements', 'extends', 'super', 'final', 'native', 'synchronized', 'transient',
             'volatile', 'accessors', 'persistent', 'singleton', 'synchronized', 'serializable'
         ],
-        
+
         typeKeywords: [
             'any', 'array', 'boolean', 'date', 'numeric', 'string', 'struct', 'query', 'void'
         ],
-        
+
         operators: [
             '=', '>', '<', '!', '?', ':', '==', '<=', '>=', '!=', '&&', '||', '++', '--',
             '+', '-', '*', '/', '&', '|', '^', '%', '<<', '>>', '>>>', '+=', '-=', '*=',
             '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>='
         ],
-        
+
         symbols: /[=><!~?:&|+\-*\/\^%]+/,
         escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
-        
+
         tokenizer: {
             root: [
                 // Identifiers and keywords
@@ -39,26 +39,26 @@ export const boxlangMonarchTokens = {
                     }
                 }],
                 [/[A-Z][\w$]*/, 'type.identifier'],
-                
+
                 // Whitespace
                 { include: '@whitespace' },
-                
+
                 // Numbers
                 [/\d*\.\d+([eE][\-+]?\d+)?/, 'number.float'],
                 [/0[xX][0-9a-fA-F]+/, 'number.hex'],
                 [/\d+/, 'number'],
-                
+
                 // Strings
                 [/"([^"\\]|\\.)*$/, 'string.invalid'],
                 [/"/, { token: 'string.quote', bracket: '@open', next: '@string' }],
                 [/'([^'\\]|\\.)*$/, 'string.invalid'],
                 [/'/, { token: 'string.quote', bracket: '@open', next: '@stringSingle' }],
-                
+
                 // Characters
                 [/'[^\\']'/, 'string'],
                 [/(')(@escapes)(')/, ['string','string.escape','string']],
                 [/'/, 'string.invalid'],
-                
+
                 // Delimiters and operators
                 [/[{}()\[\]]/, '@brackets'],
                 [/[<>](?!@symbols)/, '@brackets'],
@@ -68,43 +68,43 @@ export const boxlangMonarchTokens = {
                         '@default': ''
                     }
                 }],
-                
+
                 // Comments
                 [/\/\*/, 'comment', '@comment'],
                 [/\/\/.*$/, 'comment'],
-                
+
                 // Annotations
                 [/@\w+/, 'annotation'],
-                
+
                 // Tags (for template files)
                 [/<[a-zA-Z][\w]*/, 'tag'],
                 [/<\/[a-zA-Z][\w]*>/, 'tag'],
-                
+
                 // Interpolation
                 [/#([^#]|##)*#/, 'string.interpolated']
             ],
-            
+
             comment: [
                 [/[^\/*]+/, 'comment'],
                 [/\/\*/, 'comment', '@push'],
                 ["\\*/", 'comment', '@pop'],
                 [/[\/*]/, 'comment']
             ],
-            
+
             string: [
                 [/[^\\"]+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
                 [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
-            
+
             stringSingle: [
                 [/[^\\']+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
                 [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
-            
+
             whitespace: [
                 [/[ \t\r\n]+/, 'white'],
                 [/\/\*/, 'comment', '@comment'],
@@ -112,11 +112,11 @@ export const boxlangMonarchTokens = {
             ]
         }
     },
-    
+
     template: {
         defaultToken: 'invalid',
         tokenPostfix: '.bxm',
-        
+
         keywords: [
             'abstract', 'any', 'array', 'as', 'boolean', 'break', 'by', 'case', 'catch', 'class',
             'component', 'continue', 'default', 'do', 'else', 'elseif', 'false', 'finally',
@@ -125,68 +125,68 @@ export const boxlangMonarchTokens = {
             'query', 'remote', 'required', 'return', 'static', 'string', 'struct', 'switch',
             'this', 'throw', 'true', 'try', 'type', 'var', 'variables', 'void', 'while'
         ],
-        
+
         typeKeywords: [
             'any', 'array', 'boolean', 'date', 'numeric', 'string', 'struct', 'query', 'void'
         ],
-        
+
         operators: [
             '=', '>', '<', '!', '?', ':', '==', '<=', '>=', '!=', '&&', '||', '++', '--',
             '+', '-', '*', '/', '&', '|', '^', '%', '<<', '>>', '>>>', '+=', '-=', '*=',
             '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>='
         ],
-        
+
         symbols: /[=><!~?:&|+\-*\/\^%]+/,
         escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
-        
+
         tokenizer: {
             root: [
+                // BoxLang script blocks - must come before HTML tags
+                [/<bx:script[^>]*>/i, { token: 'tag.bx', next: '@bxScript' }],
+
+                // BoxLang components
+                [/<(bx:[a-zA-Z]+)/, { token: 'tag.bx', next: '@bxTag' }],
+                [/<\/(bx:[a-zA-Z]+)>/, 'tag.bx'],
+
                 // HTML tags
                 [/<!DOCTYPE/, 'tag', '@doctype'],
                 [/<!--/, 'comment', '@htmlComment'],
                 [/<\/?[a-zA-Z][\w]*/, 'tag', '@htmlTag'],
-                
-                // BoxLang script blocks
-                [/<(bx:script)(\s[^>]*)?>/i, [{ token: 'tag' }, { token: 'attribute.name' }, { token: 'tag', next: '@bxScript' }]],
-                
-                // BoxLang components
-                [/<(bx:[a-zA-Z]+)/, { token: 'tag.bx', next: '@bxTag' }],
-                [/<\/(bx:[a-zA-Z]+)>/, 'tag.bx'],
-                
+
                 // BoxLang interpolation
                 [/#[^#]*#/, 'string.interpolated'],
-                
+
                 // BoxLang comments
                 [/<!---/, 'comment', '@bxComment'],
-                
+
                 // Regular text
                 [/[^<#]+/, 'text']
             ],
-            
+
             doctype: [
                 [/[^>]+/, 'tag'],
                 [/>/, 'tag', '@pop']
             ],
-            
+
             htmlComment: [
                 [/[^\\-]+/, 'comment'],
                 [/-->/, 'comment', '@pop'],
                 [/[\\-]/, 'comment']
             ],
-            
+
             bxComment: [
                 [/[^\\-]+/, 'comment'],
                 [/--->/, 'comment', '@pop'],
                 [/[\\-]/, 'comment']
             ],
-            
+
             htmlTag: [
                 [/[ \t\r\n]+/, 'white'],
                 [/(\w+)(\s*=\s*)("[^"]*"|'[^']*')/, ['attribute.name', 'delimiter', 'attribute.value']],
                 [/\w+/, 'attribute.name'],
                 [/>/, 'tag', '@pop']
             ],
-            
+
             bxTag: [
                 [/[ \t\r\n]+/, 'white'],
                 [/(\w+)(\s*=\s*)("[^"]*"|'[^']*')/, ['attribute.name', 'delimiter', 'attribute.value']],
@@ -194,9 +194,12 @@ export const boxlangMonarchTokens = {
                 [/>/, 'tag.bx', '@pop'],
                 [/\/>/, 'tag.bx', '@pop']
             ],
-            
+
             bxScript: [
-                // Include all BoxLang script tokenization
+                // End script tag - must be first to properly exit
+                [/<\/(bx:script)>/i, { token: 'tag', next: '@pop' }],
+
+                // Identifiers and keywords
                 [/[a-z_$][\w$]*/, {
                     cases: {
                         '@typeKeywords': 'keyword',
@@ -205,21 +208,26 @@ export const boxlangMonarchTokens = {
                     }
                 }],
                 [/[A-Z][\w$]*/, 'type.identifier'],
-                
+
                 // Whitespace
-                { include: '@whitespace' },
-                
+                { include: '@scriptWhitespace' },
+
                 // Numbers
                 [/\d*\.\d+([eE][\-+]?\d+)?/, 'number.float'],
                 [/0[xX][0-9a-fA-F]+/, 'number.hex'],
                 [/\d+/, 'number'],
-                
+
                 // Strings
                 [/"([^"\\]|\\.)*$/, 'string.invalid'],
-                [/"/, { token: 'string.quote', bracket: '@open', next: '@string' }],
+                [/"/, { token: 'string.quote', bracket: '@open', next: '@scriptString' }],
                 [/'([^'\\]|\\.)*$/, 'string.invalid'],
-                [/'/, { token: 'string.quote', bracket: '@open', next: '@stringSingle' }],
-                
+                [/'/, { token: 'string.quote', bracket: '@open', next: '@scriptStringSingle' }],
+
+                // Characters
+                [/'[^\\']'/, 'string'],
+                [/(')(@escapes)(')/, ['string','string.escape','string']],
+                [/'/, 'string.invalid'],
+
                 // Delimiters and operators
                 [/[{}()\[\]]/, '@brackets'],
                 [/[<>](?!@symbols)/, '@brackets'],
@@ -229,36 +237,66 @@ export const boxlangMonarchTokens = {
                         '@default': ''
                     }
                 }],
-                
+
                 // Comments
-                [/\/\*/, 'comment', '@comment'],
+                [/\/\*/, 'comment', '@scriptComment'],
                 [/\/\/.*$/, 'comment'],
-                
-                // End script tag
-                [/<\/(bx:script)>/i, { token: 'tag', next: '@pop' }]
+
+                // Annotations
+                [/@\w+/, 'annotation'],
+
+                // Interpolation (still works inside script blocks)
+                [/#([^#]|##)*#/, 'string.interpolated']
             ],
-            
+
+            scriptComment: [
+                [/[^\/*]+/, 'comment'],
+                [/\/\*/, 'comment', '@push'],
+                ["\\*/", 'comment', '@pop'],
+                [/[\/*]/, 'comment']
+            ],
+
+            scriptString: [
+                [/[^\\"]+/, 'string'],
+                [/@escapes/, 'string.escape'],
+                [/\\./, 'string.escape.invalid'],
+                [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
+            ],
+
+            scriptStringSingle: [
+                [/[^\\']+/, 'string'],
+                [/@escapes/, 'string.escape'],
+                [/\\./, 'string.escape.invalid'],
+                [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
+            ],
+
+            scriptWhitespace: [
+                [/[ \t\r\n]+/, 'white'],
+                [/\/\*/, 'comment', '@scriptComment'],
+                [/\/\/.*$/, 'comment']
+            ],
+
             comment: [
                 [/[^\/*]+/, 'comment'],
                 [/\/\*/, 'comment', '@push'],
                 ["\\*/", 'comment', '@pop'],
                 [/[\/*]/, 'comment']
             ],
-            
+
             string: [
                 [/[^\\"]+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
                 [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
-            
+
             stringSingle: [
                 [/[^\\']+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
                 [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
-            
+
             whitespace: [
                 [/[ \t\r\n]+/, 'white'],
                 [/\/\*/, 'comment', '@comment'],
