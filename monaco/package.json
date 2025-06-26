@@ -47,9 +47,7 @@
     "syntax-highlighting",
     "code-editor",
     "language-support",
-    "ide",
-    "cfml",
-    "coldfusion"
+    "ide"
   ],
   "repository": {
     "type": "git",
@@ -65,7 +63,7 @@
     "email": "boxlang@ortussolutions.com",
     "url": "https://ortussolutions.com"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "engines": {
     "node": ">=16.0.0"
   }

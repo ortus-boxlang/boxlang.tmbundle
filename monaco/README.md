@@ -3,7 +3,7 @@
 Monaco Editor language support for BoxLang - providing syntax highlighting, IntelliSense, and custom themes for BoxLang development.
 
 [![npm version](https://badge.fury.io/js/@boxlang%2Fmonaco-editor.svg)](https://www.npmjs.com/package/@boxlang/monaco-editor)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Installation
 
@@ -22,7 +22,7 @@ initializeBoxLangSupport();
 
 // Create a BoxLang editor
 const editor = createBoxLangEditor(document.getElementById('editor'), {
-    value: 'component { function init() { return this; } }',
+    value: 'class { function init() { return this; } }',
     language: 'boxlang',
     theme: 'boxlang-theme'
 });
@@ -151,7 +151,7 @@ monaco.languages.registerCompletionItemProvider('boxlang', {
 ### BoxLang Script Files (.bx, .bxs)
 
 - Component declarations
-- Function definitions  
+- Function definitions
 - Class syntax with inheritance
 - Interface definitions
 - Property declarations
@@ -208,7 +208,7 @@ Modify `boxlang-language-config.js` to customize:
 Update `boxlang-monarch-tokens.js` to add or modify:
 
 - Keywords
-- Operators  
+- Operators
 - Token patterns
 - Syntax rules
 

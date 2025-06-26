@@ -9,11 +9,16 @@ const sampleFiles = {
  * BoxLang Script Example
  * Demonstrates core language features
  */
-component singleton {
-    
-    property string name;
-    property numeric age default=25;
-    
+@singleton
+@metadata( "name" )
+@cache( false )
+class  {
+
+    property name;
+    property name="age" type="numeric" default=25;
+	@inject
+	property name="logger";
+
     /**
      * Constructor
      */
@@ -22,22 +27,22 @@ component singleton {
         variables.age = arguments.age;
         return this;
     }
-    
+
     /**
      * Get a greeting message
      */
     function getGreeting() {
         var message = "Hello, my name is #variables.name# and I am #variables.age# years old.";
-        
+
         if ( variables.age >= 18 ) {
             message &= " I am an adult.";
         } else {
             message &= " I am a minor.";
         }
-        
+
         return message;
     }
-    
+
     /**
      * Process an array of numbers
      */
@@ -53,9 +58,9 @@ component singleton {
                 return acc + num;
             }, 0 );
     }
-    
+
 }`,
-  
+
   template: `<!DOCTYPE html>
 <html>
 <head>
@@ -66,14 +71,14 @@ component singleton {
         // BoxLang template with embedded script
         param name="users" type="array" default=[];
         param name="title" type="string" default="User List";
-        
+
         function formatUser( required struct user ) {
             return "#user.firstName# #user.lastName# (#user.email#)";
         }
     </bx:script>
-    
+
     <h1>#title#</h1>
-    
+
     <bx:if condition="arrayLen(users) > 0">
         <ul>
             <bx:loop array="#users#" item="user">
@@ -90,7 +95,7 @@ component singleton {
     <bx:else>
         <p>No users found.</p>
     </bx:if>
-    
+
     <!--- BoxLang template comment --->
     <div class="user-stats">
         Total Users: #arrayLen(users)#<br>
@@ -98,32 +103,32 @@ component singleton {
     </div>
 </body>
 </html>`,
-  
+
   class: `/**
  * Example BoxLang Interface and Class
  */
 interface IUserService {
-    
+
     /**
      * Get user by ID
      */
     public struct function getUserById( required numeric id );
-    
+
     /**
      * Create a new user
      */
     public struct function createUser( required struct userData );
-    
+
 }
 
 /**
  * User Service Implementation
  */
 class UserService implements="IUserService" {
-    
+
     property inject="@DataSource" datasource;
     property inject="Logger" logger;
-    
+
     /**
      * Constructor
      */
@@ -131,25 +136,25 @@ class UserService implements="IUserService" {
         variables.cache = {};
         return this;
     }
-    
+
     /**
      * Get user by ID
      */
     public struct function getUserById( required numeric id ) {
-        
+
         // Check cache first
         if ( structKeyExists( variables.cache, arguments.id ) ) {
             variables.logger.debug( "Returning user from cache: #arguments.id#" );
             return variables.cache[ arguments.id ];
         }
-        
+
         // Query database
         var qryUser = queryExecute(
             "SELECT * FROM users WHERE id = :id",
             { id: arguments.id },
             { datasource: variables.datasource }
         );
-        
+
         if ( qryUser.recordCount ) {
             var user = {
                 id: qryUser.id,
@@ -158,30 +163,30 @@ class UserService implements="IUserService" {
                 email: qryUser.email,
                 isActive: qryUser.isActive
             };
-            
+
             // Cache the result
             variables.cache[ arguments.id ] = user;
-            
+
             return user;
         }
-        
+
         throw( type="UserNotFound", message="User with ID #arguments.id# not found" );
     }
-    
+
     /**
      * Create a new user
      */
     public struct function createUser( required struct userData ) {
-        
+
         // Validate required fields
         var requiredFields = [ "firstName", "lastName", "email" ];
-        
+
         for ( var field in requiredFields ) {
             if ( !structKeyExists( arguments.userData, field ) || !len( arguments.userData[ field ] ) ) {
                 throw( type="ValidationError", message="Field '#field#' is required" );
             }
         }
-        
+
         // Insert user
         var result = queryExecute(
             "INSERT INTO users (firstName, lastName, email, isActive) VALUES (:firstName, :lastName, :email, :isActive)",
@@ -191,19 +196,19 @@ class UserService implements="IUserService" {
                 email: arguments.userData.email,
                 isActive: arguments.userData.isActive ?: true
             },
-            { 
+            {
                 datasource: variables.datasource,
                 result: "insertResult"
             }
         );
-        
+
         var newUserId = insertResult.generatedKey;
-        
+
         variables.logger.info( "Created new user with ID: #newUserId#" );
-        
+
         return getUserById( newUserId );
     }
-    
+
 }`
 };
 
@@ -267,11 +272,11 @@ document.querySelectorAll('.file-tab').forEach(tab => {
         // Update active tab
         document.querySelectorAll('.file-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        
+
         // Switch file content
         currentFile = tab.dataset.file;
         const language = currentFile === 'template' ? 'boxlang-template' : 'boxlang';
-        
+
         editor.setValue(sampleFiles[currentFile]);
         monaco.editor.setModelLanguage(editor.getModel(), language);
     });
@@ -298,11 +303,11 @@ monaco.languages.registerCompletionItemProvider('boxlang', {
     provideCompletionItems: function(model, position) {
         const suggestions = [
             {
-                label: 'component',
+                label: 'class',
                 kind: monaco.languages.CompletionItemKind.Keyword,
-                insertText: 'component {\\n\\t$1\\n}',
+                insertText: 'class {\\n\\t$1\\n}',
                 insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                documentation: 'Create a new BoxLang component'
+                documentation: 'Create a new BoxLang class'
             },
             {
                 label: 'function',
@@ -333,7 +338,7 @@ monaco.languages.registerCompletionItemProvider('boxlang', {
                 documentation: 'Try-catch block'
             }
         ];
-        
+
         return { suggestions: suggestions };
     }
 });

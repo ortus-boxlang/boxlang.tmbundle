@@ -1,0 +1,18 @@
+.gradle
+build/**
+!gradle/wrapper/gradle-wrapper.jar
+bin/**
+node_modules/
+
+### IntelliJ IDEA ###
+.idea/
+
+### Mac OS ###
+.DS_Store
+
+### BOXLANG ###
+grapher/**
+/libs/
+src/test/resources/libs/
+/wwwServerHome
+/www
