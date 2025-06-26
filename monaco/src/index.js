@@ -292,12 +292,6 @@ window.toggleTheme = function() {
     monaco.editor.setTheme(currentTheme);
 };
 
-window.runCode = function() {
-    const code = editor.getValue();
-    console.log('BoxLang Code to execute:', code);
-    alert('Code would be executed in BoxLang runtime. Check console for code content.');
-};
-
 // Add BoxLang-specific completion provider
 monaco.languages.registerCompletionItemProvider('boxlang', {
     provideCompletionItems: function(model, position) {

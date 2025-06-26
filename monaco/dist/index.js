@@ -402,7 +402,7 @@ const boxlangTheme$1 = {
 
 /**
  * BoxLang Monaco Integration Example
- * 
+ *
  * This file shows how to integrate BoxLang support into an existing Monaco Editor setup.
  * Use this as a reference for your own projects.
  */
@@ -413,14 +413,14 @@ const boxlangTheme$1 = {
  */
 function initializeBoxLangSupport$1() {
     // Register BoxLang languages
-    monaco__namespace.languages.register({ 
+    monaco__namespace.languages.register({
         id: 'boxlang',
         extensions: ['.bx', '.bxs'],
         aliases: ['BoxLang Script', 'boxlang'],
         mimetypes: ['text/x-boxlang']
     });
-    
-    monaco__namespace.languages.register({ 
+
+    monaco__namespace.languages.register({
         id: 'boxlang-template',
         extensions: ['.bxm'],
         aliases: ['BoxLang Template', 'boxlang-template'],
@@ -440,7 +440,7 @@ function initializeBoxLangSupport$1() {
 
     // Register completion providers
     registerBoxLangCompletions();
-    
+
     console.log('BoxLang support initialized for Monaco Editor');
 }
 
@@ -454,12 +454,12 @@ function registerBoxLangCompletions() {
             const suggestions = [
                 // Keywords
                 {
-                    label: 'component',
+                    label: 'class',
                     kind: monaco__namespace.languages.CompletionItemKind.Keyword,
-                    insertText: 'component ${1:name} {\\n\\t$2\\n}',
+                    insertText: 'class ${1:name} {\\n\\t$2\\n}',
                     insertTextRules: monaco__namespace.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                    documentation: 'Create a BoxLang component',
-                    detail: 'BoxLang Component'
+                    documentation: 'Create a BoxLang class',
+                    detail: 'BoxLang class'
                 },
                 {
                     label: 'function',
@@ -493,7 +493,7 @@ function registerBoxLangCompletions() {
                     documentation: 'Try-catch block',
                     detail: 'Error Handling'
                 },
-                
+
                 // Common BoxLang functions
                 {
                     label: 'arrayLen',
@@ -562,7 +562,7 @@ function registerBoxLangCompletions() {
 
 /**
  * Create a BoxLang-enabled Monaco Editor instance
- * 
+ *
  * @param {HTMLElement} container - The DOM element to mount the editor in
  * @param {Object} options - Editor options
  * @returns {monaco.editor.IStandaloneCodeEditor} The editor instance
@@ -570,7 +570,7 @@ function registerBoxLangCompletions() {
 function createBoxLangEditor$1(container, options = {}) {
     // Ensure BoxLang support is initialized
     initializeBoxLangSupport$1();
-    
+
     // Default options for BoxLang
     const defaultOptions = {
         language: 'boxlang',
@@ -600,25 +600,25 @@ function createBoxLangEditor$1(container, options = {}) {
             strings: false
         }
     };
-    
+
     // Merge options
     const editorOptions = { ...defaultOptions, ...options };
-    
+
     // Create and return the editor
     return monaco__namespace.editor.create(container, editorOptions);
 }
 
 /**
  * Get the appropriate language ID for a file based on its extension
- * 
+ *
  * @param {string} filename - The filename to check
  * @returns {string} The language ID ('boxlang', 'boxlang-template', or 'plaintext')
  */
 function getBoxLangLanguage$1(filename) {
     if (!filename) return 'plaintext';
-    
+
     const ext = filename.split('.').pop()?.toLowerCase();
-    
+
     switch (ext) {
         case 'bx':
         case 'bxs':
@@ -632,15 +632,15 @@ function getBoxLangLanguage$1(filename) {
 
 /**
  * Example usage:
- * 
+ *
  * import { createBoxLangEditor, getBoxLangLanguage } from './boxlang-monaco-integration';
- * 
+ *
  * // Create a BoxLang editor
  * const editor = createBoxLangEditor(document.getElementById('editor'), {
- *     value: 'component { function init() { return this; } }',
+ *     value: 'class { function init() { return this; } }',
  *     language: 'boxlang'
  * });
- * 
+ *
  * // Or set language based on filename
  * const language = getBoxLangLanguage('MyClass.bx');
  * editor.setValue(code);

@@ -32,7 +32,7 @@ const editor = createBoxLangEditor(document.getElementById('editor'), {
 
 - **Syntax Highlighting**: Full support for BoxLang script (.bx, .bxs) and template (.bxm) files
 - **IntelliSense**: Auto-completion for BoxLang keywords, functions, and constructs
-- **Custom Theme**: BoxLang-specific color theme optimized for readability
+- **Custom Theme**: BoxLang-branded color theme featuring the signature cyan-blue gradient from the official logo
 - **Template Support**: Mixed HTML/BoxLang template highlighting
 - **Code Folding**: Intelligent folding for functions, classes, and blocks
 - **Bracket Matching**: Automatic bracket and quote pairing
