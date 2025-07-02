@@ -72,24 +72,47 @@ const boxlangMonarchTokens$1 = {
         tokenPostfix: '.bx',
 
         keywords: [
-            'abstract', 'any', 'array', 'as', 'boolean', 'break', 'by', 'case', 'catch', 'class',
-            'component', 'continue', 'default', 'do', 'else', 'elseif', 'false', 'finally',
-            'for', 'function', 'if', 'import', 'in', 'include', 'interface', 'java', 'lock',
-            'new', 'null', 'numeric', 'package', 'param', 'private', 'property', 'public',
-            'query', 'remote', 'required', 'return', 'static', 'string', 'struct', 'switch',
-            'this', 'throw', 'true', 'try', 'type', 'var', 'variables', 'void', 'while',
-            'implements', 'extends', 'super', 'final', 'native', 'synchronized', 'transient',
-            'volatile', 'accessors', 'persistent', 'singleton', 'synchronized', 'serializable'
+            'abort', 'abstract', 'any', 'array', 'as', 'assert', 'break', 'by', 'case', 'castas',
+            'catch', 'class', 'component', 'contain', 'continue', 'default', 'do', 'does', 'else',
+            'elseif', 'exit', 'extends', 'final', 'finally', 'for', 'function', 'greater', 'if',
+            'implements', 'imp', 'import', 'in', 'include', 'instanceof', 'interface', 'is', 'java',
+            'less', 'lock', 'new', 'package', 'param', 'private', 'property', 'public', 'query',
+            'remote', 'required', 'rethrow', 'return', 'static', 'switch', 'than', 'thread', 'throw',
+            'to', 'transaction', 'try', 'type', 'var', 'when', 'while', 'xor'
         ],
 
         typeKeywords: [
-            'any', 'array', 'boolean', 'date', 'numeric', 'string', 'struct', 'query', 'void'
+            'any', 'array', 'binary', 'boolean', 'class', 'date', 'double', 'function', 'guid',
+            'int', 'integer', 'numeric', 'string', 'struct', 'query', 'uuid', 'void', 'xml'
+        ],
+
+        booleans: [
+            'true', 'false', 'yes', 'no'
+        ],
+
+        nullValue: [
+            'null'
+        ],
+
+        modifiers: [
+            'public', 'private', 'remote', 'package', 'abstract', 'final', 'static', 'required'
+        ],
+
+        variableScopes: [
+            'application', 'arguments', 'attributes', 'caller', 'client', 'cgi', 'form', 'local',
+            'request', 'server', 'session', 'static', 'super', 'url', 'thread', 'this', 'variables'
+        ],
+
+        humanOperators: [
+            'and', 'or', 'not', 'xor', 'mod', 'eq', 'neq', 'lt', 'le', 'gt', 'ge', 'equal',
+            'contains', 'instanceof', 'does', 'eqv', 'imp'
         ],
 
         operators: [
-            '=', '>', '<', '!', '?', ':', '==', '<=', '>=', '!=', '&&', '||', '++', '--',
+            '=', '>', '<', '!', '?', ':', '==', '<=', '>=', '!=', '<>', '&&', '||', '++', '--',
             '+', '-', '*', '/', '&', '|', '^', '%', '<<', '>>', '>>>', '+=', '-=', '*=',
-            '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>='
+            '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>=', '===', '!==', '?:', '->', '=>',
+            'b|', 'b&', 'b^', 'b~', 'b<<', 'b>>', 'b>>>'
         ],
 
         symbols: /[=><!~?:&|+\-*\/\^%]+/,
@@ -100,8 +123,13 @@ const boxlangMonarchTokens$1 = {
                 // Identifiers and keywords
                 [/[a-z_$][\w$]*/, {
                     cases: {
-                        '@typeKeywords': 'keyword',
+                        '@typeKeywords': 'type.keyword',
                         '@keywords': 'keyword',
+                        '@booleans': 'boolean',
+                        '@nullValue': 'null',
+                        '@modifiers': 'modifier',
+                        '@variableScopes': 'variable.scope',
+                        '@humanOperators': 'operator.human',
                         '@default': 'identifier'
                     }
                 }],
@@ -159,16 +187,18 @@ const boxlangMonarchTokens$1 = {
             ],
 
             string: [
-                [/[^\\"]+/, 'string'],
+                [/[^\\"#]+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
+                [/#([^#]|##)*#/, 'string.interpolated'],
                 [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
 
             stringSingle: [
-                [/[^\\']+/, 'string'],
+                [/[^\\'#]+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
+                [/#([^#]|##)*#/, 'string.interpolated'],
                 [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
 
@@ -185,22 +215,47 @@ const boxlangMonarchTokens$1 = {
         tokenPostfix: '.bxm',
 
         keywords: [
-            'abstract', 'any', 'array', 'as', 'boolean', 'break', 'by', 'case', 'catch', 'class',
-            'component', 'continue', 'default', 'do', 'else', 'elseif', 'false', 'finally',
-            'for', 'function', 'if', 'import', 'in', 'include', 'interface', 'java', 'lock',
-            'new', 'null', 'numeric', 'package', 'param', 'private', 'property', 'public',
-            'query', 'remote', 'required', 'return', 'static', 'string', 'struct', 'switch',
-            'this', 'throw', 'true', 'try', 'type', 'var', 'variables', 'void', 'while'
+            'abort', 'abstract', 'any', 'array', 'as', 'assert', 'break', 'by', 'case', 'castas',
+            'catch', 'class', 'component', 'contain', 'continue', 'default', 'do', 'does', 'else',
+            'elseif', 'exit', 'extends', 'final', 'finally', 'for', 'function', 'greater', 'if',
+            'implements', 'imp', 'import', 'in', 'include', 'instanceof', 'interface', 'is', 'java',
+            'less', 'lock', 'new', 'package', 'param', 'private', 'property', 'public', 'query',
+            'remote', 'required', 'rethrow', 'return', 'static', 'switch', 'than', 'thread', 'throw',
+            'to', 'transaction', 'try', 'type', 'var', 'when', 'while', 'xor'
         ],
 
         typeKeywords: [
-            'any', 'array', 'boolean', 'date', 'numeric', 'string', 'struct', 'query', 'void'
+            'any', 'array', 'binary', 'boolean', 'class', 'date', 'double', 'function', 'guid',
+            'int', 'integer', 'numeric', 'string', 'struct', 'query', 'uuid', 'void', 'xml'
+        ],
+
+        booleans: [
+            'true', 'false', 'yes', 'no'
+        ],
+
+        nullValue: [
+            'null'
+        ],
+
+        modifiers: [
+            'public', 'private', 'remote', 'package', 'abstract', 'final', 'static', 'required'
+        ],
+
+        variableScopes: [
+            'application', 'arguments', 'attributes', 'caller', 'client', 'cgi', 'form', 'local',
+            'request', 'server', 'session', 'super', 'url', 'thread', 'this', 'variables'
+        ],
+
+        humanOperators: [
+            'and', 'or', 'not', 'xor', 'mod', 'eq', 'neq', 'lt', 'le', 'gt', 'ge', 'equal',
+            'contains', 'instanceof', 'does', 'eqv', 'imp'
         ],
 
         operators: [
-            '=', '>', '<', '!', '?', ':', '==', '<=', '>=', '!=', '&&', '||', '++', '--',
+            '=', '>', '<', '!', '?', ':', '==', '<=', '>=', '!=', '<>', '&&', '||', '++', '--',
             '+', '-', '*', '/', '&', '|', '^', '%', '<<', '>>', '>>>', '+=', '-=', '*=',
-            '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>='
+            '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>=', '===', '!==', '?:', '->', '=>',
+            'b|', 'b&', 'b^', 'b~', 'b<<', 'b>>', 'b>>>'
         ],
 
         symbols: /[=><!~?:&|+\-*\/\^%]+/,
@@ -269,8 +324,13 @@ const boxlangMonarchTokens$1 = {
                 // Identifiers and keywords
                 [/[a-z_$][\w$]*/, {
                     cases: {
-                        '@typeKeywords': 'keyword',
+                        '@typeKeywords': 'type.keyword',
                         '@keywords': 'keyword',
+                        '@booleans': 'boolean',
+                        '@nullValue': 'null',
+                        '@modifiers': 'modifier',
+                        '@variableScopes': 'variable.scope',
+                        '@humanOperators': 'operator.human',
                         '@default': 'identifier'
                     }
                 }],
@@ -324,16 +384,18 @@ const boxlangMonarchTokens$1 = {
             ],
 
             scriptString: [
-                [/[^\\"]+/, 'string'],
+                [/[^\\"#]+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
+                [/#([^#]|##)*#/, 'string.interpolated'],
                 [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
 
             scriptStringSingle: [
-                [/[^\\']+/, 'string'],
+                [/[^\\'#]+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
+                [/#([^#]|##)*#/, 'string.interpolated'],
                 [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
 
@@ -351,16 +413,18 @@ const boxlangMonarchTokens$1 = {
             ],
 
             string: [
-                [/[^\\"]+/, 'string'],
+                [/[^\\"#]+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
+                [/#([^#]|##)*#/, 'string.interpolated'],
                 [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
 
             stringSingle: [
-                [/[^\\']+/, 'string'],
+                [/[^\\'#]+/, 'string'],
                 [/@escapes/, 'string.escape'],
                 [/\\./, 'string.escape.invalid'],
+                [/#([^#]|##)*#/, 'string.interpolated'],
                 [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
             ],
 
@@ -386,6 +450,22 @@ const boxlangTheme$1 = {
         // Types - using BoxLang cyan-green
         { token: 'type', foreground: '00E5CC' },
         { token: 'type.identifier', foreground: '00E5CC' },
+        { token: 'type.keyword', foreground: '00E5CC', fontStyle: 'bold' },
+
+        // Modifiers - bright orange for visibility
+        { token: 'modifier', foreground: 'FF8C00', fontStyle: 'bold' },
+
+        // Variable scopes - purple/magenta for distinctiveness
+        { token: 'variable.scope', foreground: 'DA70D6', fontStyle: 'bold' },
+
+        // Human operators - bright yellow for readability
+        { token: 'operator.human', foreground: 'FFD700', fontStyle: 'bold' },
+
+        // Boolean literals - bright green
+        { token: 'boolean', foreground: '32CD32', fontStyle: 'bold' },
+
+        // Null value - red for attention
+        { token: 'null', foreground: 'FF6B6B', fontStyle: 'bold' },
 
         // Strings - warm complementary color
         { token: 'string', foreground: 'F4A261' },
@@ -401,7 +481,7 @@ const boxlangTheme$1 = {
         // Comments - muted blue-gray
         { token: 'comment', foreground: '7B8FA3', fontStyle: 'italic' },
 
-        // Operators
+        // Operators - light gray for readability
         { token: 'operator', foreground: 'E0E0E0' },
 
         // Identifiers

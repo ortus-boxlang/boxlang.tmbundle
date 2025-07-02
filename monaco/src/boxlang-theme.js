@@ -11,6 +11,22 @@ export const boxlangTheme = {
         // Types - using BoxLang cyan-green
         { token: 'type', foreground: '00E5CC' },
         { token: 'type.identifier', foreground: '00E5CC' },
+        { token: 'type.keyword', foreground: '00E5CC', fontStyle: 'bold' },
+
+        // Modifiers - bright orange for visibility
+        { token: 'modifier', foreground: 'FF8C00', fontStyle: 'bold' },
+
+        // Variable scopes - purple/magenta for distinctiveness
+        { token: 'variable.scope', foreground: 'DA70D6', fontStyle: 'bold' },
+
+        // Human operators - bright yellow for readability
+        { token: 'operator.human', foreground: 'FFD700', fontStyle: 'bold' },
+
+        // Boolean literals - bright green
+        { token: 'boolean', foreground: '32CD32', fontStyle: 'bold' },
+
+        // Null value - red for attention
+        { token: 'null', foreground: 'FF6B6B', fontStyle: 'bold' },
 
         // Strings - warm complementary color
         { token: 'string', foreground: 'F4A261' },
@@ -26,7 +42,7 @@ export const boxlangTheme = {
         // Comments - muted blue-gray
         { token: 'comment', foreground: '7B8FA3', fontStyle: 'italic' },
 
-        // Operators
+        // Operators - light gray for readability
         { token: 'operator', foreground: 'E0E0E0' },
 
         // Identifiers

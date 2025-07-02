@@ -32,58 +32,80 @@ self.MonacoEnvironment = {
 const sampleFiles = {
   script: `/**
  * BoxLang Script Example
- * Demonstrates core language features
+ * Demonstrates core language features and syntax highlighting
  */
 @singleton
 @metadata( "name" )
 @cache( false )
-class  {
+class {
 
-    property name;
-    property name="age" type="numeric" default=25;
-	@inject
-	property name="logger";
+ 	property name="users" type="array" default=[];
+    property name="config" type="struct" default={};
 
-    /**
-     * Constructor
-     */
-    function init( required string name, numeric age = 25 ) {
+    // Variable scopes and types
+    static.APPLICATION_NAME = "MyApp";
+
+    // Constructor with modifiers and types
+    public function init(
+        required string name,
+        numeric age = 25,
+        boolean active = true,
+        xml document = null
+    ) {
         variables.name = arguments.name;
         variables.age = arguments.age;
+        variables.active = arguments.active;
+
+        // Human operators in action
+        if ( variables.age gt 18 and variables.active eq true ) {
+            variables.status = "adult";
+        } else if ( variables.age lt 18 or variables.active neq true ) {
+            variables.status = "minor";
+        }
+
         return this;
     }
 
-    /**
-     * Get a greeting message
-     */
-    function getGreeting() {
-        var message = "Hello, my name is #variables.name# and I am #variables.age# years old.";
-
-        if ( variables.age >= 18 ) {
-            message &= " I am an adult.";
-        } else {
-            message &= " I am a minor.";
+    // Function with various types
+    public boolean function validateUser(
+        required uuid userId,
+        binary avatar = null,
+        guid sessionId = null
+    ) {
+        // Variable scopes
+        if ( not structKeyExists( session, "user" ) ) {
+            session.user = {};
         }
 
-        return message;
+        // More human operators
+        local.isValid = userId contains "-"
+                       and len( userId ) ge 36
+                       and userId instanceof "string";
+
+        // Boolean literals and null
+        local.hasAvatar = avatar neq null ? true : false;
+        local.hasSession = sessionId eq null ? no : yes;
+
+        // Using variable scopes
+        application.users[userId] = {
+            "name": variables.name,
+            "age": variables.age,
+            "avatar": local.hasAvatar,
+            "session": local.hasSession
+        };
+
+        return local.isValid;
     }
 
-    /**
-     * Process an array of numbers
-     */
-    function processNumbers( required array numbers ) {
-        return numbers
-            .filter( function( num ) {
-                return num > 10;
-            })
-            .map( function( num ) {
-                return num * 2;
-            })
-            .reduce( function( acc, num ) {
-                return acc + num;
-            }, 0 );
+    // Static method with modifiers
+    public static array function getActiveUsers() {
+        return application.users.filter( function( user ) {
+            return user.active eq true and user.age mod 2 eq 0;
+        });
     }
 
+    // Abstract method (if this were an abstract class)
+    // public abstract void function processData();
 }`,
 
   template: `<!DOCTYPE html>

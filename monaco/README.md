@@ -1,23 +1,23 @@
-# @boxlang/monaco-editor
+# boxlang-monaco-editor
 
 Monaco Editor language support for BoxLang - providing syntax highlighting, IntelliSense, and custom themes for BoxLang development.
 
 Built with [Vite](https://vitejs.dev/) for fast development and optimized production builds.
 
-[![npm version](https://badge.fury.io/js/@boxlang%2Fmonaco-editor.svg)](https://www.npmjs.com/package/@boxlang/monaco-editor)
+[![npm version](https://badge.fury.io/js/boxlang-monaco-editor.svg)](https://www.npmjs.com/package/boxlang-monaco-editor)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Installation
 
 ```bash
-npm install @boxlang/monaco-editor monaco-editor
+npm install boxlang-monaco-editor monaco-editor
 ```
 
 ## Quick Start
 
 ```javascript
 import * as monaco from 'monaco-editor';
-import { initializeBoxLangSupport, createBoxLangEditor } from '@boxlang/monaco-editor';
+import { initializeBoxLangSupport, createBoxLangEditor } from 'boxlang-monaco-editor';
 
 // Initialize BoxLang support
 initializeBoxLangSupport();
@@ -98,57 +98,32 @@ monaco/
 To integrate BoxLang support into your own Monaco Editor instance:
 
 ```javascript
-import * as monaco from 'monaco-editor';
-import { boxlangLanguageConfig } from './boxlang-language-config';
-import { boxlangMonarchTokens } from './boxlang-monarch-tokens';
-import { boxlangTheme } from './boxlang-theme';
-
-// Monaco Editor worker configuration for Vite (if using Vite)
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
-import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
-import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
-import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
-
-self.MonacoEnvironment = {
-  getWorker(_, label) {
-    if (label === 'json') {
-      return new jsonWorker();
-    }
-    if (label === 'css' || label === 'scss' || label === 'less') {
-      return new cssWorker();
-    }
-    if (label === 'html' || label === 'handlebars' || label === 'razor') {
-      return new htmlWorker();
-    }
-    if (label === 'typescript' || label === 'javascript') {
-      return new tsWorker();
-    }
-    return new editorWorker();
-  }
-};
+import * as monaco from "monaco-editor";
+import { boxlangLanguageConfig } from "boxlang-monaco-editor/boxlang-language-config";
+import { boxlangMonarchTokens } from "boxlang-monaco-editor/boxlang-monarch-tokens";
+import { boxlangTheme } from "boxlang-monaco-editor/boxlang-theme";
 
 // Register BoxLang language
-monaco.languages.register({ id: 'boxlang' });
-monaco.languages.register({ id: 'boxlang-template' });
+monaco.languages.register( { id: "boxlang" } );
+monaco.languages.register( { id: "boxlang-template" } );
 
 // Set language configuration
-monaco.languages.setLanguageConfiguration('boxlang', boxlangLanguageConfig);
-monaco.languages.setLanguageConfiguration('boxlang-template', boxlangLanguageConfig);
+monaco.languages.setLanguageConfiguration( "boxlang", boxlangLanguageConfig );
+monaco.languages.setLanguageConfiguration( "boxlang-template", boxlangLanguageConfig );
 
 // Set syntax highlighting
-monaco.languages.setMonarchTokensProvider('boxlang', boxlangMonarchTokens.script);
-monaco.languages.setMonarchTokensProvider('boxlang-template', boxlangMonarchTokens.template);
+monaco.languages.setMonarchTokensProvider( "boxlang", boxlangMonarchTokens.script );
+monaco.languages.setMonarchTokensProvider( "boxlang-template", boxlangMonarchTokens.template );
 
 // Define custom theme
-monaco.editor.defineTheme('boxlang-theme', boxlangTheme);
+monaco.editor.defineTheme( "boxlang-theme", boxlangTheme );
 
 // Create editor
-const editor = monaco.editor.create(document.getElementById('container'), {
-    value: 'component { function init() { return this; } }',
-    language: 'boxlang',
-    theme: 'boxlang-theme'
-});
+const editor = monaco.editor.create( document.getElementById( "container" ), {
+    value: "component { function init() { return this; } }",
+    language: "boxlang",
+    theme: "boxlang-theme"
+} );
 ```
 
 ### File Extension Mapping
@@ -156,16 +131,16 @@ const editor = monaco.editor.create(document.getElementById('container'), {
 Configure your application to map file extensions to the appropriate language:
 
 ```javascript
-function getLanguageForFile(filename) {
-    const ext = filename.split('.').pop().toLowerCase();
-    switch (ext) {
-        case 'bx':
-        case 'bxs':
-            return 'boxlang';
-        case 'bxm':
-            return 'boxlang-template';
+function getLanguageForFile( filename ) {
+    const ext = filename.split( "." ).pop().toLowerCase();
+    switch ( ext ) {
+        case "bx":
+        case "bxs":
+            return "boxlang";
+        case "bxm":
+            return "boxlang-template";
         default:
-            return 'plaintext';
+            return "plaintext";
     }
 }
 ```
@@ -175,15 +150,15 @@ function getLanguageForFile(filename) {
 The integration includes a basic completion provider. You can extend it with your own completions:
 
 ```javascript
-monaco.languages.registerCompletionItemProvider('boxlang', {
-    provideCompletionItems: function(model, position) {
+monaco.languages.registerCompletionItemProvider( 'boxlang', {
+    provideCompletionItems: function( model, position ) {
         // Your custom completion logic here
         return {
             suggestions: [
                 {
                     label: 'myCustomFunction',
                     kind: monaco.languages.CompletionItemKind.Function,
-                    insertText: 'myCustomFunction($1)',
+                    insertText: 'myCustomFunction( $1 )',
                     insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
                     documentation: 'My custom function'
                 }

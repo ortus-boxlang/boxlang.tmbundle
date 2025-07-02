@@ -1,5 +1,5 @@
 {
-  "name": "@boxlang/monaco-editor",
+  "name": "boxlang-monaco-editor",
   "version": "1.0.0",
   "description": "Monaco Editor language support for BoxLang - syntax highlighting, IntelliSense, and themes",
   "type": "module",
