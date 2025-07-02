@@ -2,6 +2,7 @@
   "name": "@boxlang/monaco-editor",
   "version": "1.0.0",
   "description": "Monaco Editor language support for BoxLang - syntax highlighting, IntelliSense, and themes",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -13,24 +14,19 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "build:demo": "webpack --mode=production",
-    "dev": "webpack serve --mode=development",
+    "build:demo": "vite build",
+    "dev": "vite",
     "dev:lib": "rollup -c --watch",
     "test": "node test-monaco.js",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run build"
+    "prepublishOnly": "npm test && npm run build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "monaco-editor": "^0.45.0"
   },
   "devDependencies": {
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1",
-    "monaco-editor-webpack-plugin": "^7.1.0",
-    "html-webpack-plugin": "^5.5.4",
-    "style-loader": "^3.3.3",
-    "css-loader": "^6.8.1",
+    "vite": "^5.0.0",
     "rollup": "^4.6.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-commonjs": "^25.0.7",

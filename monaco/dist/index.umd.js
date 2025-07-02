@@ -70,7 +70,7 @@
         script: {
             defaultToken: 'invalid',
             tokenPostfix: '.bx',
-            
+
             keywords: [
                 'abstract', 'any', 'array', 'as', 'boolean', 'break', 'by', 'case', 'catch', 'class',
                 'component', 'continue', 'default', 'do', 'else', 'elseif', 'false', 'finally',
@@ -81,20 +81,20 @@
                 'implements', 'extends', 'super', 'final', 'native', 'synchronized', 'transient',
                 'volatile', 'accessors', 'persistent', 'singleton', 'synchronized', 'serializable'
             ],
-            
+
             typeKeywords: [
                 'any', 'array', 'boolean', 'date', 'numeric', 'string', 'struct', 'query', 'void'
             ],
-            
+
             operators: [
                 '=', '>', '<', '!', '?', ':', '==', '<=', '>=', '!=', '&&', '||', '++', '--',
                 '+', '-', '*', '/', '&', '|', '^', '%', '<<', '>>', '>>>', '+=', '-=', '*=',
                 '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>='
             ],
-            
+
             symbols: /[=><!~?:&|+\-*\/\^%]+/,
             escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
-            
+
             tokenizer: {
                 root: [
                     // Identifiers and keywords
@@ -106,26 +106,26 @@
                         }
                     }],
                     [/[A-Z][\w$]*/, 'type.identifier'],
-                    
+
                     // Whitespace
                     { include: '@whitespace' },
-                    
+
                     // Numbers
                     [/\d*\.\d+([eE][\-+]?\d+)?/, 'number.float'],
                     [/0[xX][0-9a-fA-F]+/, 'number.hex'],
                     [/\d+/, 'number'],
-                    
+
                     // Strings
                     [/"([^"\\]|\\.)*$/, 'string.invalid'],
                     [/"/, { token: 'string.quote', bracket: '@open', next: '@string' }],
                     [/'([^'\\]|\\.)*$/, 'string.invalid'],
                     [/'/, { token: 'string.quote', bracket: '@open', next: '@stringSingle' }],
-                    
+
                     // Characters
                     [/'[^\\']'/, 'string'],
                     [/(')(@escapes)(')/, ['string','string.escape','string']],
                     [/'/, 'string.invalid'],
-                    
+
                     // Delimiters and operators
                     [/[{}()\[\]]/, '@brackets'],
                     [/[<>](?!@symbols)/, '@brackets'],
@@ -135,43 +135,43 @@
                             '@default': ''
                         }
                     }],
-                    
+
                     // Comments
                     [/\/\*/, 'comment', '@comment'],
                     [/\/\/.*$/, 'comment'],
-                    
+
                     // Annotations
                     [/@\w+/, 'annotation'],
-                    
+
                     // Tags (for template files)
                     [/<[a-zA-Z][\w]*/, 'tag'],
                     [/<\/[a-zA-Z][\w]*>/, 'tag'],
-                    
+
                     // Interpolation
                     [/#([^#]|##)*#/, 'string.interpolated']
                 ],
-                
+
                 comment: [
                     [/[^\/*]+/, 'comment'],
                     [/\/\*/, 'comment', '@push'],
                     ["\\*/", 'comment', '@pop'],
                     [/[\/*]/, 'comment']
                 ],
-                
+
                 string: [
                     [/[^\\"]+/, 'string'],
                     [/@escapes/, 'string.escape'],
                     [/\\./, 'string.escape.invalid'],
                     [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
                 ],
-                
+
                 stringSingle: [
                     [/[^\\']+/, 'string'],
                     [/@escapes/, 'string.escape'],
                     [/\\./, 'string.escape.invalid'],
                     [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
                 ],
-                
+
                 whitespace: [
                     [/[ \t\r\n]+/, 'white'],
                     [/\/\*/, 'comment', '@comment'],
@@ -179,11 +179,11 @@
                 ]
             }
         },
-        
+
         template: {
             defaultToken: 'invalid',
             tokenPostfix: '.bxm',
-            
+
             keywords: [
                 'abstract', 'any', 'array', 'as', 'boolean', 'break', 'by', 'case', 'catch', 'class',
                 'component', 'continue', 'default', 'do', 'else', 'elseif', 'false', 'finally',
@@ -192,68 +192,68 @@
                 'query', 'remote', 'required', 'return', 'static', 'string', 'struct', 'switch',
                 'this', 'throw', 'true', 'try', 'type', 'var', 'variables', 'void', 'while'
             ],
-            
+
             typeKeywords: [
                 'any', 'array', 'boolean', 'date', 'numeric', 'string', 'struct', 'query', 'void'
             ],
-            
+
             operators: [
                 '=', '>', '<', '!', '?', ':', '==', '<=', '>=', '!=', '&&', '||', '++', '--',
                 '+', '-', '*', '/', '&', '|', '^', '%', '<<', '>>', '>>>', '+=', '-=', '*=',
                 '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>='
             ],
-            
+
             symbols: /[=><!~?:&|+\-*\/\^%]+/,
             escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
-            
+
             tokenizer: {
                 root: [
+                    // BoxLang script blocks - must come before HTML tags
+                    [/<bx:script[^>]*>/i, { token: 'tag.bx', next: '@bxScript' }],
+
+                    // BoxLang components
+                    [/<(bx:[a-zA-Z]+)/, { token: 'tag.bx', next: '@bxTag' }],
+                    [/<\/(bx:[a-zA-Z]+)>/, 'tag.bx'],
+
                     // HTML tags
                     [/<!DOCTYPE/, 'tag', '@doctype'],
                     [/<!--/, 'comment', '@htmlComment'],
                     [/<\/?[a-zA-Z][\w]*/, 'tag', '@htmlTag'],
-                    
-                    // BoxLang script blocks
-                    [/<(bx:script)(\s[^>]*)?>/i, [{ token: 'tag' }, { token: 'attribute.name' }, { token: 'tag', next: '@bxScript' }]],
-                    
-                    // BoxLang components
-                    [/<(bx:[a-zA-Z]+)/, { token: 'tag.bx', next: '@bxTag' }],
-                    [/<\/(bx:[a-zA-Z]+)>/, 'tag.bx'],
-                    
+
                     // BoxLang interpolation
                     [/#[^#]*#/, 'string.interpolated'],
-                    
+
                     // BoxLang comments
                     [/<!---/, 'comment', '@bxComment'],
-                    
+
                     // Regular text
                     [/[^<#]+/, 'text']
                 ],
-                
+
                 doctype: [
                     [/[^>]+/, 'tag'],
                     [/>/, 'tag', '@pop']
                 ],
-                
+
                 htmlComment: [
                     [/[^\\-]+/, 'comment'],
                     [/-->/, 'comment', '@pop'],
                     [/[\\-]/, 'comment']
                 ],
-                
+
                 bxComment: [
                     [/[^\\-]+/, 'comment'],
                     [/--->/, 'comment', '@pop'],
                     [/[\\-]/, 'comment']
                 ],
-                
+
                 htmlTag: [
                     [/[ \t\r\n]+/, 'white'],
                     [/(\w+)(\s*=\s*)("[^"]*"|'[^']*')/, ['attribute.name', 'delimiter', 'attribute.value']],
                     [/\w+/, 'attribute.name'],
                     [/>/, 'tag', '@pop']
                 ],
-                
+
                 bxTag: [
                     [/[ \t\r\n]+/, 'white'],
                     [/(\w+)(\s*=\s*)("[^"]*"|'[^']*')/, ['attribute.name', 'delimiter', 'attribute.value']],
@@ -261,9 +261,12 @@
                     [/>/, 'tag.bx', '@pop'],
                     [/\/>/, 'tag.bx', '@pop']
                 ],
-                
+
                 bxScript: [
-                    // Include all BoxLang script tokenization
+                    // End script tag - must be first to properly exit
+                    [/<\/(bx:script)>/i, { token: 'tag', next: '@pop' }],
+
+                    // Identifiers and keywords
                     [/[a-z_$][\w$]*/, {
                         cases: {
                             '@typeKeywords': 'keyword',
@@ -272,21 +275,26 @@
                         }
                     }],
                     [/[A-Z][\w$]*/, 'type.identifier'],
-                    
+
                     // Whitespace
-                    { include: '@whitespace' },
-                    
+                    { include: '@scriptWhitespace' },
+
                     // Numbers
                     [/\d*\.\d+([eE][\-+]?\d+)?/, 'number.float'],
                     [/0[xX][0-9a-fA-F]+/, 'number.hex'],
                     [/\d+/, 'number'],
-                    
+
                     // Strings
                     [/"([^"\\]|\\.)*$/, 'string.invalid'],
-                    [/"/, { token: 'string.quote', bracket: '@open', next: '@string' }],
+                    [/"/, { token: 'string.quote', bracket: '@open', next: '@scriptString' }],
                     [/'([^'\\]|\\.)*$/, 'string.invalid'],
-                    [/'/, { token: 'string.quote', bracket: '@open', next: '@stringSingle' }],
-                    
+                    [/'/, { token: 'string.quote', bracket: '@open', next: '@scriptStringSingle' }],
+
+                    // Characters
+                    [/'[^\\']'/, 'string'],
+                    [/(')(@escapes)(')/, ['string','string.escape','string']],
+                    [/'/, 'string.invalid'],
+
                     // Delimiters and operators
                     [/[{}()\[\]]/, '@brackets'],
                     [/[<>](?!@symbols)/, '@brackets'],
@@ -296,36 +304,66 @@
                             '@default': ''
                         }
                     }],
-                    
+
                     // Comments
-                    [/\/\*/, 'comment', '@comment'],
+                    [/\/\*/, 'comment', '@scriptComment'],
                     [/\/\/.*$/, 'comment'],
-                    
-                    // End script tag
-                    [/<\/(bx:script)>/i, { token: 'tag', next: '@pop' }]
+
+                    // Annotations
+                    [/@\w+/, 'annotation'],
+
+                    // Interpolation (still works inside script blocks)
+                    [/#([^#]|##)*#/, 'string.interpolated']
                 ],
-                
+
+                scriptComment: [
+                    [/[^\/*]+/, 'comment'],
+                    [/\/\*/, 'comment', '@push'],
+                    ["\\*/", 'comment', '@pop'],
+                    [/[\/*]/, 'comment']
+                ],
+
+                scriptString: [
+                    [/[^\\"]+/, 'string'],
+                    [/@escapes/, 'string.escape'],
+                    [/\\./, 'string.escape.invalid'],
+                    [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
+                ],
+
+                scriptStringSingle: [
+                    [/[^\\']+/, 'string'],
+                    [/@escapes/, 'string.escape'],
+                    [/\\./, 'string.escape.invalid'],
+                    [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
+                ],
+
+                scriptWhitespace: [
+                    [/[ \t\r\n]+/, 'white'],
+                    [/\/\*/, 'comment', '@scriptComment'],
+                    [/\/\/.*$/, 'comment']
+                ],
+
                 comment: [
                     [/[^\/*]+/, 'comment'],
                     [/\/\*/, 'comment', '@push'],
                     ["\\*/", 'comment', '@pop'],
                     [/[\/*]/, 'comment']
                 ],
-                
+
                 string: [
                     [/[^\\"]+/, 'string'],
                     [/@escapes/, 'string.escape'],
                     [/\\./, 'string.escape.invalid'],
                     [/"/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
                 ],
-                
+
                 stringSingle: [
                     [/[^\\']+/, 'string'],
                     [/@escapes/, 'string.escape'],
                     [/\\./, 'string.escape.invalid'],
                     [/'/, { token: 'string.quote', bracket: '@close', next: '@pop' }]
                 ],
-                
+
                 whitespace: [
                     [/[ \t\r\n]+/, 'white'],
                     [/\/\*/, 'comment', '@comment'],
@@ -336,67 +374,95 @@
     };
 
     // Custom BoxLang theme for Monaco Editor
+    // Inspired by the BoxLang logo gradient colors
     const boxlangTheme$1 = {
         base: 'vs-dark',
         inherit: true,
         rules: [
-            // Keywords
-            { token: 'keyword', foreground: '569cd6', fontStyle: 'bold' },
-            { token: 'keyword.operator', foreground: 'd4d4d4' },
-            
-            // Types
-            { token: 'type', foreground: '4ec9b0' },
-            { token: 'type.identifier', foreground: '4ec9b0' },
-            
-            // Strings
-            { token: 'string', foreground: 'ce9178' },
-            { token: 'string.quote', foreground: 'ce9178' },
-            { token: 'string.escape', foreground: 'd7ba7d' },
-            { token: 'string.interpolated', foreground: 'ffd700', fontStyle: 'bold' },
-            
-            // Numbers
-            { token: 'number', foreground: 'b5cea8' },
-            { token: 'number.float', foreground: 'b5cea8' },
-            { token: 'number.hex', foreground: 'b5cea8' },
-            
-            // Comments
-            { token: 'comment', foreground: '6a9955', fontStyle: 'italic' },
-            
+            // Keywords - using BoxLang signature cyan-blue
+            { token: 'keyword', foreground: '00B4D8', fontStyle: 'bold' },
+            { token: 'keyword.operator', foreground: 'E0E0E0' },
+
+            // Types - using BoxLang cyan-green
+            { token: 'type', foreground: '00E5CC' },
+            { token: 'type.identifier', foreground: '00E5CC' },
+
+            // Strings - warm complementary color
+            { token: 'string', foreground: 'F4A261' },
+            { token: 'string.quote', foreground: 'F4A261' },
+            { token: 'string.escape', foreground: 'E76F51' },
+            { token: 'string.interpolated', foreground: '00E5CC', fontStyle: 'bold' },
+
+            // Numbers - bright cyan for visibility
+            { token: 'number', foreground: '4DD0E1' },
+            { token: 'number.float', foreground: '4DD0E1' },
+            { token: 'number.hex', foreground: '4DD0E1' },
+
+            // Comments - muted blue-gray
+            { token: 'comment', foreground: '7B8FA3', fontStyle: 'italic' },
+
             // Operators
-            { token: 'operator', foreground: 'd4d4d4' },
-            
+            { token: 'operator', foreground: 'E0E0E0' },
+
             // Identifiers
-            { token: 'identifier', foreground: 'd4d4d4' },
-            
-            // Tags (for templates)
-            { token: 'tag', foreground: '569cd6' },
-            { token: 'tag.bx', foreground: 'ff6b6b', fontStyle: 'bold' },
-            
-            // Attributes
-            { token: 'attribute.name', foreground: '92c5f8' },
-            { token: 'attribute.value', foreground: 'ce9178' },
-            
-            // Annotations
-            { token: 'annotation', foreground: 'dcdcaa' },
-            
-            // Brackets
-            { token: 'delimiter.bracket', foreground: 'ffd700' },
-            { token: 'delimiter.parenthesis', foreground: 'ffd700' },
-            { token: 'delimiter.square', foreground: 'ffd700' },
-            
+            { token: 'identifier', foreground: 'E0E0E0' },
+
+            // Tags (for templates) - BoxLang blue
+            { token: 'tag', foreground: '00B4D8' },
+            { token: 'tag.bx', foreground: '00E5CC', fontStyle: 'bold' },
+
+            // Attributes - lighter blue
+            { token: 'attribute.name', foreground: '81C7D4' },
+            { token: 'attribute.value', foreground: 'F4A261' },
+
+            // Annotations - BoxLang green
+            { token: 'annotation', foreground: '26C6AA' },
+
+            // Brackets - BoxLang signature gradient
+            { token: 'delimiter.bracket', foreground: '00E5CC' },
+            { token: 'delimiter.parenthesis', foreground: '00B4D8' },
+            { token: 'delimiter.square', foreground: '4DD0E1' },
+
             // Text (for templates)
-            { token: 'text', foreground: 'd4d4d4' }
+            { token: 'text', foreground: 'E0E0E0' }
         ],
         colors: {
-            'editor.background': '#1e1e1e',
-            'editor.foreground': '#d4d4d4',
-            'editorLineNumber.foreground': '#858585',
-            'editorCursor.foreground': '#aeafad',
-            'editor.selectionBackground': '#264f78',
-            'editor.inactiveSelectionBackground': '#3a3d41',
-            'editorIndentGuide.background': '#404040',
-            'editorIndentGuide.activeBackground': '#707070',
-            'editor.selectionHighlightBackground': '#add6ff26'
+            // Main editor - dark navy inspired by logo background
+            'editor.background': '#1B2433',
+            'editor.foreground': '#E0E0E0',
+
+            // Line numbers - muted blue-gray
+            'editorLineNumber.foreground': '#7B8FA3',
+            'editorLineNumber.activeForeground': '#00B4D8',
+
+            // Cursor - BoxLang cyan
+            'editorCursor.foreground': '#00E5CC',
+
+            // Selection - BoxLang blue with transparency
+            'editor.selectionBackground': '#00B4D833',
+            'editor.inactiveSelectionBackground': '#00B4D81A',
+            'editor.selectionHighlightBackground': '#00E5CC26',
+
+            // Indent guides
+            'editorIndentGuide.background': '#3B434F',
+            'editorIndentGuide.activeBackground': '#00B4D8',
+
+            // Minimap
+            'minimap.background': '#1B2433',
+
+            // Scrollbars
+            'scrollbarSlider.background': '#3B434F66',
+            'scrollbarSlider.hoverBackground': '#00B4D866',
+            'scrollbarSlider.activeBackground': '#00E5CC66',
+
+            // Find/replace
+            'editor.findMatchBackground': '#00E5CC33',
+            'editor.findMatchHighlightBackground': '#00B4D826',
+            'editor.findRangeHighlightBackground': '#00B4D81A',
+
+            // Word highlight
+            'editor.wordHighlightBackground': '#00B4D826',
+            'editor.wordHighlightStrongBackground': '#00E5CC26'
         }
     };
 

@@ -2,6 +2,8 @@
 
 Monaco Editor language support for BoxLang - providing syntax highlighting, IntelliSense, and custom themes for BoxLang development.
 
+Built with [Vite](https://vitejs.dev/) for fast development and optimized production builds.
+
 [![npm version](https://badge.fury.io/js/@boxlang%2Fmonaco-editor.svg)](https://www.npmjs.com/package/@boxlang/monaco-editor)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -40,20 +42,35 @@ const editor = createBoxLangEditor(document.getElementById('editor'), {
 ## Development
 
 1. **Install dependencies**:
+
    ```bash
    cd monaco
    npm install
    ```
 
 2. **Start development server**:
+
    ```bash
    npm run dev
    ```
 
+   This will start Vite's development server at http://localhost:3000 with hot module replacement for fast development.
+
 3. **Build for production**:
+
    ```bash
-   npm run build
+   npm run build:demo
    ```
+
+   This builds the demo application for production using Vite.
+
+4. **Preview production build**:
+
+   ```bash
+   npm run preview
+   ```
+
+   This serves the production build locally at http://localhost:4173 for testing.
 
 ## File Structure
 
@@ -65,8 +82,10 @@ monaco/
 │   ├── boxlang-language-config.js   # Language configuration
 │   ├── boxlang-monarch-tokens.js    # Syntax tokenizer
 │   └── boxlang-theme.js        # Custom color theme
+├── dist/                       # Production build output
 ├── package.json
-└── webpack.config.js
+├── vite.config.js              # Vite configuration
+└── rollup.config.js           # Rollup config for library builds
 ```
 
 ## Integration Guide
@@ -80,6 +99,31 @@ import * as monaco from 'monaco-editor';
 import { boxlangLanguageConfig } from './boxlang-language-config';
 import { boxlangMonarchTokens } from './boxlang-monarch-tokens';
 import { boxlangTheme } from './boxlang-theme';
+
+// Monaco Editor worker configuration for Vite (if using Vite)
+import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
+import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
+import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
+import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
+import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
+
+self.MonacoEnvironment = {
+  getWorker(_, label) {
+    if (label === 'json') {
+      return new jsonWorker();
+    }
+    if (label === 'css' || label === 'scss' || label === 'less') {
+      return new cssWorker();
+    }
+    if (label === 'html' || label === 'handlebars' || label === 'razor') {
+      return new htmlWorker();
+    }
+    if (label === 'typescript' || label === 'javascript') {
+      return new tsWorker();
+    }
+    return new editorWorker();
+  }
+};
 
 // Register BoxLang language
 monaco.languages.register({ id: 'boxlang' });
@@ -217,9 +261,9 @@ Update `boxlang-monarch-tokens.js` to add or modify:
 ### Testing Changes
 
 1. Make your changes to the source files
-2. Run `npm run dev` to start the development server
+2. Run `npm run dev` to start the Vite development server
 3. Open http://localhost:3000 to test your changes
-4. The page will automatically reload when you save changes
+4. The page will automatically reload when you save changes thanks to Vite's fast HMR (Hot Module Replacement)
 
 ### Adding New Keywords
 
