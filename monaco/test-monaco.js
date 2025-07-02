@@ -12,11 +12,13 @@ async function runTests() {
 
     // Check if all required files exist
     const requiredFiles = [
-        'src/index.html',
-        'src/index.js',
+        'src/demo/index.html',
+        'src/demo/index.js',
         'src/boxlang-language-config.js',
         'src/boxlang-monarch-tokens.js',
         'src/boxlang-theme.js',
+        'src/index.js',
+        'src/lib.js',
         'package.json',
         'vite.config.js'
     ];

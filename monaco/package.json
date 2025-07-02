@@ -14,7 +14,6 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "build:demo": "vite build",
     "dev": "vite",
     "dev:lib": "rollup -c --watch",
     "test": "node test-monaco.js",

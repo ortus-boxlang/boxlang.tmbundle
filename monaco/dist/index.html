@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoxLang Monaco Editor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #007acc;
+        }
+
+        .header p {
+            margin: 5px 0;
+            color: #cccccc;
+        }
+
+        .editor-container {
+            border: 1px solid #3c3c3c;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        #editor {
+            height: 600px;
+        }
+
+        .toolbar {
+            background-color: #2d2d30;
+            padding: 10px;
+            border-bottom: 1px solid #3c3c3c;
+        }
+
+        .toolbar button {
+            background-color: #0e639c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            margin-right: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .toolbar button:hover {
+            background-color: #1177bb;
+        }
+
+        .file-tabs {
+            background-color: #252526;
+            padding: 0;
+            border-bottom: 1px solid #3c3c3c;
+            display: flex;
+        }
+
+        .file-tab {
+            padding: 8px 16px;
+            background-color: #2d2d30;
+            border-right: 1px solid #3c3c3c;
+            cursor: pointer;
+            color: #cccccc;
+            font-size: 13px;
+        }
+
+        .file-tab.active {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .file-tab:hover {
+            background-color: #37373d;
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/index-DmQLm7Qr.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CXBm6MfC.css">
+</head>
+<body>
+    <div class="header">
+        <h1>BoxLang Monaco Editor</h1>
+        <p>A modern code editor with BoxLang syntax highlighting</p>
+    </div>
+
+    <div class="editor-container">
+        <div class="file-tabs">
+            <div class="file-tab active" data-file="script">Example.bx</div>
+            <div class="file-tab" data-file="template">Template.bxm</div>
+            <div class="file-tab" data-file="class">MyClass.bx</div>
+        </div>
+
+        <div class="toolbar">
+            <button onclick="formatCode()">Format Code</button>
+            <button onclick="toggleTheme()">Toggle Theme</button>
+        </div>
+
+        <div id="editor"></div>
+    </div>
+
+</body>
+</html>

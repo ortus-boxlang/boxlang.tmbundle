@@ -56,13 +56,13 @@ const editor = createBoxLangEditor(document.getElementById('editor'), {
 
    This will start Vite's development server at http://localhost:3000 with hot module replacement for fast development.
 
-3. **Build for production**:
+3. **Build library for production**:
 
    ```bash
-   npm run build:demo
+   npm run build
    ```
 
-   This builds the demo application for production using Vite.
+   This builds the library for production using Rollup.
 
 4. **Preview production build**:
 
@@ -70,15 +70,18 @@ const editor = createBoxLangEditor(document.getElementById('editor'), {
    npm run preview
    ```
 
-   This serves the production build locally at http://localhost:4173 for testing.
+   This serves the demo locally for testing. Note: The demo is for development purposes only and doesn't produce a production build.
 
 ## File Structure
 
 ```
 monaco/
 ├── src/
-│   ├── index.html              # Demo page
-│   ├── index.js                # Main entry point
+│   ├── demo/
+│   │   ├── index.html          # Demo page
+│   │   └── index.js            # Demo application
+│   ├── index.js                # Library entry point
+│   ├── lib.js                  # Main library exports
 │   ├── boxlang-language-config.js   # Language configuration
 │   ├── boxlang-monarch-tokens.js    # Syntax tokenizer
 │   └── boxlang-theme.js        # Custom color theme
