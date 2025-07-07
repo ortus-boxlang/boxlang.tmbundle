@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>name</key>
-	<string>BoxLang High Contrast</string>
 	<key>author</key>
 	<string>Ortus Solutions</string>
-	<key>uuid</key>
-	<string>2C9FADBE-3F40-5162-7C8D-9E0F1A2B3C4D</string>
-	<key>comment</key>
-	<string>A high-contrast accessible theme using BoxLang's brand colors for enhanced readability</string>
+	<key>name</key>
+	<string>BoxLang High Contrast</string>
+	<key>semanticClass</key>
+	<string>theme.dark.boxlang.highcontrast</string>
 	<key>settings</key>
 	<array>
 		<!-- Global Settings -->
@@ -328,5 +326,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>uuid</key>
+	<string>2C9FADBE-3F40-5162-7C8D-9E0F1A2B3C4D</string>
 </dict>
 </plist>

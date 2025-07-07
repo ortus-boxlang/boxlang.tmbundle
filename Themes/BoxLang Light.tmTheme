@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>name</key>
-	<string>BoxLang Light</string>
 	<key>author</key>
 	<string>Ortus Solutions</string>
-	<key>uuid</key>
-	<string>0A7E8B9C-1D2E-3F40-5A6B-7C8D9E0F1A2B</string>
-	<key>comment</key>
-	<string>A light theme inspired by BoxLang's vibrant green-cyan gradient branding</string>
+	<key>name</key>
+	<string>BoxLang Light</string>
+	<key>semanticClass</key>
+	<string>theme.light.boxlang</string>
 	<key>settings</key>
 	<array>
 		<!-- Global Settings -->
@@ -328,5 +326,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>uuid</key>
+	<string>0A7E8B9C-1D2E-3F40-5A6B-7C8D9E0F1A2B</string>
 </dict>
 </plist>
