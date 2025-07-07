@@ -4,9 +4,10 @@
  * @author ${TM_FULLNAME:$USER}
  * @date ${TM_DATE}
  */
-class{
+class extends="testbox.system.BaseSpec"{
 
   function run(){
+
   	describe( "My BDD test", () => {
 
 		beforeEach( () => {
@@ -23,6 +24,7 @@ class{
 		test( "it can multiply", () => {
 		} )
 	} )
+
   }
 
 }

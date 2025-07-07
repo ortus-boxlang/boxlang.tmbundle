@@ -6,6 +6,6 @@
  */
 
 // BoxLang script execution starts here
-println("BoxLang Script: ${TM_NEW_FILE_BASENAME}");
+println( "BoxLang Script: ${TM_NEW_FILE_BASENAME}" );
 
 $0

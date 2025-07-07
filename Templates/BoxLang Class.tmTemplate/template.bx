@@ -9,10 +9,15 @@ class {
     /**
      * Constructor
      */
-    public function init() {
+    function init() {
         return this;
     }
 
-    $0
+	/**
+	 * Main Executable
+	 */
+	function main(){
+		$0
+	}
 
 }

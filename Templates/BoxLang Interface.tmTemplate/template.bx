@@ -9,6 +9,13 @@ interface {
     /**
      * Sample interface method
      */
-    public function sampleMethod();
+    function sampleMethod();
+
+	/**
+	 * Sample default method
+	 */
+	default function defaultMethod() {
+		return "Default implementation";
+	}
 
 }

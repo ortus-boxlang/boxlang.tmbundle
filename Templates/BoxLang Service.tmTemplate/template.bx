@@ -12,14 +12,14 @@ class {
     /**
      * Constructor
      */
-    public function init() {
+    function init() {
         return this;
     }
 
     /**
      * Sample service method
      */
-    public function sampleMethod() {
+    function sampleMethod() {
         // Add your service logic here
         $0
         return {};
