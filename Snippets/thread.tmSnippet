@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>thread action="${1:run}" name="${2:threadName}" {
+	$0
+}</string>
+	<key>name</key>
+	<string>thread</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>thread</string>
+	<key>uuid</key>
+	<string>L8M9N0O1-P2Q3-4567-LMNO-890123456LMN</string>
+</dict>
+</plist>

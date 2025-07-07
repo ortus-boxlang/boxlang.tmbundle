@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>bx:http url="${1:url}" method="${2:GET}" result="${3:result}" {
+	$0
+}</string>
+	<key>name</key>
+	<string>bx:http</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>bxhttp</string>
+	<key>uuid</key>
+	<string>H4I5J6K7-L8M9-0123-HIJK-456789012HIJ</string>
+</dict>
+</plist>

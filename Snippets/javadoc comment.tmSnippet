@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>/**
+ * ${1:Description}
+ * 
+ * @param ${2:paramName} ${3:Parameter description}
+ * @return ${4:Return description}
+ */</string>
+	<key>name</key>
+	<string>javadoc comment</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>doc</string>
+	<key>uuid</key>
+	<string>U7V8W9X0-Y1Z2-3456-UVWX-789012345UVW</string>
+</dict>
+</plist>

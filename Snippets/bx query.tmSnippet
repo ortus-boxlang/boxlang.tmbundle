@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>bx:query name="${1:queryName}" datasource="${2:datasource}" {
+	${3:SELECT * FROM table}
+}</string>
+	<key>name</key>
+	<string>bx:query</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>bxquery</string>
+	<key>uuid</key>
+	<string>J6K7L8M9-N0O1-2345-JKLM-678901234JKL</string>
+</dict>
+</plist>

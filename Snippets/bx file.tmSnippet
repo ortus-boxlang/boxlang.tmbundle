@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>bx:file action="${1:read}" file="${2:path}" variable="${3:content}" {
+	$0
+}</string>
+	<key>name</key>
+	<string>bx:file</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>bxfile</string>
+	<key>uuid</key>
+	<string>I5J6K7L8-M9N0-1234-IJKL-567890123IJK</string>
+</dict>
+</plist>

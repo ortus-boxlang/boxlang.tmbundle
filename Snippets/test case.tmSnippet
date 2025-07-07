@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>// Test case
+function test${1:methodName}() {
+	// Given
+	${2:// setup}
+	
+	// When
+	${3:// action}
+	
+	// Then
+	${4:// assertions}
+	$0
+}</string>
+	<key>name</key>
+	<string>test case</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>test</string>
+	<key>uuid</key>
+	<string>T6U7V8W9-X0Y1-2345-TUVW-678901234TUV</string>
+</dict>
+</plist>

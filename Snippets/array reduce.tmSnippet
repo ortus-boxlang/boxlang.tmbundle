@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>${1:array}.reduce(function(${2:accumulator}, ${3:item}, ${4:index}) {
+	return $0;
+}, ${5:initialValue});</string>
+	<key>name</key>
+	<string>array reduce</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>reduce</string>
+	<key>uuid</key>
+	<string>D0E1F2G3-H4I5-6789-DEFG-012345678DEF</string>
+</dict>
+</plist>

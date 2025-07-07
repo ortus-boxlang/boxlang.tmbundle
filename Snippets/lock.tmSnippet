@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>lock name="${1:lockName}" timeout="${2:10}" {
+	$0
+}</string>
+	<key>name</key>
+	<string>lock</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>lock</string>
+	<key>uuid</key>
+	<string>K7L8M9N0-O1P2-3456-KLMN-789012345KLM</string>
+</dict>
+</plist>

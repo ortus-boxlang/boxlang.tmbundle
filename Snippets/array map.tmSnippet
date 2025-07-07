@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>${1:array}.map(function(${2:item}, ${3:index}) {
+	return $0;
+});</string>
+	<key>name</key>
+	<string>array map</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>map</string>
+	<key>uuid</key>
+	<string>B8C9D0E1-F2G3-4567-BCDE-890123456BCD</string>
+</dict>
+</plist>

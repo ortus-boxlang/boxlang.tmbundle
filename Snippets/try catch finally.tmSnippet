@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>try {
+	$1
+} catch (${2:any e}) {
+	${3:// error handling}
+} finally {
+	$0
+}</string>
+	<key>name</key>
+	<string>try catch finally</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>tryf</string>
+	<key>uuid</key>
+	<string>L2M3N4O5-P6Q7-8901-LMNO-234567890LMN</string>
+</dict>
+</plist>

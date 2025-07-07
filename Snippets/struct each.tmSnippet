@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>${1:struct}.each(function(${2:key}, ${3:value}) {
+	$0
+});</string>
+	<key>name</key>
+	<string>struct each</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>seach</string>
+	<key>uuid</key>
+	<string>E1F2G3H4-I5J6-7890-EFGH-123456789EFG</string>
+</dict>
+</plist>

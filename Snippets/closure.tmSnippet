@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>// Closure
+(${1:parameters}) => {
+	$0
+}</string>
+	<key>name</key>
+	<string>closure</string>
+	<key>scope</key>
+	<string>source.boxlang</string>
+	<key>tabTrigger</key>
+	<string>closure</string>
+	<key>uuid</key>
+	<string>S9T0U1V2-W3X4-5678-STUV-901234567STU</string>
+</dict>
+</plist>
