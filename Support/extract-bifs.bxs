@@ -49,7 +49,7 @@ function extractBifsFromApiDocs( baseUrl = static.BASE_URL ) {
 
             if ( httpResult.statusCode == 200 ) {
                 var content = httpResult.fileContent
-                println( "Successfully fetched package: " & package )
+                println( "Successfully fetched package: " & package.listLast( " /" ) )
                 // Extract BIF names from HTML links in the class summary table
                 // Pattern matches: <a href="BifName.html" title="class in ...">BifName</a>
                 // Using REMatchNoCase and more flexible pattern for case variations
