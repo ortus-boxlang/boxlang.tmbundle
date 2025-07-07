@@ -14,7 +14,7 @@
 	<a href="https://www.ortussolutions.com">www.ortussolutions.com</a>
 </blockquote>
 
-A comprehensive TextMate bundle that provides rich language support for BoxLang development, including syntax highlighting, code execution, documentation lookup, and intelligent code navigation.
+A comprehensive TextMate bundle that provides rich language support for BoxLang development, including syntax highlighting, code execution, documentation lookup, intelligent code navigation, and extensive code snippets.
 
 ## Features
 
@@ -22,6 +22,8 @@ A comprehensive TextMate bundle that provides rich language support for BoxLang 
 
 - **BoxLang Script** (`.bx`, `.bxs`) - Full syntax highlighting for BoxLang script files
 - **BoxLang Templates** (`.bxm`) - Template syntax with embedded script support and HTML integration
+- **Dynamic BIF Recognition** - Automatically updated Built-In Functions from BoxLang API documentation
+- **Modern Language Features** - Support for lambda functions, arrow functions, and advanced syntax
 
 ### 🚀 Code Execution
 
@@ -30,11 +32,66 @@ A comprehensive TextMate bundle that provides rich language support for BoxLang 
 - **Run Selected Code** - Execute only the selected code snippet
 - **BoxLang REPL** - Launch an interactive BoxLang Read-Eval-Print Loop
 
+### ⚡ Code Snippets (52+ Available)
+
+Comprehensive snippet collection for rapid development:
+
+#### **Core Language Constructs**
+
+- `class` - Class definition with inheritance and interfaces
+- `interface` - Interface definition
+- `function` - Function declaration with modifiers
+- `property` - Property declaration with attributes
+- `import` - Import statement with module support
+- `var` - Variable declaration
+- `new` - Object instantiation
+
+#### **Control Flow**
+
+- `if` / `ife` - If and if-else statements
+- `for` / `forin` - Traditional and for-in loops
+- `while` / `do` - While and do-while loops
+- `switch` / `case` / `default` - Switch statements
+- `try` / `tryf` - Try-catch and try-catch-finally blocks
+- `break` / `continue` - Loop control statements
+
+#### **Function Types**
+
+- `anon` - Anonymous function
+- `arrow` - Arrow function with `=>`
+- `lambda` - Lambda function expressions
+
+#### **Access Modifiers**
+
+- `public` / `private` / `static` / `final` / `abstract` / `remote` - Method and property modifiers
+
+#### **Data Structures & Collections**
+
+- `array` / `struct` - Literal declarations
+- `each` / `seach` - Array and struct iteration
+- `map` / `filter` / `reduce` - Functional programming methods
+
+#### **BoxLang Components**
+
+- `bxhttp` - HTTP request component
+- `bxfile` - File operation component
+- `bxquery` - Database query component
+- `lock` / `thread` / `transaction` - Concurrency components
+
+#### **Development & Testing**
+
+- `test` - Test case template with Given-When-Then structure
+- `doc` - JavaDoc comment template
+- `todo` - TODO comment
+- `main` - Main method template
+- `println` / `dump` - Debugging utilities
+
 ### 📚 Documentation & Help
 
 - **API Documentation** - Quick access to BoxLang API documentation
 - **Context-Sensitive Help** - Get documentation for the word under cursor
 - **Built-in Examples** - Sample files demonstrating BoxLang features
+- **Auto-Updated BIFs** - Built-In Functions automatically extracted from latest API docs
 
 ### 🧭 Code Navigation
 
@@ -42,11 +99,19 @@ A comprehensive TextMate bundle that provides rich language support for BoxLang 
 - **Smart Folding** - Intelligent code folding for better readability
 - **Go to Symbol** - Quick navigation to class definitions and method declarations
 
+### 🤖 Automated Release Process
+
+- **CI/CD Pipeline** - Automated builds and releases via GitHub Actions
+- **Version Management** - Automatic version bumping and changelog generation
+- **Multi-format Releases** - Both `.zip` and `.tar.gz` formats available
+- **S3 Distribution** - Fast global distribution via AWS S3
+- **Snapshot Builds** - Development builds from `development` branch
+
 ## Installation
 
 ### Prerequisites
 
-- TextMate 2.0 or later
+- TextMate 2.0 or later (also compatible with VS Code, Sublime Text, and other TextMate-compatible editors)
 - BoxLang runtime installed and available in your PATH
 
 ### Install via Git
@@ -56,11 +121,31 @@ cd ~/Library/Application\ Support/TextMate/Bundles/
 git clone https://github.com/ortus-boxlang/boxlang.tmbundle.git
 ```
 
-### Manual Installation
+### Install Latest Release
 
-1. Download the latest release from the [releases page](https://github.com/ortus-boxlang/boxlang.tmbundle/releases)
-2. Extract the bundle to `~/Library/Application Support/TextMate/Bundles/`
-3. Restart TextMate or reload bundles with `Bundles → Bundle Editor → Reload Bundles`
+**Recommended:** Download the latest stable release for the most up-to-date features and BIF definitions.
+
+1. Visit the [releases page](https://github.com/ortus-boxlang/boxlang.tmbundle/releases)
+2. Download the latest release (available in `.zip` and `.tar.gz` formats)
+3. Extract the bundle to `~/Library/Application Support/TextMate/Bundles/`
+4. Restart TextMate or reload bundles with `Bundles → Bundle Editor → Reload Bundles`
+
+### Install Development Snapshots
+
+For the latest features and fixes (may be unstable):
+
+1. Check the [S3 bucket](https://s3.amazonaws.com/downloads.ortussolutions.com/ortussolutions/textmate-bundles/boxlang.tmbundle/) for snapshot builds
+2. Download the latest snapshot build
+3. Follow the same extraction steps as above
+
+### Verify Installation
+
+After installation, verify the bundle is working:
+
+1. Create a new file with `.bx` extension
+2. Type `class` and press Tab - you should see a class template
+3. The syntax should be highlighted in BoxLang colors
+4. `⌘R` should be available to run BoxLang files
 
 ## Usage
 
@@ -72,11 +157,25 @@ git clone https://github.com/ortus-boxlang/boxlang.tmbundle.git
 
 ### Key Commands
 
+#### Execution Commands
+
 - `⌘R` - Run current file
 - `⌘⇧R` - Run with arguments
 - `⌃⌘R` - Run selected code
 - `⌃H` - Show documentation for current word
 - `⌃⌥⌘H` - Open BoxLang API documentation
+
+#### Code Snippets (Tab Triggers)
+
+- `class` + Tab - Class definition
+- `function` + Tab - Function declaration
+- `if` + Tab - If statement
+- `for` + Tab - For loop
+- `try` + Tab - Try-catch block
+- `each` + Tab - Array iteration
+- `bxhttp` + Tab - HTTP component
+- `test` + Tab - Test case template
+- And 40+ more snippets for rapid development!
 
 ### File Templates
 
@@ -120,27 +219,79 @@ boxlang --version
 
 You can customize the execution commands by editing the `.tmCommand` files in the `Commands/` directory.
 
+## Bundle Development & Maintenance
+
+### Automated Release Pipeline
+
+The BoxLang TextMate bundle features a sophisticated CI/CD pipeline that ensures always up-to-date releases:
+
+- **Automated BIF Extraction** - Built-In Functions are automatically extracted from the latest BoxLang API documentation
+- **Version Management** - Versions are read from `box.json` and automatically applied to bundle metadata
+- **Multi-Branch Releases** - Snapshot builds from `development` branch, stable releases from `main`
+- **Multiple Distribution Channels** - Released to both GitHub Releases and AWS S3 for global availability
+- **Quality Assurance** - All releases include automated testing and validation
+
+### Bundle Structure
+
+```
+boxlang.tmbundle/
+├── Commands/           # Execution and utility commands
+├── Preferences/        # Editor behavior and folding rules
+├── Samples/           # Example BoxLang files
+├── Snippets/          # 52+ code snippets for rapid development
+├── Support/           # Utilities and extracted BIF lists
+├── Syntaxes/          # Language grammar definitions
+├── Templates/         # File templates for new documents
+└── info.plist        # Bundle metadata and configuration
+```
+
+### Staying Current
+
+The bundle automatically stays current with BoxLang development:
+
+- **BIF Synchronization** - Built-In Functions are extracted fresh from API docs with each release
+- **Grammar Updates** - Language grammar updated to match BoxLang language evolution
+- **Feature Additions** - New language features and capabilities added as BoxLang grows
+- **Community Feedback** - Regular updates based on developer community needs
+
 ## Language Features
 
 ### Syntax Elements Supported
 
-- Classes and interfaces
-- Methods and functions
-- Variables and scoped variables
-- Annotations and metadata
-- Components and templates
-- String interpolation
-- Comments (single-line, multi-line, and documentation)
-- Keywords and operators
-- Numbers and literals
+- **Classes and Interfaces** - Full OOP support with inheritance and implementations
+- **Methods and Functions** - Named functions, anonymous functions, lambda expressions, arrow functions
+- **Variables and Scoped Variables** - var, final, static declarations with proper scoping
+- **Annotations and Metadata** - @annotation support with parameter passing
+- **Components and Templates** - bx: prefixed components with attribute support
+- **String Interpolation** - `#variable#` expressions within strings
+- **Comments** - Single-line (`//`), multi-line (`/* */`), and documentation (`/** */`) comments
+- **Keywords and Operators** - Complete BoxLang keyword set and operator precedence
+- **Numbers and Literals** - Integer, float, string, boolean, and null literals
+- **Collection Literals** - Array `[]` and struct `{}` literal syntax
+- **Control Structures** - if/else, for/while/do-while, switch/case, try/catch/finally
+
+### Advanced Language Features
+
+- **Functional Programming** - map, filter, reduce, each operations on collections
+- **Concurrency** - lock, thread, transaction components
+- **Type System** - Dynamic typing with optional type hints
+- **Module System** - import statements with aliasing and module references
+- **Component Architecture** - Reusable components with attribute binding
 
 ### Template Features
 
-- HTML integration
-- Embedded script blocks
-- Component islands
-- Tag-based syntax
-- Expression interpolation
+- **HTML Integration** - Seamless mixing of HTML and BoxLang code
+- **Embedded Script Blocks** - `<bx:script>` tags for server-side logic
+- **Component Islands** - ``` delimited component blocks
+- **Tag-based Syntax** - XML-style component syntax with attributes
+- **Expression Interpolation** - `#expression#` evaluation within templates
+
+### Built-In Functions (BIFs)
+
+- **315+ Built-In Functions** - Automatically extracted from BoxLang API documentation
+- **Auto-Updated** - BIF list refreshed with each release from official API docs
+- **Categorized Functions** - Array, String, Math, Date, Decision, Conversion, Struct, Query, System, Cache, Encryption, XML, and Zip functions
+- **Intelligent Completion** - All BIFs available for syntax highlighting and completion
 
 ## Troubleshooting
 
