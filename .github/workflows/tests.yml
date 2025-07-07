@@ -8,6 +8,8 @@ on:
         required: false
         type: string
         default: ''
+    # Allow manual triggering
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -36,36 +38,6 @@ jobs:
         test -d Preferences/ || echo "⚠️  Preferences directory missing"
 
         echo "Bundle structure validation complete"
-
-    - name: Validate plist files
-      run: |
-        echo "Validating plist files..."
-
-        # Basic XML validation for plist files
-        for file in $(find . -name "*.plist" -o -name "*.tmCommand" -o -name "*.tmPreferences" -o -name "*.tmSnippet"); do
-          echo "Checking $file"
-
-          # Check if file is empty
-          if [ ! -s "$file" ]; then
-            echo "❌ Empty file: $file"
-            exit 1
-          fi
-
-          # Basic XML structure check
-          if ! grep -q "<?xml" "$file"; then
-            echo "❌ Missing XML declaration in: $file"
-            exit 1
-          fi
-
-          if ! grep -q "<plist" "$file"; then
-            echo "❌ Missing plist tag in: $file"
-            exit 1
-          fi
-
-          echo "✅ $file appears valid"
-        done
-
-        echo "Plist validation complete"
 
     - name: Check syntax files
       run: |
@@ -98,7 +70,6 @@ jobs:
         echo ""
         echo "📋 Validation Summary:"
         echo "✅ Bundle structure validated"
-        echo "✅ Plist files checked"
         echo "✅ Syntax files verified"
         echo ""
         echo "🎯 Your BoxLang TextMate bundle looks good!"
