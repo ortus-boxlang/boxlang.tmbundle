@@ -83,42 +83,9 @@ jobs:
         cd ..
         echo "BIF extraction complete"
 
-    - name: Prepare Build Directory
+    - name: Build BoxLang TextMate Bundle
       run: |
-        echo "Preparing build directory..."
-
-        # Create build directory
-        mkdir -p build/boxlang.tmbundle
-
-        # Copy all bundle files to build directory
-        cp -r Syntaxes build/boxlang.tmbundle/ 2>/dev/null || echo "No Syntaxes directory"
-        cp -r Commands build/boxlang.tmbundle/ 2>/dev/null || echo "No Commands directory"
-        cp -r Snippets build/boxlang.tmbundle/ 2>/dev/null || echo "No Snippets directory"
-        cp -r Preferences build/boxlang.tmbundle/ 2>/dev/null || echo "No Preferences directory"
-        cp -r Templates build/boxlang.tmbundle/ 2>/dev/null || echo "No Templates directory"
-        cp -r Samples build/boxlang.tmbundle/ 2>/dev/null || echo "No Samples directory"
-        cp -r Support build/boxlang.tmbundle/ 2>/dev/null || echo "No Support directory"
-
-        # Copy main files
-        cp info.plist build/boxlang.tmbundle/
-        cp README.md build/boxlang.tmbundle/ 2>/dev/null || echo "No README.md"
-        cp LICENSE build/boxlang.tmbundle/ 2>/dev/null || echo "No LICENSE"
-        cp changelog.md build/boxlang.tmbundle/ 2>/dev/null || echo "No changelog.md"
-        cp *.png build/boxlang.tmbundle/ 2>/dev/null || echo "No icon files"
-
-        echo "Build directory prepared"
-
-    - name: Update Bundle Version
-      run: |
-        echo "Updating bundle version to ${{ env.VERSION }}..."
-
-        # Update info.plist with actual version
-        sed -i "s/@build.version@/${{ env.VERSION }}/g" build/boxlang.tmbundle/info.plist
-
-        echo "Version updated in info.plist"
-
-        # Verify the update
-        grep -A1 -B1 "CFBundleVersion" build/boxlang.tmbundle/info.plist || echo "Version key not found in standard format"
+        boxlang Build.bx ${{ env.VERSION }}
 
     - name: Update changelog [unreleased] with latest version
       uses: thomaseizinger/keep-a-changelog-new-release@2.0.0
@@ -149,30 +116,15 @@ jobs:
         force_push_tag: true
         message: "Latest Release v${{ env.VERSION }}"
 
-    - name: Create Release Archive
-      run: |
-        echo "Creating release archive..."
-        cd build
-
-        # Create zip archive
-        zip -r "boxlang-tmbundle-${{ env.VERSION }}.zip" boxlang.tmbundle/
-
-        # Create tar.gz archive
-        tar -czf "boxlang-tmbundle-${{ env.VERSION }}.tar.gz" boxlang.tmbundle/
-
-        echo "Archives created:"
-        ls -la *.zip *.tar.gz
-
-        cd ..
-
     - name: Upload Build Artifacts
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: boxlang-tmbundle-${{ env.VERSION }}
+        name: boxlang-tmbundle
         path: |
-          build/boxlang-tmbundle-${{ env.VERSION }}.zip
-          build/boxlang-tmbundle-${{ env.VERSION }}.tar.gz
+          build/artifacts/boxlang-tmbundle-${{ env.VERSION }}.zip
+          build/artifacts/boxlang-tmbundle-${{ env.VERSION }}.zip.sha256
+          box.json
           changelog.md
         retention-days: 30
 
@@ -184,7 +136,7 @@ jobs:
         AWS_S3_BUCKET: "downloads.ortussolutions.com"
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_SECRET }}
-        SOURCE_DIR: "build/"
+        SOURCE_DIR: "build/artifacts"
         DEST_DIR: "ortussolutions/boxlang-tmbundle/${{ env.VERSION }}"
 
     - name: Create GitHub Release
@@ -195,8 +147,9 @@ jobs:
         name: BoxLang TextMate Bundle v${{ env.VERSION }}
         body_path: changelog.md
         files: |
-          build/boxlang-tmbundle-${{ env.VERSION }}.zip
-          build/boxlang-tmbundle-${{ env.VERSION }}.tar.gz
+          build/artifacts/boxlang-tmbundle-${{ env.VERSION }}.zip
+          build/artifacts/boxlang-tmbundle-${{ env.VERSION }}.zip.sha256
+          box.json
         draft: false
         prerelease: false
       env:
@@ -207,14 +160,9 @@ jobs:
         echo "🎉 Release Summary:"
         echo "===================="
         echo "📦 Bundle Version: ${{ env.VERSION }}"
-        echo "🔧 BoxLang Version: ${{ env.BOXLANG_VERSION }}"
         echo "📸 Snapshot: ${{ env.SNAPSHOT }}"
-        echo "🌐 S3 Location: s3://downloads.ortussolutions.com/ortussolutions/boxlang-tmbundle/${{ env.VERSION }}/"
+        echo "🌐 S3 Location: https://downloads.ortussolutions.com/ortussolutions/boxlang-tmbundle/${{ env.VERSION }}/"
 
         if [[ "${{ env.SNAPSHOT }}" == "false" ]]; then
           echo "🏷️  GitHub Release: https://github.com/${{ github.repository }}/releases/tag/v${{ env.VERSION }}"
         fi
-
-        echo ""
-        echo "📁 Build Contents:"
-        find build/ -type f -name "*.zip" -o -name "*.tar.gz" | head -10

@@ -1,0 +1,118 @@
+class{
+
+	function init(){
+		variables.cwd = server.cli.executionPath
+		variables.artifactsDir = variables.cwd & "/build/artifacts"
+		variables.bundleDir = variables.cwd & "/build/boxlang.tmbundle"
+	}
+
+	function main( args ){
+		var version = args[ 1 ] ?: "1.0.0"
+		println( "🥊 Building BoxLang.tmBundle v" & version )
+		println( "----------------------------------------------" )
+
+		// Create the build directories
+		if( DirectoryExists( "build" ) ){
+			println( "⚠️ Build directory already exists, removing..." )
+			directoryDelete( "build", true, true )
+		}
+		println( "📁 Creating build directories..." )
+		directoryCreate( variables.bundleDir, true, true )
+		directoryCreate( variables.artifactsDir, true, true )
+
+		// Copy all bundle files to build directory
+		println( "📦 Copying bundle files to build directory..." )
+		[
+			"Commands",
+			"Preferences",
+			"Samples",
+			"Snippets",
+			"Support",
+			"Syntaxes",
+			"Templates"
+		]
+		.each( thisTarget => {
+			directoryCopy(
+				variables.cwd & "/" & thisTarget,
+				variables.bundleDir & "/" & thisTarget,
+				true
+			)
+		} );
+
+		// Copy main files
+		println( "📄 Copying main files into the bundle..." )
+		[
+			"box.json",
+			"info.plist",
+			"README.md",
+			"LICENSE",
+			"changelog.md",
+			"icon.png"
+		].each( fileName => {
+			var sourceFile = variables.cwd & "/" & fileName
+			fileCopy( sourceFile, variables.bundleDir & "/" & fileName )
+		} );
+
+		// Update the bundle version in info.plist
+		println( "🔧 Updating bundle version to " & version )
+		var infoContent = fileRead( variables.bundleDir & "/info.plist" )
+		infoContent = infoContent.replaceNoCase( "@build.version@", version, "all" )
+		fileWrite( variables.bundleDir & "/info.plist", infoContent )
+		println( "✅ Bundle version updated to " & version )
+
+		// Create the archives
+		println( "📦 Creating archives..." )
+		FileCopy( "box.json", "#variables.artifactsDir#/box.json" )
+		var zipPath = variables.artifactsDir & "/" & "boxlang-tmbundle-" & version & ".zip"
+		bx:zip
+			action = "zip"
+			file = zipPath
+			source = variables.bundleDir;
+		println( "✅ Created ZIP archive: " & zipPath )
+
+		var thisHash = hash( fileReadBinary( zipPath ), "sha-256" );
+		fileWrite(
+			zipPath & ".sha256",
+			thisHash
+		)
+		println( "🔑 Created SHA-256 hash file: " & zipPath & ".sha256" )
+
+	}
+
+	/**
+	 * Replace tokens in files
+	 *
+	 * @targetDir Target directory
+	 * @token Token to replace
+	 * @replacement Replacement string
+	 * @excludes Excluded files and directories
+	 */
+	static public function tokenReplace(
+		required targetDir,
+		required token,
+		required replacement,
+		excludes = [ "^\.git", "SetupTemplate.bx", "Test.bx" ],
+		boolean verbose = false
+	){
+		directoryList( arguments.targetDir, true, "array", "*.*", "asc", "file" )
+			.filter( item => {
+				var targetPath = item.replaceNoCase( targetDir, "" )
+				return !excludes.some( pattern => targetPath.reFindNoCase( pattern ) )
+			} )
+			.each( item => {
+				var targetPath = item.replaceNoCase( targetDir, "" )
+				var content = fileRead( item )
+
+				if( content.findNoCase( token ) ){
+					if( verbose )
+						println( "✅ Replacing token in [#targetPath#]" );
+					var newContent = content.replaceNoCase( token, replacement, "all" );
+					fileWrite( item, newContent )
+				} else{
+					if( verbose )
+						println( "- Skipping, token not found on [#targetPath#]" )
+				}
+			} );
+	}
+
+}
