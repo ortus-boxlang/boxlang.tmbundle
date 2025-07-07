@@ -1,0 +1,220 @@
+name: Release TextMate Bundle
+
+on:
+  push:
+    branches: [ main, master ]
+
+  # Reusable workflow : Usually called by a `snapshot` workflow
+  workflow_call:
+    inputs:
+      snapshot:
+        description: "Is this a snapshot build?"
+        required: false
+        default: false
+        type: boolean
+
+  workflow_dispatch:
+    inputs:
+      snapshot:
+        description: 'Force snapshot release'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  SNAPSHOT: ${{ inputs.snapshot || false }}
+  BUILD_ID: ${{ github.run_number }}
+
+jobs:
+  release:
+    name: Release TextMate Bundle
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Boxlang
+      uses: ortus-boxlang/setup-boxlang@1.0.0
+
+    - name: Prep Version
+      id: read-config
+      run: |
+        # Read bundle version from box.json
+        BUNDLE_VERSION=$(cat box.json | jq '.version' -r)
+        echo "VERSION=$BUNDLE_VERSION" >> $GITHUB_ENV
+        echo "Bundle version: $BUNDLE_VERSION"
+
+        # Read BoxLang version from box.json: boxlang.version
+        BOXLANG_VERSION=$(cat box.json | jq '.boxlang.version' -r)
+        echo "BOXLANG_VERSION=$BOXLANG_VERSION" >> $GITHUB_ENV
+        echo "BoxLang version: $BOXLANG_VERSION"
+
+        # Determine if this is a snapshot release
+        if [ $GITHUB_REF == 'refs/heads/development' ]; then
+          echo "SNAPSHOT=true" >> $GITHUB_ENV
+          echo "This is a snapshot release"
+          # For snapshots, append -snapshot to version if not already present
+          if [[ "$BUNDLE_VERSION" != *"snapshot"* ]]; then
+            VERSION_SNAPSHOT="${BUNDLE_VERSION}-snapshot"
+            echo "VERSION=$VERSION_SNAPSHOT" >> $GITHUB_ENV
+          fi
+        else
+          echo "SNAPSHOT=false" >> $GITHUB_ENV
+          echo "This is a production release"
+        fi
+
+    - name: Extract Latest BIFs and Components
+      run: |
+        echo "Extracting latest BIFs from BoxLang API documentation..."
+        cd Support
+
+        # Run the BIF extraction script
+        echo "Running BIF extraction script..."
+        boxlang extract-bifs.bxs || echo "BIF extraction completed with warnings"
+
+        if [ -f "extracted-bifs.txt" ]; then
+          echo "BIFs extracted successfully:"
+          head -20 extracted-bifs.txt
+          echo "..."
+          echo "Total lines: $(wc -l < extracted-bifs.txt)"
+        fi
+
+        cd ..
+        echo "BIF extraction complete"
+
+    - name: Prepare Build Directory
+      run: |
+        echo "Preparing build directory..."
+
+        # Create build directory
+        mkdir -p build/boxlang.tmbundle
+
+        # Copy all bundle files to build directory
+        cp -r Syntaxes build/boxlang.tmbundle/ 2>/dev/null || echo "No Syntaxes directory"
+        cp -r Commands build/boxlang.tmbundle/ 2>/dev/null || echo "No Commands directory"
+        cp -r Snippets build/boxlang.tmbundle/ 2>/dev/null || echo "No Snippets directory"
+        cp -r Preferences build/boxlang.tmbundle/ 2>/dev/null || echo "No Preferences directory"
+        cp -r Templates build/boxlang.tmbundle/ 2>/dev/null || echo "No Templates directory"
+        cp -r Samples build/boxlang.tmbundle/ 2>/dev/null || echo "No Samples directory"
+        cp -r Support build/boxlang.tmbundle/ 2>/dev/null || echo "No Support directory"
+
+        # Copy main files
+        cp info.plist build/boxlang.tmbundle/
+        cp README.md build/boxlang.tmbundle/ 2>/dev/null || echo "No README.md"
+        cp LICENSE build/boxlang.tmbundle/ 2>/dev/null || echo "No LICENSE"
+        cp changelog.md build/boxlang.tmbundle/ 2>/dev/null || echo "No changelog.md"
+        cp *.png build/boxlang.tmbundle/ 2>/dev/null || echo "No icon files"
+
+        echo "Build directory prepared"
+
+    - name: Update Bundle Version
+      run: |
+        echo "Updating bundle version to ${{ env.VERSION }}..."
+
+        # Update info.plist with actual version
+        sed -i "s/@build.version@/${{ env.VERSION }}/g" build/boxlang.tmbundle/info.plist
+
+        echo "Version updated in info.plist"
+
+        # Verify the update
+        grep -A1 -B1 "CFBundleVersion" build/boxlang.tmbundle/info.plist || echo "Version key not found in standard format"
+
+    - name: Update changelog [unreleased] with latest version
+      uses: thomaseizinger/keep-a-changelog-new-release@2.0.0
+      if: env.SNAPSHOT == 'false'
+      with:
+        changelogPath: ./changelog.md
+        tag: v${{ env.VERSION }}
+
+    - name: Changelog Updates
+      run: |
+        npm install -g markdownlint-cli
+        markdownlint changelog.md --fix
+
+    - name: Commit Changelog [unreleased] with latest version
+      uses: EndBug/add-and-commit@v9.1.4
+      if: env.SNAPSHOT == 'false'
+      with:
+        author_name: Github Actions
+        author_email: info@ortussolutions.com
+        message: "Finalized changelog for v${{ env.VERSION }}"
+        add: changelog.md
+
+    - name: Tag Version
+      uses: rickstaa/action-create-tag@v1.7.2
+      if: env.SNAPSHOT == 'false'
+      with:
+        tag: "v${{ env.VERSION }}"
+        force_push_tag: true
+        message: "Latest Release v${{ env.VERSION }}"
+
+    - name: Create Release Archive
+      run: |
+        echo "Creating release archive..."
+        cd build
+
+        # Create zip archive
+        zip -r "boxlang-tmbundle-${{ env.VERSION }}.zip" boxlang.tmbundle/
+
+        # Create tar.gz archive
+        tar -czf "boxlang-tmbundle-${{ env.VERSION }}.tar.gz" boxlang.tmbundle/
+
+        echo "Archives created:"
+        ls -la *.zip *.tar.gz
+
+        cd ..
+
+    - name: Upload Build Artifacts
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: boxlang-tmbundle-${{ env.VERSION }}
+        path: |
+          build/boxlang-tmbundle-${{ env.VERSION }}.zip
+          build/boxlang-tmbundle-${{ env.VERSION }}.tar.gz
+          changelog.md
+        retention-days: 30
+
+    - name: Upload Distributions to S3
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read
+      env:
+        AWS_S3_BUCKET: "downloads.ortussolutions.com"
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_SECRET }}
+        SOURCE_DIR: "build/"
+        DEST_DIR: "ortussolutions/boxlang-tmbundle/${{ env.VERSION }}"
+
+    - name: Create GitHub Release
+      if: env.SNAPSHOT == 'false'
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v${{ env.VERSION }}
+        name: BoxLang TextMate Bundle v${{ env.VERSION }}
+        body_path: changelog.md
+        files: |
+          build/boxlang-tmbundle-${{ env.VERSION }}.zip
+          build/boxlang-tmbundle-${{ env.VERSION }}.tar.gz
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release Summary
+      run: |
+        echo "🎉 Release Summary:"
+        echo "===================="
+        echo "📦 Bundle Version: ${{ env.VERSION }}"
+        echo "🔧 BoxLang Version: ${{ env.BOXLANG_VERSION }}"
+        echo "📸 Snapshot: ${{ env.SNAPSHOT }}"
+        echo "🌐 S3 Location: s3://downloads.ortussolutions.com/ortussolutions/boxlang-tmbundle/${{ env.VERSION }}/"
+
+        if [[ "${{ env.SNAPSHOT }}" == "false" ]]; then
+          echo "🏷️  GitHub Release: https://github.com/${{ github.repository }}/releases/tag/v${{ env.VERSION }}"
+        fi
+
+        echo ""
+        echo "📁 Build Contents:"
+        find build/ -type f -name "*.zip" -o -name "*.tar.gz" | head -10

@@ -1,0 +1,27 @@
+{
+	"name":"BoxLang TextMate Bundle",
+	"version":"1.0.0",
+    "author":"Ortus Solutions, Corp.",
+    "description":"A TextMate bundle for BoxLang",
+	"slug":"boxlang-tmbundle",
+	"location":"ForgeboxStorage",
+    "bugs":"https://github.com/ortus-boxlang/boxlang.tmbundle/issues",
+    "documentation":"https://github.com/ortus-docs/boxlang",
+    "homepage":"https://www.boxlang.org",
+    "ignore":[
+        "**/.*",
+        "/test/",
+        "/tests/"
+    ],
+    "installPaths":{},
+    "keywords":[
+		"IDE",
+		"TextMate",
+		"BoxLang"
+	],
+    "scripts":{},
+    "type":"ide",
+	"boxlang": {
+		"version" : "1.3.0"
+	}
+}
