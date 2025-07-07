@@ -38,7 +38,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Boxlang
-      uses: ortus-boxlang/setup-boxlang@1.0.0
+      uses: ortus-boxlang/setup-boxlang@1.1.0
 
     - name: Prep Version
       id: read-config
@@ -91,7 +91,7 @@ jobs:
         boxlang Build.bx ${{ env.VERSION }}
 
     - name: Update changelog [unreleased] with latest version
-      uses: thomaseizinger/keep-a-changelog-new-release@2.0.0
+      uses: thomaseizinger/keep-a-changelog-new-release@3.1.0
       if: env.SNAPSHOT == 'false'
       with:
         changelogPath: ./changelog.md
@@ -129,7 +129,7 @@ jobs:
           build/artifacts/boxlang-tmbundle-${{ env.VERSION }}.zip.sha256
           box.json
           changelog.md
-        retention-days: 30
+        retention-days: 7
 
     - name: Upload Distributions to S3
       uses: jakejarvis/s3-sync-action@master
