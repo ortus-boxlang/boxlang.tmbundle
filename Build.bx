@@ -44,7 +44,7 @@ class{
 		[
 			"box.json",
 			"info.plist",
-			"README.md",
+			"readme.md",
 			"LICENSE",
 			"changelog.md",
 			"icon.png"

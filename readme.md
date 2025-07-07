@@ -25,6 +25,21 @@ A comprehensive TextMate bundle that provides rich language support for BoxLang 
 - **Dynamic BIF Recognition** - Automatically updated Built-In Functions from BoxLang API documentation
 - **Modern Language Features** - Support for lambda functions, arrow functions, and advanced syntax
 
+### 🎭 Custom Themes
+
+Beautiful themes designed with BoxLang's signature green-cyan gradient colors:
+
+- **BoxLang Light** - Clean, professional light theme with vibrant accents
+- **BoxLang Dark** - Modern dark theme perfect for extended coding sessions  
+- **BoxLang High Contrast** - Accessibility-focused theme with enhanced readability
+
+All themes feature:
+
+- **Brand Consistency** - Uses BoxLang's signature green-cyan color palette
+- **Semantic Highlighting** - Different colors for keywords, functions, strings, and components
+- **BoxLang-Specific** - Special highlighting for `bx:` components and built-in functions
+- **Eye Comfort** - Carefully chosen contrast ratios for reduced eye strain
+
 ### 🚀 Code Execution
 
 - **Run Current File** - Execute the current BoxLang file with a single command
@@ -32,7 +47,7 @@ A comprehensive TextMate bundle that provides rich language support for BoxLang 
 - **Run Selected Code** - Execute only the selected code snippet
 - **BoxLang REPL** - Launch an interactive BoxLang Read-Eval-Print Loop
 
-### ⚡ Code Snippets (52+ Available)
+### ⚡ Code Snippets (52 Available)
 
 Comprehensive snippet collection for rapid development:
 
@@ -57,9 +72,9 @@ Comprehensive snippet collection for rapid development:
 
 #### **Function Types**
 
-- `anon` - Anonymous function
-- `arrow` - Arrow function with `=>`
-- `lambda` - Lambda function expressions
+- `anon` - Anonymous function: `function(params) {}`
+- `closure` - Closure with `=>`: `(params) => {}`
+- `lambda` - Lambda with `->`: `(params) -> {}`
 
 #### **Access Modifiers**
 
@@ -169,13 +184,37 @@ After installation, verify the bundle is working:
 
 - `class` + Tab - Class definition
 - `function` + Tab - Function declaration
+- `anon` + Tab - Anonymous function
+- `closure` + Tab - Closure with `=>`
+- `lambda` + Tab - Lambda with `->`
 - `if` + Tab - If statement
 - `for` + Tab - For loop
 - `try` + Tab - Try-catch block
 - `each` + Tab - Array iteration
 - `bxhttp` + Tab - HTTP component
 - `test` + Tab - Test case template
-- And 40+ more snippets for rapid development!
+- And 44 more snippets for rapid development!
+
+### Themes
+
+The bundle includes three custom themes optimized for BoxLang development:
+
+#### Applying Themes
+
+1. Open TextMate Preferences (`⌘,`)
+2. Go to the **Themes** tab
+3. Select from the available BoxLang themes:
+   - **BoxLang Light** - For bright, comfortable daytime coding
+   - **BoxLang Dark** - For reduced eye strain and night coding
+   - **BoxLang High Contrast** - For maximum accessibility and readability
+
+#### Theme Features
+
+- **Consistent Branding** - All themes use BoxLang's signature color palette
+- **Syntax-Aware** - Distinct colors for keywords, functions, strings, and comments
+- **Component Highlighting** - Special treatment for `bx:` components and attributes
+- **BIF Recognition** - Built-in functions styled for easy identification
+- **Template Support** - Optimized for both script and template file types
 
 ### File Templates
 
