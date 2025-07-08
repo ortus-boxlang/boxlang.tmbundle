@@ -14,7 +14,39 @@
 	<a href="https://www.ortussolutions.com">www.ortussolutions.com</a>
 </blockquote>
 
+---
+
+## 📑 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Bundle Development & Maintenance](#bundle-development--maintenance)
+- [Language Features](#language-features)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Changelog](#changelog)
+- [License](#license)
+- [Open-Source & Professional Support](#open-source--professional-support)
+- [Ortus Sponsors](#ortus-sponsors)
+
+---
+
+## Overview
+
 A comprehensive TextMate bundle that provides rich language support for BoxLang development, including syntax highlighting, code execution, documentation lookup, intelligent code navigation, and extensive code snippets.
+
+🌟 **Key Highlights:**
+
+- **315+ Built-In Functions** automatically updated from BoxLang API
+- **52+ Code Snippets** for rapid development
+- **3 Beautiful Themes** with BoxLang's signature green-cyan palette
+- **Full HTML Integration** in template files (`.bxm`)
+- **Automated CI/CD Pipeline** for always up-to-date releases
+
+---
 
 ## Features
 
@@ -22,6 +54,7 @@ A comprehensive TextMate bundle that provides rich language support for BoxLang 
 
 - **BoxLang Script** (`.bx`, `.bxs`) - Full syntax highlighting for BoxLang script files
 - **BoxLang Templates** (`.bxm`) - Template syntax with embedded script support and HTML integration
+- **HTML Markup Support** - Complete HTML syntax highlighting within template files with proper comment handling
 - **Dynamic BIF Recognition** - Automatically updated Built-In Functions from BoxLang API documentation
 - **Modern Language Features** - Support for lambda functions, arrow functions, and advanced syntax
 
@@ -30,13 +63,13 @@ A comprehensive TextMate bundle that provides rich language support for BoxLang 
 Beautiful themes designed with BoxLang's signature green-cyan gradient colors:
 
 **Theme Dark**
-<img src ="theme-dark.png" alt="theme"/>
+<img src ="https://github.com/ortus-boxlang/boxlang.tmbundle/blob/development/theme-dark.png?raw=true" alt="theme"/>
 
 **Theme High Contrast**
-<img src ="theme-high-contrast.png" alt="theme"/>
+<img src ="https://github.com/ortus-boxlang/boxlang.tmbundle/blob/development/theme-high-contrast.png?raw=true" alt="theme"/>
 
 **Theme Light**
-<img src ="theme-light.png" alt="theme"/>
+<img src ="https://github.com/ortus-boxlang/boxlang.tmbundle/blob/development/theme-light.png?raw=true" alt="theme"/>
 
 - **BoxLang Light** - Clean, professional light theme with vibrant accents
 - **BoxLang Dark** - Modern dark theme perfect for extended coding sessions
