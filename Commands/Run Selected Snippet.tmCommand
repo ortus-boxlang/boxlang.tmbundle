@@ -12,7 +12,7 @@ if [ -z "$TM_SELECTED_TEXT" ]; then
     exit_show_tool_tip
 else
     # Check if boxlang command is available
-    if ! command -v boxlang &> /dev/null; then
+    if ! command -v boxlang &amp;> /dev/null; then
         echo "BoxLang command not found. Please ensure BoxLang is installed and in your PATH."
         exit_show_tool_tip
     fi
@@ -22,7 +22,7 @@ else
     echo "$TM_SELECTED_TEXT" > "$TEMP_FILE"
 
     # Execute the snippet and capture output
-    OUTPUT=$(boxlang "$TEMP_FILE" 2>&1)
+    OUTPUT=$(boxlang "$TEMP_FILE" 2>&amp;1)
     EXIT_CODE=$?
 
     # Clean up temporary file

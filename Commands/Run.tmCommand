@@ -45,7 +45,7 @@ echo "    &lt;/div&gt;"
 
 # Execute BoxLang file and capture output
 START_TIME=$(date +%s.%N)
-OUTPUT=$(boxlang "$FILE_PATH" 2>&1)
+OUTPUT=$(boxlang "$FILE_PATH" 2>&amp;1)
 EXIT_CODE=$?
 END_TIME=$(date +%s.%N)
 
