@@ -126,10 +126,10 @@
 			</dict>
 		</dict>
 
-		<!-- Booleans & Constants -->
+		<!-- Booleans and Constants -->
 		<dict>
 			<key>name</key>
-			<string>Boolean & Constants</string>
+			<string>Boolean and Constants</string>
 			<key>scope</key>
 			<string>constant.language</string>
 			<key>settings</key>
