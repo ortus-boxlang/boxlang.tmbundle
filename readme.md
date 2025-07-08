@@ -29,8 +29,17 @@ A comprehensive TextMate bundle that provides rich language support for BoxLang 
 
 Beautiful themes designed with BoxLang's signature green-cyan gradient colors:
 
+**Theme Dark**
+<img src ="theme-dark.png" alt="theme"/>
+
+**Theme High Contrast**
+<img src ="theme-high-contrast.png" alt="theme"/>
+
+**Theme Light**
+<img src ="theme-light.png" alt="theme"/>
+
 - **BoxLang Light** - Clean, professional light theme with vibrant accents
-- **BoxLang Dark** - Modern dark theme perfect for extended coding sessions  
+- **BoxLang Dark** - Modern dark theme perfect for extended coding sessions
 - **BoxLang High Contrast** - Accessibility-focused theme with enhanced readability
 
 All themes feature:
