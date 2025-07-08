@@ -40,10 +40,6 @@
 		<string>B0C1D2E3-F4A5-6B78-9C0D-E1F234567890</string>
 		<string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
 		<string>A1B2C3D4-E5F6-7890-ABCD-123456789012</string>
-		<string>BL05TEMP-COMM-1234-5678-90ABCDEF1234</string>
-		<string>BL06FOLD-SCRI-PT12-3456-789012345678</string>
-		<string>BL01F313-C9FB-4D7E-9D01-FB85287BE21C</string>
-		<string>BL08FUNC-SYMB-OL12-3456-789012345678</string>
 	</array>
 	<key>repository</key>
 	<string>https://github.com/ortus-boxlang/boxlang.tmbundle</string>

@@ -60,6 +60,23 @@
 						</dict>
 					</array>
 				</dict>
+				<dict>
+					<key>name</key>
+					<string>comment.block.html</string>
+					<key>begin</key>
+					<string>&lt;!--(?!-)</string>
+					<key>end</key>
+					<string>--&gt;</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.bad-comments-or-CDATA.html</string>
+							<key>match</key>
+							<string>--</string>
+						</dict>
+					</array>
+				</dict>
 			</array>
 		</dict>
 		<key>bx-script</key>
@@ -1495,27 +1512,194 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>include</key>
+					<string>#html-doctype</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#html-tag</string>
+				</dict>
+				<dict>
 					<key>name</key>
 					<string>text.html.basic</string>
 					<key>match</key>
 					<string>[^&lt;#]+</string>
 				</dict>
+			</array>
+		</dict>
+		<key>html-doctype</key>
+		<dict>
+			<key>name</key>
+			<string>meta.tag.sgml.doctype.html</string>
+			<key>begin</key>
+			<string>&lt;!(?i:DOCTYPE)</string>
+			<key>end</key>
+			<string>&gt;</string>
+			<key>patterns</key>
+			<array>
 				<dict>
 					<key>name</key>
-					<string>meta.tag.any.html</string>
+					<string>string.quoted.double.doctype.identifiers-and-DTDs.html</string>
 					<key>begin</key>
-					<string>&lt;(?!bx:|/bx:)</string>
+					<string>"</string>
 					<key>end</key>
-					<string>&gt;</string>
+					<string>"</string>
+				</dict>
+			</array>
+		</dict>
+		<key>html-tag</key>
+		<dict>
+			<key>name</key>
+			<string>meta.tag.any.html</string>
+			<key>begin</key>
+			<string>&lt;(?!bx:|/bx:|#)</string>
+			<key>end</key>
+			<string>&gt;</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html</string>
+				</dict>
+			</dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.html</string>
+					<key>match</key>
+					<string>\G/?[a-zA-Z][a-zA-Z0-9-]*</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#html-attribute</string>
+				</dict>
+			</array>
+		</dict>
+		<key>html-attribute</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>meta.attribute-with-value.html</string>
+					<key>begin</key>
+					<string>\b([a-zA-Z-]+)(=)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.other.attribute-name.html</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.key-value.html</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?=\s|/?&gt;)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#html-attribute-value</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>entity.other.attribute-name.html</string>
+					<key>match</key>
+					<string>\b[a-zA-Z-]+</string>
+				</dict>
+			</array>
+		</dict>
+		<key>html-attribute-value</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.double.html</string>
+					<key>begin</key>
+					<string>"</string>
+					<key>end</key>
+					<string>"</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.html</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.html</string>
+						</dict>
+					</dict>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>name</key>
-							<string>entity.name.tag.html</string>
+							<string>constant.character.entity.html</string>
 							<key>match</key>
-							<string>[a-zA-Z][a-zA-Z0-9-]*</string>
+							<string>&amp;[a-zA-Z0-9]+;</string>
 						</dict>
 					</array>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.single.html</string>
+					<key>begin</key>
+					<string>'</string>
+					<key>end</key>
+					<string>'</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.html</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.html</string>
+						</dict>
+					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>constant.character.entity.html</string>
+							<key>match</key>
+							<string>&amp;[a-zA-Z0-9]+;</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>string.unquoted.html</string>
+					<key>match</key>
+					<string>[^\s/&gt;]+</string>
 				</dict>
 			</array>
 		</dict>

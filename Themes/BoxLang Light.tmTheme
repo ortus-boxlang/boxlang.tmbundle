@@ -268,6 +268,129 @@
 			</dict>
 		</dict>
 
+		<!-- HTML Tags -->
+		<dict>
+			<key>name</key>
+			<string>HTML Tag Names</string>
+			<key>scope</key>
+			<string>entity.name.tag.html</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#D32F2F</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+			</dict>
+		</dict>
+
+		<!-- HTML Tag Punctuation -->
+		<dict>
+			<key>name</key>
+			<string>HTML Tag Punctuation</string>
+			<key>scope</key>
+			<string>punctuation.definition.tag.begin.html, punctuation.definition.tag.end.html</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#F44336</string>
+			</dict>
+		</dict>
+
+		<!-- HTML Attributes -->
+		<dict>
+			<key>name</key>
+			<string>HTML Attribute Names</string>
+			<key>scope</key>
+			<string>entity.other.attribute-name.html</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#1976D2</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+
+		<!-- HTML Attribute Values -->
+		<dict>
+			<key>name</key>
+			<string>HTML Attribute Values</string>
+			<key>scope</key>
+			<string>string.quoted.double.html, string.quoted.single.html, string.unquoted.html</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#388E3C</string>
+			</dict>
+		</dict>
+
+		<!-- HTML String Punctuation -->
+		<dict>
+			<key>name</key>
+			<string>HTML String Punctuation</string>
+			<key>scope</key>
+			<string>punctuation.definition.string.begin.html, punctuation.definition.string.end.html</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#4CAF50</string>
+			</dict>
+		</dict>
+
+		<!-- HTML Comments -->
+		<dict>
+			<key>name</key>
+			<string>HTML Comments</string>
+			<key>scope</key>
+			<string>comment.block.html</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#757575</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+
+		<!-- HTML Doctype -->
+		<dict>
+			<key>name</key>
+			<string>HTML Doctype</string>
+			<key>scope</key>
+			<string>meta.tag.sgml.doctype.html</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#7B1FA2</string>
+			</dict>
+		</dict>
+
+		<!-- HTML Entities -->
+		<dict>
+			<key>name</key>
+			<string>HTML Entities</string>
+			<key>scope</key>
+			<string>constant.character.entity.html</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#FF9800</string>
+			</dict>
+		</dict>
+
+		<!-- HTML Text Content -->
+		<dict>
+			<key>name</key>
+			<string>HTML Text Content</string>
+			<key>scope</key>
+			<string>text.html.basic</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#2D3436</string>
+			</dict>
+		</dict>
+
 		<!-- Tag Attributes -->
 		<dict>
 			<key>name</key>

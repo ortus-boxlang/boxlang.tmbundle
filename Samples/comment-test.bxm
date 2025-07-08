@@ -1,0 +1,40 @@
+<!---
+This is a BoxLang template comment with 3 dashes
+It should be highlighted as comment.block.boxlang.template
+--->
+
+<!-- This is an HTML comment with 2 dashes -->
+<!-- It should be highlighted as comment.block.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comment Test</title>
+</head>
+<body>
+    <!--- BoxLang template comment inside body --->
+
+    <div>
+        <!-- HTML comment inside div -->
+        <p>Regular HTML content</p>
+    </div>
+
+    <bx:output>
+        <!--- BoxLang comment inside bx:output --->
+        <!-- HTML comment also inside bx:output -->
+        <p>Mixed content with both comment types</p>
+    </bx:output>
+
+    <!---
+    Multi-line BoxLang comment
+    with multiple lines
+    should all be highlighted
+    --->
+
+    <!--
+    Multi-line HTML comment
+    with multiple lines
+    should also be highlighted
+    -->
+</body>
+</html>

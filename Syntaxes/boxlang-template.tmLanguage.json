@@ -36,6 +36,17 @@
               "end": "--->"
             }
           ]
+        },
+        {
+          "name": "comment.block.html",
+          "begin": "<!--(?!-)",
+          "end": "-->",
+          "patterns": [
+            {
+              "name": "invalid.illegal.bad-comments-or-CDATA.html",
+              "match": "--"
+            }
+          ]
         }
       ]
     },
@@ -964,19 +975,126 @@
     "html-content": {
       "patterns": [
         {
-          "name": "text.html.basic",
-          "match": "[^<#]+"
+          "include": "#html-doctype"
         },
         {
-          "name": "meta.tag.any.html",
-          "begin": "<(?!bx:|/bx:)",
-          "end": ">",
+          "include": "#html-tag"
+        },
+        {
+          "name": "text.html.basic",
+          "match": "[^<#]+"
+        }
+      ]
+    },
+    "html-doctype": {
+      "name": "meta.tag.sgml.doctype.html",
+      "begin": "<!(?i:DOCTYPE)",
+      "end": ">",
+      "patterns": [
+        {
+          "name": "string.quoted.double.doctype.identifiers-and-DTDs.html",
+          "begin": "\"",
+          "end": "\""
+        }
+      ]
+    },
+    "html-tag": {
+      "name": "meta.tag.any.html",
+      "begin": "<(?!bx:|/bx:|#)",
+      "end": ">",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.tag.begin.html"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.tag.end.html"
+        }
+      },
+      "patterns": [
+        {
+          "name": "entity.name.tag.html",
+          "match": "\\G/?[a-zA-Z][a-zA-Z0-9-]*"
+        },
+        {
+          "include": "#html-attribute"
+        }
+      ]
+    },
+    "html-attribute": {
+      "patterns": [
+        {
+          "name": "meta.attribute-with-value.html",
+          "begin": "\\b([a-zA-Z-]+)(=)",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.other.attribute-name.html"
+            },
+            "2": {
+              "name": "punctuation.separator.key-value.html"
+            }
+          },
+          "end": "(?=\\s|/?>)",
           "patterns": [
             {
-              "name": "entity.name.tag.html",
-              "match": "[a-zA-Z][a-zA-Z0-9-]*"
+              "include": "#html-attribute-value"
             }
           ]
+        },
+        {
+          "name": "entity.other.attribute-name.html",
+          "match": "\\b[a-zA-Z-]+"
+        }
+      ]
+    },
+    "html-attribute-value": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.html",
+          "begin": "\"",
+          "end": "\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.html"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.html"
+            }
+          },
+          "patterns": [
+            {
+              "name": "constant.character.entity.html",
+              "match": "&[a-zA-Z0-9]+;"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.html",
+          "begin": "'",
+          "end": "'",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.html"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.html"
+            }
+          },
+          "patterns": [
+            {
+              "name": "constant.character.entity.html",
+              "match": "&[a-zA-Z0-9]+;"
+            }
+          ]
+        },
+        {
+          "name": "string.unquoted.html",
+          "match": "[^\\s/>]+"
         }
       ]
     }
