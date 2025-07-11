@@ -1,0 +1,59 @@
+<!-- Test for basic BoxLang components -->
+<html>
+<head>
+    <title>Basic BoxLang Components Test</title>
+</head>
+<body>
+    <!-- Script block -->
+    <bx:script>
+        var x = 1;
+        console.log("test");
+    </bx:script>
+
+    <!-- If statement -->
+    <bx:if condition="true">
+        <p>If content</p>
+    </bx:if>
+
+    <!-- Try-catch -->
+    <bx:try>
+        <p>Try content</p>
+    </bx:try>
+
+    <bx:catch type="any">
+        <p>Catch content</p>
+    </bx:catch>
+
+    <!-- Output -->
+    <bx:output>
+        <p>Output content</p>
+    </bx:output>
+
+    <!-- Switch -->
+    <bx:switch expression="value">
+        <bx:case value="1">
+            <p>Case 1</p>
+        </bx:case>
+        <bx:defaultcase>
+            <p>Default</p>
+        </bx:defaultcase>
+    </bx:switch>
+
+    <!-- While loop -->
+    <bx:while condition="true">
+        <p>While content</p>
+    </bx:while>
+
+    <!-- Function -->
+    <bx:function name="test">
+        <bx:argument name="param" type="string" />
+        <bx:return value="result" />
+    </bx:function>
+
+    <!-- Custom components -->
+    <bx:customWidget name="test">
+        <p>Custom content</p>
+    </bx:customWidget>
+
+</body>
+</html>

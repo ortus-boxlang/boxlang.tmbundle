@@ -20,34 +20,6 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#bx-script</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#bx-output</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#bx-if</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#bx-switch</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#bx-try</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#bx-while</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#bx-function</string>
-		</dict>
-		<dict>
-			<key>include</key>
 			<string>#bx-components</string>
 		</dict>
 		<dict>
@@ -1674,6 +1646,41 @@
 							</array>
 						</dict>
 						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.tag.end.boxlang</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>bx-closing</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.closing.boxlang</string>
+					<key>match</key>
+					<string>(&lt;/)\s*(bx:([a-zA-Z_][a-zA-Z0-9_\-]*))\s*(&gt;)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.tag.begin.boxlang</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.tag.boxlang</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.tag.boxlang</string>
+						</dict>
+						<key>4</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.tag.end.boxlang</string>
