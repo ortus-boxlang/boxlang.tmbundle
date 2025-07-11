@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- End tag support
+- Multi-line support for templates
+
+### Fixed
+
+- Fixed templating syntax highlighting for generic `bx:` tags
+
 ## [1.0.0] - 2025-07-08
 
 - First Version
