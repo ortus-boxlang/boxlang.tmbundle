@@ -9,4 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed templating syntax highlighting for generic `bx:` tags
+
+## [1.0.0] - 2025-07-08
+
 - First Version
+
+[unreleased]: https://github.com/ortus-boxlang/boxlang.tmbundle/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/ortus-boxlang/boxlang.tmbundle/compare/bd7a050dae5a4cde7b04ce7e628f88bd25fb9740...v1.0.0
