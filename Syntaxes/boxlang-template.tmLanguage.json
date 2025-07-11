@@ -651,6 +651,31 @@
               "name": "punctuation.definition.tag.end.boxlang"
             }
           }
+        },
+        {
+          "name": "meta.tag.self-closing.generic.boxlang",
+          "match": "(<)(bx:([a-zA-Z_][a-zA-Z0-9_\\-]*))(\\s[^>]*)?+(/?>)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.tag.begin.boxlang"
+            },
+            "2": {
+              "name": "entity.name.tag.boxlang"
+            },
+            "3": {
+              "name": "entity.name.tag.boxlang"
+            },
+            "4": {
+              "patterns": [
+                {
+                  "include": "#tag-attributes"
+                }
+              ]
+            },
+            "5": {
+              "name": "punctuation.definition.tag.end.boxlang"
+            }
+          }
         }
       ]
     },
@@ -680,7 +705,7 @@
               "name": "punctuation.definition.tag.end.boxlang"
             }
           },
-          "end": "(</)\\s*(bx:\\3)\\s*(>)",
+          "end": "(</)\\s*(bx:[a-zA-Z_][a-zA-Z0-9_\\-]*)\\s*(>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.tag.begin.boxlang"
