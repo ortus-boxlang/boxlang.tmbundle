@@ -268,6 +268,77 @@
 			</dict>
 		</dict>
 
+		<!-- BoxLang Tag Punctuation -->
+		<dict>
+			<key>name</key>
+			<string>BoxLang Tag Punctuation</string>
+			<key>scope</key>
+			<string>punctuation.definition.tag.begin.boxlang, punctuation.definition.tag.end.boxlang</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00FF99</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+			</dict>
+		</dict>
+
+		<!-- BoxLang Attributes -->
+		<dict>
+			<key>name</key>
+			<string>BoxLang Attributes</string>
+			<key>scope</key>
+			<string>entity.other.attribute-name.boxlang</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#80FF80</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+
+		<!-- BoxLang Attribute Values -->
+		<dict>
+			<key>name</key>
+			<string>BoxLang Attribute Values</string>
+			<key>scope</key>
+			<string>string.quoted.double.boxlang, string.quoted.single.boxlang, string.unquoted.boxlang</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#80FFFF</string>
+			</dict>
+		</dict>
+
+		<!-- BoxLang Interpolation -->
+		<dict>
+			<key>name</key>
+			<string>BoxLang Interpolation</string>
+			<key>scope</key>
+			<string>punctuation.definition.embedded.begin.boxlang, punctuation.definition.embedded.end.boxlang</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00FFFF</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+			</dict>
+		</dict>
+
+		<!-- BoxLang Embedded Code -->
+		<dict>
+			<key>name</key>
+			<string>BoxLang Embedded Code</string>
+			<key>scope</key>
+			<string>meta.embedded.line.boxlang, meta.embedded.block.boxlang.script</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#002000</string>
+			</dict>
+		</dict>
+
 		<!-- HTML Tags -->
 		<dict>
 			<key>name</key>
