@@ -39,7 +39,7 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Setup Boxlang
       uses: ortus-boxlang/setup-boxlang@1.1.0
@@ -189,7 +189,7 @@ jobs:
 
     steps:
       - name: Checkout Development Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: development
 
