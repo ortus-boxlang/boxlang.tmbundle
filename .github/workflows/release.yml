@@ -42,7 +42,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Boxlang
-      uses: ortus-boxlang/setup-boxlang@1.1.0
+      uses: ortus-boxlang/setup-boxlang@1.2.0
 
     - name: Prep Version
       id: read-config
