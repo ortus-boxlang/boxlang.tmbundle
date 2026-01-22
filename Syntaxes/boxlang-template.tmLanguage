@@ -1285,7 +1285,7 @@
 					<key>name</key>
 					<string>variable.language.scope.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(variables|request|server|application|session|client|form|url|cgi|cookie)\b</string>
+					<string>(?i)\b(variables|request|server|application|session|client|form|url|cgi|cookie|this)\b</string>
 				</dict>
 			</array>
 		</dict>
