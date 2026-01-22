@@ -39,10 +39,10 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup Boxlang
-      uses: ortus-boxlang/setup-boxlang@1.1.0
+      uses: ortus-boxlang/setup-boxlang@1.2.0
 
     - name: Prep Version
       id: read-config
@@ -125,7 +125,7 @@ jobs:
 
     - name: Upload Build Artifacts
       if: success()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: boxlang-tmbundle
         path: |
@@ -189,7 +189,7 @@ jobs:
 
     steps:
       - name: Checkout Development Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: development
 
@@ -197,7 +197,7 @@ jobs:
         uses: Ortus-Solutions/setup-commandbox@v2.0.1
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: .tmp
 
