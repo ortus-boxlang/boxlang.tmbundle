@@ -1237,6 +1237,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#literals</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#variables</string>
 				</dict>
 			</array>
@@ -1255,7 +1259,7 @@
 					<key>name</key>
 					<string>keyword.other.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(import|include|as|in|instanceof|castas|does|not|contain|contains|than|to|when|assert|param|abort|exit|lock|thread|transaction)\b</string>
+					<string>(?i)\b(import|include|as|in|instanceof|castas|does|not|contain|contains|than|to|when|assert|param|abort|exit|lock|thread|transaction|throws|extends|implements|writedump|echo|println|writeoutput)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -1273,13 +1277,13 @@
 					<key>name</key>
 					<string>storage.type.primitive.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(any|array|boolean|numeric|query|string|struct)\b</string>
+					<string>(?i)\b(any|array|boolean|numeric|query|string|struct|date|binary|guid|uuid|function|closure|lambda|class)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>constant.language.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(true|false|null)\b</string>
+					<string>(?i)\b(true|false|null|yes|no)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -1303,7 +1307,13 @@
 					<key>name</key>
 					<string>keyword.operator.comparison.boxlang</string>
 					<key>match</key>
-					<string>(?i)\b(eq|equal|neq|gt|gte|ge|lt|lte|le|is)\b|==|!=|&lt;&gt;|&gt;=|&lt;=|&gt;|&lt;|===</string>
+					<string>(?i)\b(eq|equal|neq|gt|gte|ge|lt|lte|le|is)\b|===|==|!=|&lt;&gt;|&gt;=|&lt;=|&gt;|&lt;|&lt;=&gt;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.match.boxlang</string>
+					<key>match</key>
+					<string>==~|=~</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -1325,9 +1335,33 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.arrow.boxlang</string>
+					<key>match</key>
+					<string>=&gt;|-&gt;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.elvis.boxlang</string>
+					<key>match</key>
+					<string>\?:</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.spread.boxlang</string>
+					<key>match</key>
+					<string>\.\.\.</string>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>keyword.operator.ternary.boxlang</string>
 					<key>match</key>
-					<string>\?:|\?|:</string>
+					<string>\?|:</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.range.boxlang</string>
+					<key>match</key>
+					<string>\.\.&lt;|\.\.</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -1337,9 +1371,15 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.safe-navigation.boxlang</string>
+					<key>match</key>
+					<string>\?\.</string>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>keyword.operator.access.boxlang</string>
 					<key>match</key>
-					<string>\.|::|\\?\\.</string>
+					<string>\.</string>
 				</dict>
 			</array>
 		</dict>
@@ -1437,6 +1477,20 @@
 							<string>punctuation.definition.arguments.begin.boxlang</string>
 						</dict>
 					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>literals</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.boxlang</string>
+					<key>comment</key>
+					<string>Set literal set{...} and StringBuilder literal sb{...}/stringbuilder{...} soft keywords</string>
+					<key>match</key>
+					<string>(?i)\b(set|sb|stringbuilder)\b(?=\s*\{)</string>
 				</dict>
 			</array>
 		</dict>

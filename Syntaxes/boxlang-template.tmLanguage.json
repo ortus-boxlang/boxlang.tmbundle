@@ -853,6 +853,9 @@
           "include": "#function-calls"
         },
         {
+          "include": "#literals"
+        },
+        {
           "include": "#variables"
         }
       ]
@@ -865,7 +868,7 @@
         },
         {
           "name": "keyword.other.boxlang",
-          "match": "(?i)\\b(import|include|as|in|instanceof|castas|does|not|contain|contains|than|to|when|assert|param|abort|exit|lock|thread|transaction)\\b"
+          "match": "(?i)\\b(import|include|as|in|instanceof|castas|does|not|contain|contains|than|to|when|assert|param|abort|exit|lock|thread|transaction|throws|extends|implements|writedump|echo|println|writeoutput)\\b"
         },
         {
           "name": "storage.modifier.boxlang",
@@ -877,11 +880,11 @@
         },
         {
           "name": "storage.type.primitive.boxlang",
-          "match": "(?i)\\b(any|array|boolean|numeric|query|string|struct)\\b"
+          "match": "(?i)\\b(any|array|boolean|numeric|query|string|struct|date|binary|guid|uuid|function|closure|lambda|class)\\b"
         },
         {
           "name": "constant.language.boxlang",
-          "match": "(?i)\\b(true|false|null)\\b"
+          "match": "(?i)\\b(true|false|null|yes|no)\\b"
         },
         {
           "name": "variable.language.scope.boxlang",
@@ -897,7 +900,11 @@
         },
         {
           "name": "keyword.operator.comparison.boxlang",
-          "match": "(?i)\\b(eq|equal|neq|gt|gte|ge|lt|lte|le|is)\\b|==|!=|<>|>=|<=|>|<|==="
+          "match": "(?i)\\b(eq|equal|neq|gt|gte|ge|lt|lte|le|is)\\b|===|==|!=|<>|>=|<=|>|<|<=>"
+        },
+        {
+          "name": "keyword.operator.match.boxlang",
+          "match": "==~|=~"
         },
         {
           "name": "keyword.operator.arithmetic.boxlang",
@@ -912,16 +919,36 @@
           "match": "&"
         },
         {
+          "name": "keyword.operator.arrow.boxlang",
+          "match": "=>|->"
+        },
+        {
+          "name": "keyword.operator.elvis.boxlang",
+          "match": "\\?:"
+        },
+        {
+          "name": "keyword.operator.spread.boxlang",
+          "match": "\\.\\.\\."
+        },
+        {
           "name": "keyword.operator.ternary.boxlang",
-          "match": "\\?:|\\?|:"
+          "match": "\\?|:"
+        },
+        {
+          "name": "keyword.operator.range.boxlang",
+          "match": "\\.\\.<|\\.\\."
         },
         {
           "name": "keyword.operator.bitwise.boxlang",
           "match": "\\bb[&|^~]\\b|\\bb<<\\b|\\bb>>\\b|\\bb>>>\\b"
         },
         {
+          "name": "keyword.operator.safe-navigation.boxlang",
+          "match": "\\?\\."
+        },
+        {
           "name": "keyword.operator.access.boxlang",
-          "match": "\\.|::|\\\\?\\\\."
+          "match": "\\."
         }
       ]
     },
@@ -986,6 +1013,15 @@
               "name": "punctuation.definition.arguments.begin.boxlang"
             }
           }
+        }
+      ]
+    },
+    "literals": {
+      "patterns": [
+        {
+          "name": "keyword.other.boxlang",
+          "comment": "Set literal set{...} and StringBuilder literal sb{...}/stringbuilder{...} soft keywords",
+          "match": "(?i)\\b(set|sb|stringbuilder)\\b(?=\\s*\\{)"
         }
       ]
     },
