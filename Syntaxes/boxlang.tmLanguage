@@ -63,6 +63,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#literals</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#variables</string>
 		</dict>
 		<dict>
@@ -347,6 +351,12 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.spread.boxlang</string>
+					<key>match</key>
+					<string>\.\.\.</string>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>keyword.operator.ternary.boxlang</string>
 					<key>match</key>
 					<string>\?|:</string>
@@ -355,13 +365,7 @@
 					<key>name</key>
 					<string>keyword.operator.range.boxlang</string>
 					<key>match</key>
-					<string>\.\.</string>
-				</dict>
-				<dict>
-					<key>name</key>
-					<string>keyword.operator.spread.boxlang</string>
-					<key>match</key>
-					<string>\*:</string>
+					<string>\.\.&lt;|\.\.</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -819,6 +823,20 @@
 				</dict>
 			</array>
 		</dict>
+		<key>literals</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.boxlang</string>
+					<key>comment</key>
+					<string>Set literal set{...} and StringBuilder literal sb{...}/stringbuilder{...} soft keywords</string>
+					<key>match</key>
+					<string>(?i)\b(set|sb|stringbuilder)\b(?=\s*\{)</string>
+				</dict>
+			</array>
+		</dict>
 		<key>annotations</key>
 		<dict>
 			<key>patterns</key>
@@ -1023,6 +1041,10 @@
 				<dict>
 					<key>include</key>
 					<string>#map-keys</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literals</string>
 				</dict>
 				<dict>
 					<key>include</key>

@@ -41,6 +41,9 @@
       "include": "#components"
     },
     {
+      "include": "#literals"
+    },
+    {
       "include": "#variables"
     },
     {
@@ -231,16 +234,16 @@
           "match": "\\?:"
         },
         {
+          "name": "keyword.operator.spread.boxlang",
+          "match": "\\.\\.\\."
+        },
+        {
           "name": "keyword.operator.ternary.boxlang",
           "match": "\\?|:"
         },
         {
           "name": "keyword.operator.range.boxlang",
-          "match": "\\.\\."
-        },
-        {
-          "name": "keyword.operator.spread.boxlang",
-          "match": "\\*:"
+          "match": "\\.\\.<|\\.\\."
         },
         {
           "name": "keyword.operator.bitwise.boxlang",
@@ -533,6 +536,15 @@
         }
       ]
     },
+    "literals": {
+      "patterns": [
+        {
+          "name": "keyword.other.boxlang",
+          "comment": "Set literal set{...} and StringBuilder literal sb{...}/stringbuilder{...} soft keywords",
+          "match": "(?i)\\b(set|sb|stringbuilder)\\b(?=\\s*\\{)"
+        }
+      ]
+    },
     "annotations": {
       "patterns": [
         {
@@ -667,6 +679,9 @@
         },
         {
           "include": "#map-keys"
+        },
+        {
+          "include": "#literals"
         },
         {
           "include": "#variables"
