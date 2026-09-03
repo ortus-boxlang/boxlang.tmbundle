@@ -1,0 +1,66 @@
+/**
+ * Sample BoxLang file demonstrating recently added grammar syntax highlighting:
+ * range operators, spread/rest, destructuring, Set/StringBuilder literals,
+ * two-variable for-in, assert with message, and struct literal shorthand.
+ */
+class {
+
+	function sum4( a, b, c, d ) {
+		return a + b + c + d;
+	}
+
+	function init() {
+		// Range operators - should be highlighted as keyword.operator.range.boxlang
+		var full = 1..5;
+		var leftExclusive = 1>..5;
+		var rightExclusive = 1..<5;
+		var bothExclusive = 1>..<5;
+
+		// Spread in array literals - should be highlighted as keyword.operator.spread.boxlang
+		var rest = [ 3, 4 ];
+		var combined = [ 1, 2, ...rest ];
+
+		// Spread in function arguments
+		var total = sum4( ...combined );
+
+		// Struct literal shorthand and spread
+		var foo = "bar";
+		var shorthand = { foo, ...{ baz: "bum" } };
+
+		// Object destructuring, with renaming and rest
+		var { foo: aliasedFoo, ...others } = shorthand;
+
+		// Array destructuring, with rest
+		var [ first, second, ...tail ] = combined;
+
+		// Set literal (soft keyword "set")
+		var mySet = set{ 1, 2, 3 };
+
+		// StringBuilder literal (soft keyword "sb" / "stringbuilder")
+		var builder = sb{ "hello " };
+		var builder2 = stringbuilder{ "world" };
+
+		// Two-variable for-in over an array (item, index)
+		for ( item, index in combined ) {
+			writeoutput( index & ": " & item );
+		}
+
+		// Two-variable for-in over a struct (key, value)
+		for ( key, value in shorthand ) {
+			writeoutput( key & " = " & value );
+		}
+
+		// assert with a message
+		assert mySet.size() > 0 : "mySet should not be empty";
+
+		// Local (in-body) class
+		class LocalHelper {
+			function greet() {
+				return "hi";
+			}
+		}
+
+		return new LocalHelper().greet();
+	}
+
+}
